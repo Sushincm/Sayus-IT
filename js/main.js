@@ -265,34 +265,14 @@ function initKeyFactsAnimation() {
 
   // Desktop (min-width: 768px)
   mm.add("(min-width: 768px)", () => {
-    gsap.set(cards[0], {
-      opacity: 0,
-      x: -50,
-      y: 150,
-      z: -150,
-      rotateX: 45,
-      rotateY: 15,
-      skewY: -10,
-      transformOrigin: "center center"
-    });
-    gsap.set(cards[1], {
+    gsap.set(cards, {
       opacity: 0,
       x: 0,
-      y: 180,
-      z: -150,
-      rotateX: 45,
+      y: 0,
+      z: 0,
+      rotateX: -92,
       rotateY: 0,
       skewY: 0,
-      transformOrigin: "center center"
-    });
-    gsap.set(cards[2], {
-      opacity: 0,
-      x: 50,
-      y: 150,
-      z: -150,
-      rotateX: 45,
-      rotateY: -15,
-      skewY: 10,
       transformOrigin: "center center"
     });
 
@@ -308,32 +288,17 @@ function initKeyFactsAnimation() {
 
     tl.to(cards[0], {
       opacity: 1,
-      x: 0,
-      y: 0,
-      z: 0,
       rotateX: 0,
-      rotateY: 0,
-      skewY: 0,
       ease: "power2.out"
     }, 0)
     .to(cards[1], {
       opacity: 1,
-      x: 0,
-      y: 0,
-      z: 0,
       rotateX: 0,
-      rotateY: 0,
-      skewY: 0,
       ease: "power2.out"
     }, 0.1)
     .to(cards[2], {
       opacity: 1,
-      x: 0,
-      y: 0,
-      z: 0,
       rotateX: 0,
-      rotateY: 0,
-      skewY: 0,
       ease: "power2.out"
     }, 0.2);
   });
