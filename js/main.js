@@ -206,7 +206,7 @@ function initScrollReveals() {
 // Button Interactive Hover Effects
 // ==========================================================================
 function initInteractiveHoverEffects() {
-  const buttons = document.querySelectorAll(".btn-volt, .menu-btn");
+  const buttons = document.querySelectorAll(".btn-volt, .menu-btn, .header-icon-link");
   
   buttons.forEach(button => {
     button.addEventListener("mousemove", (e) => {
