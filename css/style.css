@@ -822,7 +822,11 @@ html.lenis body {
 }
 
 .key-facts-section .row {
-  perspective: 1200px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.key-facts-section [class*="col-"] {
   transform-style: preserve-3d;
 }
 
