@@ -178,6 +178,28 @@ function initHeroScrollAnimation() {
     onLeaveBack: () => document.querySelector(".header-nav").classList.remove("scrolled"),
   });
 
+  ScrollTrigger.create({
+    trigger: ".services-section",
+    start: "top 60px",
+    end: "bottom 60px",
+    onEnter: () => {
+      document.querySelector(".header-nav").classList.add("light-theme-nav");
+      document.querySelector(".giant-logo").classList.add("light-theme-logo");
+    },
+    onLeave: () => {
+      document.querySelector(".header-nav").classList.remove("light-theme-nav");
+      document.querySelector(".giant-logo").classList.remove("light-theme-logo");
+    },
+    onEnterBack: () => {
+      document.querySelector(".header-nav").classList.add("light-theme-nav");
+      document.querySelector(".giant-logo").classList.add("light-theme-logo");
+    },
+    onLeaveBack: () => {
+      document.querySelector(".header-nav").classList.remove("light-theme-nav");
+      document.querySelector(".giant-logo").classList.remove("light-theme-logo");
+    },
+  });
+
   ScrollTrigger.addEventListener("refreshInit", () => {
     calculateTransitionParameters();
   });
