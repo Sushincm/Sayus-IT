@@ -1,0 +1,756 @@
+/* ==========================================================================
+   SAYUS Premium Custom Stylesheet
+   ========================================================================== */
+
+/* Import Google Fonts: Plus Jakarta Sans (Modern premium geometric font) */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
+
+:root {
+  --color-bg: #050505;
+  --color-bg-card: #0d0d0d;
+  --color-volt: #f4791f;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #8e8e8e;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+  --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Global Reset & Body Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar for Premium Feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #1b1b1b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-volt);
+}
+
+/* ==========================================================================
+   Header & Navbar Layout
+   ========================================================================== */
+.header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.5rem 4vw;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference; /* Gives a high-end blending effect with light backgrounds */
+  background: transparent;
+  transition: var(--transition-smooth);
+}
+
+/* Scrolled state for the header (adds glassmorphism subtle backing) */
+.header-nav.scrolled {
+  background: rgba(5, 5, 5, 0.75);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 1rem 4vw;
+}
+
+/* Logo landing target in the header (Optimized for new SAYUS 1.74:1 aspect ratio) */
+#logo-target {
+  width: 105px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Menu Toggle Button Style */
+.menu-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+}
+
+.menu-btn:hover {
+  background: var(--color-volt);
+  border-color: var(--color-volt);
+  color: #000;
+  box-shadow: 0 0 20px rgba(244, 121, 31, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Hero Pinned Container Layout
+   ========================================================================== */
+.hero-scroll-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Background Pinned Video Container */
+.video-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+.hero-tint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 5, 5, 0.5);
+  z-index: 90;
+}
+.hero-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.3); /* Subtle initial scale for zoom-out animation */
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Overall screen-space ambient dimming overlay */
+.grid-dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.35); /* starts soft */
+  pointer-events: none;
+  z-index: 2; /* sits above cells, under content elements */
+  will-change: background;
+}
+
+/* ==========================================================================
+   Logo & Content Typography
+   ========================================================================== */
+.giant-logo {
+  position: fixed; /* Changed from absolute to fixed to support seamless single-element flight and unpin persistence */
+  left: 0;
+  bottom: 0;
+  display: inline-block;
+  width: auto;
+  height: 15vw; /* Set to exactly 15vw as requested */
+  z-index: 1005;
+  transform-origin: left top; /* CRITICAL: Enables exact scaling calculations */
+  pointer-events: none; /* Allows clicks to pass through */
+  margin: 0;
+  padding: 0;
+  filter: drop-shadow(
+    0 0 45px rgba(244, 121, 31, 0.35)
+  ); /* Gorgeous ambient orange glow matching SAYUS */
+}
+
+/* Content layers overlaid absolute inside the hero */
+.hero-content-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  padding: 0 4vw;
+  pointer-events: none;
+}
+
+.hero-content-layer * {
+  pointer-events: auto; /* Re-enable clicks for items inside layers */
+}
+
+/* Slide 1 Content (Bottom Right text) */
+#hero-content-1 {
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-bottom: 6vh;
+  padding-right: 4vw; /* Aligned EXACTLY with standard 4vw navbar padding */
+}
+
+.sub-headline {
+  max-width: 35vw; /* Leaves a generous center gap from the giant logo */
+  font-size: clamp(1.8rem, 3.2vw, 2.2rem);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.1;
+  text-align: right;
+  color: var(--color-text-primary);
+  opacity: 1;
+}
+
+.sub-headline span {
+  font-weight: 700;
+}
+
+/* Slide 2 Content (Centered branding description) */
+#hero-content-2 {
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Animated by GSAP */
+  transform: translateY(40px); /* Animated by GSAP */
+}
+
+.center-showcase {
+  max-width: 900px;
+  text-align: center;
+}
+
+.showcase-text {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--color-text-primary);
+  margin-bottom: 2.5rem;
+}
+
+.showcase-text span,
+.text-truth {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--color-volt);
+}
+
+/* Premium Primary Action Button */
+.btn-volt {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-volt);
+  color: #000;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  padding: 1.1rem 2.8rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.btn-volt:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+}
+
+.btn-volt svg {
+  transition: transform 0.4s ease;
+}
+
+.btn-volt:hover svg {
+  transform: translateX(4px) rotate(-45deg);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 3vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  z-index: 5;
+  opacity: 0.7;
+}
+
+.scroll-indicator-mouse {
+  width: 20px;
+  height: 32px;
+  border: 2px solid var(--color-text-secondary);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-indicator-wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--color-volt);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollMouse 1.8s infinite ease-in-out;
+}
+
+@keyframes scrollMouse {
+  0% {
+    top: 6px;
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    top: 16px;
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   Subsequent Content Sections (To enable page scroll length)
+   ========================================================================= */
+.dummy-section {
+  padding: 10vh 8vw;
+  background-color: var(--color-bg);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dummy-section.alternate {
+  background-color: #080808;
+}
+
+.section-label {
+  color: var(--color-volt);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  line-height: 1.1;
+}
+
+.section-card {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 3rem 2.5rem;
+  height: 100%;
+  transition: var(--transition-smooth);
+}
+
+.section-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(244, 121, 31, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.card-num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  color: rgba(255, 255, 255, 0.08);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  display: block;
+  transition: var(--transition-smooth);
+}
+
+.section-card:hover .card-num {
+  color: var(--color-volt);
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Responsive Media Queries
+   ========================================================================= */
+@media (max-width: 991.98px) {
+  .header-nav {
+    padding: 1rem 4vw;
+  }
+
+  #logo-target {
+    width: 87px;
+    height: 50px;
+  }
+
+  .giant-logo {
+    height: 24vw;
+  }
+
+  #hero-content-1 {
+    justify-content: center;
+    padding-bottom: 15vh;
+  }
+
+  .sub-headline {
+    text-align: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .giant-logo {
+    height: 30vw;
+    bottom: 0;
+  }
+
+  #hero-content-1 {
+    padding-bottom: 22vh;
+  }
+
+  .menu-btn {
+    padding: 0.5rem 1.1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* ==========================================================================
+   Lenis Smooth Scrolling Core Layout Helpers
+   ========================================================================== */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Services Section & Color Theme Alignment
+   ========================================================================== */
+.services-section {
+  background-color: #ffffff;
+  padding: 12vh 0 16vh 0; /* Extra bottom padding so the cards have space to expand downwards */
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.services-container {
+  padding: 0 20px;
+  width: 100%;
+}
+
+.services-header {
+  padding: 0 0 6vh 0; /* Aligned with container bounds */
+}
+
+.services-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: #050505; /* Black text for white background */
+}
+
+.services-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* CRITICAL: aligns items to top so they grow downwards independently */
+  width: 100%;
+}
+
+.service-box {
+  flex: 1;
+  min-width: 220px;
+  height: 420px; /* Base height */
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Remove padding from card to allow split color background to be full bleed */
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.box-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.box-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(5, 5, 5, 0.55); /* Elegant dark tint overlay */
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-box:hover .box-video {
+  opacity: 1;
+}
+
+.service-box:hover .box-video-overlay {
+  opacity: 1;
+}
+
+.service-box:hover .box-main,
+.service-box:hover .box-footer {
+  background-color: transparent;
+}
+
+.box-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.5rem 1rem 1.5rem; /* Reduced padding to match screenshot layout */
+  position: relative;
+  z-index: 3;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.box-footer {
+  padding: 1.25rem 1.5rem; /* Reduced padding to keep footer strip narrow and clean */
+  position: relative;
+  z-index: 3;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.box-num {
+  font-family: var(--font-display);
+  font-size: 0.75rem; /* Smaller size matching screenshot */
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+  transition: var(--transition-smooth);
+}
+
+.box-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.box-description {
+  font-size: clamp(0.85rem, 1.1vw, 1rem);
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
+}
+
+.box-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem; /* Smaller font size matching screenshot */
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.01em;
+  transition: var(--transition-smooth);
+}
+
+/* Orange Volt Color Theme Progression with Split Header/Footer Colors */
+/* Box 01: Audits & Architecture */
+.box-01 .box-main {
+  background-color: #ce600e; /* Darker header/body */
+}
+.box-01 .box-footer {
+  background-color: var(--color-volt); /* #f4791f footer */
+}
+.box-01 {
+  color: #ffffff;
+}
+.box-01 .box-num {
+  color: rgba(255, 255, 255, 0.7);
+}
+.box-01 .box-title {
+  color: #ffffff;
+}
+.box-01 .box-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Box 02: The Search Matrix & GEO */
+.box-02 .box-main {
+  background-color: #b34f0d; /* Darker header/body */
+}
+.box-02 .box-footer {
+  background-color: #d86518; /* Footer */
+}
+.box-02 {
+  color: #ffffff;
+}
+.box-02 .box-num {
+  color: rgba(255, 255, 255, 0.7);
+}
+.box-02 .box-title {
+  color: #ffffff;
+}
+.box-02 .box-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Box 03: New Media & SMO */
+.box-03 .box-main {
+  background-color: #803807; /* Darker header/body */
+}
+.box-03 .box-footer {
+  background-color: #a34c0e; /* Footer */
+}
+.box-03 {
+  color: #ffffff;
+}
+.box-03 .box-num {
+  color: rgba(255, 255, 255, 0.7);
+}
+.box-03 .box-title {
+  color: #ffffff;
+}
+.box-03 .box-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Box 04: Performance Scale & CRO */
+.box-04 .box-main {
+  background-color: #4d2102; /* Darker header/body */
+}
+.box-04 .box-footer {
+  background-color: #6d3207; /* Footer */
+}
+.box-04 {
+  color: #ffffff;
+}
+.box-04 .box-num {
+  color: rgba(255, 255, 255, 0.7);
+}
+.box-04 .box-title {
+  color: #ffffff;
+}
+.box-04 .box-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Equal-Width Hover Effects (No width collapse, only expand downwards) */
+@media (min-width: 768px) {
+  .services-grid:hover .service-box {
+    opacity: 0.8;
+    filter: brightness(0.9);
+  }
+  
+  .services-grid .service-box:hover {
+    height: 570px; /* Expand downwards only */
+    opacity: 1;
+    filter: brightness(1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12); /* Soft shadow on white bg */
+    z-index: 5;
+  }
+}
+
+/* Reveal description content on hover */
+.service-box:hover .box-content {
+  max-height: 180px;
+  opacity: 1;
+  margin-top: 1.8rem;
+}
+
+/* Micro-interaction on Box Hover */
+.service-box:hover .box-num {
+  transform: translateY(-3px);
+  opacity: 1;
+}
+
+.service-box:hover .box-title {
+  transform: translateY(-3px);
+}
+
+/* Responsiveness for Smaller Viewports */
+@media (max-width: 767.98px) {
+  .services-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .service-box {
+    flex: none;
+    width: 100%;
+    min-height: 250px;
+    height: 35vh;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .service-box:hover {
+    height: 48vh; /* Expand downwards on touch/hover on mobile too */
+    min-height: 380px;
+  }
+
+  .service-box:last-child {
+    border-bottom: none;
+  }
+}
