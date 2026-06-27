@@ -173,34 +173,32 @@ function initHeroScrollAnimation() {
     }, 0.85);
   }
 
-  ScrollTrigger.create({
-    trigger: "body",
-    start: "top -50px",
-    onEnter: () => document.querySelector(".header-nav").classList.add("scrolled"),
-    onLeaveBack: () => document.querySelector(".header-nav").classList.remove("scrolled"),
-  });
+  const header = document.querySelector(".header-nav");
 
   ScrollTrigger.create({
-    trigger: ".services-section",
-    endTrigger: ".key-facts-section",
-    start: "top 60px",
-    end: "bottom 60px",
-    onEnter: () => {
-      document.querySelector(".header-nav").classList.add("light-theme-nav");
-      document.querySelector(".giant-logo").classList.add("light-theme-logo");
-    },
-    onLeave: () => {
-      document.querySelector(".header-nav").classList.remove("light-theme-nav");
-      document.querySelector(".giant-logo").classList.remove("light-theme-logo");
-    },
-    onEnterBack: () => {
-      document.querySelector(".header-nav").classList.add("light-theme-nav");
-      document.querySelector(".giant-logo").classList.add("light-theme-logo");
-    },
-    onLeaveBack: () => {
-      document.querySelector(".header-nav").classList.remove("light-theme-nav");
-      document.querySelector(".giant-logo").classList.remove("light-theme-logo");
-    },
+    trigger: "body",
+    start: "top top",
+    end: "bottom bottom",
+    onUpdate: (self) => {
+      const currentScroll = self.scroll();
+      
+      if (currentScroll < 80) {
+        // Always show and make transparent in the hero section
+        gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
+        header.classList.remove("scrolled");
+      } else {
+        // Scrolled past hero section
+        header.classList.add("scrolled");
+        
+        if (self.direction === 1) {
+          // Scrolling down - hide header
+          gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
+        } else if (self.direction === -1) {
+          // Scrolling up - show header
+          gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
+        }
+      }
+    }
   });
 
   ScrollTrigger.addEventListener("refreshInit", () => {
