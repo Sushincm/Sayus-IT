@@ -273,7 +273,7 @@ function initKeyFactsAnimation() {
       rotateX: -92,
       rotateY: 0,
       skewY: 0,
-      transformOrigin: "center center"
+      transformOrigin: "center top"
     });
 
     const tl = gsap.timeline({
