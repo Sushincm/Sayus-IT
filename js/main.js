@@ -13,6 +13,7 @@ window.addEventListener("load", () => {
   initScrollReveals();
   initInteractiveHoverEffects();
   initServiceBoxVideoHover();
+  initTooltips();
 });
 
 // ==========================================================================
@@ -253,6 +254,18 @@ function initServiceBoxVideoHover() {
     box.addEventListener("mouseleave", () => {
       video.pause();
       video.currentTime = 0;
+    });
+  });
+}
+
+// ==========================================================================
+// Bootstrap Tooltips Setup
+// ==========================================================================
+function initTooltips() {
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  tooltipTriggerList.forEach(tooltipTriggerEl => {
+    new bootstrap.Tooltip(tooltipTriggerEl, {
+      trigger: 'hover'
     });
   });
 }
