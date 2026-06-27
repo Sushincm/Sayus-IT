@@ -269,7 +269,7 @@ function initKeyFactsAnimation() {
       opacity: 0,
       y: 150,
       rotateY: 15,
-      skewY: -6,
+      skewY: -10,
       transformOrigin: "center center"
     });
     gsap.set(cards[1], {
@@ -283,15 +283,15 @@ function initKeyFactsAnimation() {
       opacity: 0,
       y: 150,
       rotateY: -15,
-      skewY: 6,
+      skewY: 10,
       transformOrigin: "center center"
     });
 
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: section,
-        start: "top 85%",
-        end: "top 25%",
+        trigger: ".key-facts-section .row",
+        start: "top 95%",
+        end: "top 30%",
         scrub: 1.5,
         invalidateOnRefresh: true
       }
