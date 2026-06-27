@@ -14,6 +14,7 @@ window.addEventListener("load", () => {
   initInteractiveHoverEffects();
   initServiceBoxVideoHover();
   initKeyFactsAnimation();
+  initCounters();
   initTooltips();
 });
 
@@ -318,6 +319,34 @@ function initKeyFactsAnimation() {
           toggleActions: "play none none reverse"
         }
       });
+    });
+  });
+}
+
+// ==========================================================================
+// Key Facts Counters Animation
+// ==========================================================================
+function initCounters() {
+  const counters = document.querySelectorAll(".count-value");
+  
+  counters.forEach(counter => {
+    const target = parseFloat(counter.getAttribute("data-target")) || 0;
+    const decimals = parseInt(counter.getAttribute("data-decimals")) || 0;
+    const countObj = { value: 0 };
+    
+    gsap.to(countObj, {
+      value: target,
+      duration: 2.0,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".key-facts-section",
+        start: "top 60%",
+        toggleActions: "play none none none",
+        once: true
+      },
+      onUpdate: () => {
+        counter.textContent = countObj.value.toFixed(decimals);
+      }
     });
   });
 }
