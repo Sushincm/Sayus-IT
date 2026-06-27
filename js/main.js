@@ -141,6 +141,7 @@ function initHeroScrollAnimation() {
     opacity: 0,
     scale: 0.8,
     filter: "blur(15px)",
+    duration: 0.5,
     ease: "power1.inOut"
   }, 0);
 
@@ -151,10 +152,11 @@ function initHeroScrollAnimation() {
   }, 0.3);
 
   const words = document.querySelectorAll(".showcase-text .word");
+  const staggerDuration = 0.55 / (words.length || 1);
   heroTimeline.to(words, {
     opacity: 1,
-    stagger: 0.05,
-    duration: 1,
+    stagger: staggerDuration,
+    duration: 0.1,
     ease: "none"
   }, 0.3);
 
@@ -164,9 +166,9 @@ function initHeroScrollAnimation() {
     heroTimeline.to(servicesBtn, {
       opacity: 1,
       y: 0,
-      duration: 0.6,
+      duration: 0.15,
       ease: "power2.out"
-    }, 0.3 + (words.length * 0.05));
+    }, 0.85);
   }
 
   ScrollTrigger.create({
