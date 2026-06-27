@@ -832,7 +832,7 @@ html.lenis body {
   padding: 2.5rem;
   position: relative;
   overflow: hidden;
-  transition: var(--transition-smooth);
+  transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fact-card.card-dark {
@@ -946,6 +946,7 @@ html.lenis body {
 .fact-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .fact-card.card-dark:hover {
