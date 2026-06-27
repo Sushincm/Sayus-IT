@@ -86,24 +86,13 @@ body {
   align-items: center;
 }
 
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
 .header-icon-link {
   color: var(--color-text-primary);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   width: 42px;
   height: 42px;
-  border-radius: 50%;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: var(--transition-smooth);
-  text-decoration: none;
 }
 
 .header-icon-link:hover {
