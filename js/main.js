@@ -1,5 +1,11 @@
+// ==========================================================================
+// GSAP Plugins Setup
+// ==========================================================================
 gsap.registerPlugin(ScrollTrigger);
 
+// ==========================================================================
+// App Initialization
+// ==========================================================================
 window.addEventListener("load", () => {
   initLenis();
   initHeroScrollAnimation();
@@ -8,6 +14,9 @@ window.addEventListener("load", () => {
   initServiceBoxVideoHover();
 });
 
+// ==========================================================================
+// Lenis Smooth Scroll Setup
+// ==========================================================================
 function initLenis() {
   const lenis = new Lenis({
     duration: 1.2,
@@ -30,6 +39,9 @@ function initLenis() {
   gsap.ticker.lagSmoothing(0);
 }
 
+// ==========================================================================
+// Hero Scroll Animation
+// ==========================================================================
 function initHeroScrollAnimation() {
   const logo = document.querySelector(".giant-logo");
   const target = document.querySelector("#logo-target");
@@ -107,6 +119,9 @@ function initHeroScrollAnimation() {
   });
 }
 
+// ==========================================================================
+// Scroll Reveal Engine
+// ==========================================================================
 function initScrollReveals() {
   const revealElements = document.querySelectorAll('[data-scroll="reveal"]');
 
@@ -148,6 +163,9 @@ function initScrollReveals() {
   });
 }
 
+// ==========================================================================
+// Button Interactive Hover Effects
+// ==========================================================================
 function initInteractiveHoverEffects() {
   const buttons = document.querySelectorAll(".btn-volt, .menu-btn");
   
@@ -176,6 +194,9 @@ function initInteractiveHoverEffects() {
   });
 }
 
+// ==========================================================================
+// Service Box Video Playback
+// ==========================================================================
 function initServiceBoxVideoHover() {
   const boxes = document.querySelectorAll(".service-box");
   boxes.forEach((box) => {

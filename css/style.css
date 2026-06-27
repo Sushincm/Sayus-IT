@@ -1,7 +1,11 @@
-
-
+/* ==========================================================================
+   Import Fonts
+   ========================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
+/* ==========================================================================
+   Variables
+   ========================================================================== */
 :root {
   --color-bg: #050505;
   --color-bg-card: #0d0d0d;
@@ -13,6 +17,9 @@
   --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ==========================================================================
+   Global Reset & Body Styles
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -29,6 +36,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================================================
+   Custom Scrollbar
+   ========================================================================== */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -43,6 +53,9 @@ body {
   background: var(--color-volt);
 }
 
+/* ==========================================================================
+   Header / Navigation
+   ========================================================================== */
 .header-nav {
   position: fixed;
   top: 0;
@@ -98,6 +111,9 @@ body {
   transform: translateY(-2px);
 }
 
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
 .hero-scroll-container {
   position: relative;
   width: 100%;
@@ -114,6 +130,7 @@ body {
   overflow: hidden;
   z-index: 1;
 }
+
 .hero-tint {
   position: absolute;
   top: 0;
@@ -123,6 +140,7 @@ body {
   background: rgba(5, 5, 5, 0.5);
   z-index: 90;
 }
+
 .hero-video {
   position: absolute;
   width: 100%;
@@ -314,6 +332,9 @@ body {
   }
 }
 
+/* ==========================================================================
+   Subsections / Cards
+   ========================================================================== */
 .dummy-section {
   padding: 10vh 8vw;
   background-color: var(--color-bg);
@@ -385,6 +406,9 @@ body {
   font-size: 1rem;
 }
 
+/* ==========================================================================
+   Responsive Layout (Header & Hero)
+   ========================================================================== */
 @media (max-width: 991.98px) {
   .header-nav {
     padding: 1rem 4vw;
@@ -425,6 +449,9 @@ body {
   }
 }
 
+/* ==========================================================================
+   Lenis Smooth Scrolling Core Styles
+   ========================================================================== */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -446,6 +473,9 @@ html.lenis body {
   pointer-events: none;
 }
 
+/* ==========================================================================
+   Services Section
+   ========================================================================== */
 .services-section {
   background-color: #ffffff;
   padding: 12vh 0 16vh 0; 
@@ -656,6 +686,9 @@ html.lenis body {
   color: rgba(255, 255, 255, 0.85);
 }
 
+/* ==========================================================================
+   Responsive Layout (Services - Desktop Hover & Expansion)
+   ========================================================================== */
 @media (min-width: 768px) {
   .services-grid:hover .service-box {
     opacity: 0.8;
@@ -686,6 +719,9 @@ html.lenis body {
   transform: translateY(-3px);
 }
 
+/* ==========================================================================
+   Responsive Layout (Services - Mobile Stack)
+   ========================================================================== */
 @media (max-width: 767.98px) {
   .services-grid {
     flex-direction: column;
