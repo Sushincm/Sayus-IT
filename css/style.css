@@ -1,8 +1,5 @@
-/* ==========================================================================
-   SAYUS Premium Custom Stylesheet
-   ========================================================================== */
 
-/* Import Google Fonts: Plus Jakarta Sans (Modern premium geometric font) */
+
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap");
 
 :root {
@@ -16,7 +13,6 @@
   --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Global Reset & Body Styles */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -33,7 +29,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar for Premium Feel */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -48,9 +43,6 @@ body {
   background: var(--color-volt);
 }
 
-/* ==========================================================================
-   Header & Navbar Layout
-   ========================================================================== */
 .header-nav {
   position: fixed;
   top: 0;
@@ -61,12 +53,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  mix-blend-mode: difference; /* Gives a high-end blending effect with light backgrounds */
+  mix-blend-mode: difference; 
   background: transparent;
   transition: var(--transition-smooth);
 }
 
-/* Scrolled state for the header (adds glassmorphism subtle backing) */
 .header-nav.scrolled {
   background: rgba(5, 5, 5, 0.75);
   backdrop-filter: blur(15px);
@@ -74,7 +65,6 @@ body {
   padding: 1rem 4vw;
 }
 
-/* Logo landing target in the header (Optimized for new SAYUS 1.74:1 aspect ratio) */
 #logo-target {
   width: 105px;
   height: 60px;
@@ -83,7 +73,6 @@ body {
   align-items: center;
 }
 
-/* Menu Toggle Button Style */
 .menu-btn {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -109,9 +98,6 @@ body {
   transform: translateY(-2px);
 }
 
-/* ==========================================================================
-   Hero Pinned Container Layout
-   ========================================================================== */
 .hero-scroll-container {
   position: relative;
   width: 100%;
@@ -119,7 +105,6 @@ body {
   overflow: hidden;
 }
 
-/* Background Pinned Video Container */
 .video-background-container {
   position: absolute;
   top: 0;
@@ -145,45 +130,40 @@ body {
   object-fit: cover;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%) scale(1.3); /* Subtle initial scale for zoom-out animation */
+  transform: translate(-50%, -50%) scale(1.3); 
   transform-origin: center center;
   will-change: transform;
 }
 
-/* Overall screen-space ambient dimming overlay */
 .grid-dark-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 5, 5, 0.35); /* starts soft */
+  background: rgba(5, 5, 5, 0.35); 
   pointer-events: none;
-  z-index: 2; /* sits above cells, under content elements */
+  z-index: 2; 
   will-change: background;
 }
 
-/* ==========================================================================
-   Logo & Content Typography
-   ========================================================================== */
 .giant-logo {
-  position: fixed; /* Changed from absolute to fixed to support seamless single-element flight and unpin persistence */
+  position: fixed; 
   left: 0;
   bottom: 0;
   display: inline-block;
   width: auto;
-  height: 15vw; /* Set to exactly 15vw as requested */
+  height: 15vw; 
   z-index: 1005;
-  transform-origin: left top; /* CRITICAL: Enables exact scaling calculations */
-  pointer-events: none; /* Allows clicks to pass through */
+  transform-origin: left top; 
+  pointer-events: none; 
   margin: 0;
   padding: 0;
   filter: drop-shadow(
     0 0 45px rgba(244, 121, 31, 0.35)
-  ); /* Gorgeous ambient orange glow matching SAYUS */
+  ); 
 }
 
-/* Content layers overlaid absolute inside the hero */
 .hero-content-layer {
   position: absolute;
   top: 0;
@@ -197,19 +177,18 @@ body {
 }
 
 .hero-content-layer * {
-  pointer-events: auto; /* Re-enable clicks for items inside layers */
+  pointer-events: auto; 
 }
 
-/* Slide 1 Content (Bottom Right text) */
 #hero-content-1 {
   align-items: flex-end;
   justify-content: flex-end;
   padding-bottom: 6vh;
-  padding-right: 4vw; /* Aligned EXACTLY with standard 4vw navbar padding */
+  padding-right: 4vw; 
 }
 
 .sub-headline {
-  max-width: 35vw; /* Leaves a generous center gap from the giant logo */
+  max-width: 35vw; 
   font-size: clamp(1.8rem, 3.2vw, 2.2rem);
   font-family: var(--font-body);
   font-weight: 300;
@@ -223,12 +202,11 @@ body {
   font-weight: 700;
 }
 
-/* Slide 2 Content (Centered branding description) */
 #hero-content-2 {
   align-items: center;
   justify-content: center;
-  opacity: 0; /* Animated by GSAP */
-  transform: translateY(40px); /* Animated by GSAP */
+  opacity: 0; 
+  transform: translateY(40px); 
 }
 
 .center-showcase {
@@ -252,7 +230,6 @@ body {
   color: var(--color-volt);
 }
 
-/* Premium Primary Action Button */
 .btn-volt {
   display: inline-flex;
   align-items: center;
@@ -286,7 +263,6 @@ body {
   transform: translateX(4px) rotate(-45deg);
 }
 
-/* Scroll indicator */
 .scroll-indicator {
   position: absolute;
   bottom: 3vh;
@@ -338,9 +314,6 @@ body {
   }
 }
 
-/* ==========================================================================
-   Subsequent Content Sections (To enable page scroll length)
-   ========================================================================= */
 .dummy-section {
   padding: 10vh 8vw;
   background-color: var(--color-bg);
@@ -412,9 +385,6 @@ body {
   font-size: 1rem;
 }
 
-/* ==========================================================================
-   Responsive Media Queries
-   ========================================================================= */
 @media (max-width: 991.98px) {
   .header-nav {
     padding: 1rem 4vw;
@@ -455,9 +425,6 @@ body {
   }
 }
 
-/* ==========================================================================
-   Lenis Smooth Scrolling Core Layout Helpers
-   ========================================================================== */
 html.lenis,
 html.lenis body {
   height: auto;
@@ -479,12 +446,9 @@ html.lenis body {
   pointer-events: none;
 }
 
-/* ==========================================================================
-   Services Section & Color Theme Alignment
-   ========================================================================== */
 .services-section {
   background-color: #ffffff;
-  padding: 12vh 0 16vh 0; /* Extra bottom padding so the cards have space to expand downwards */
+  padding: 12vh 0 16vh 0; 
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -494,7 +458,7 @@ html.lenis body {
 }
 
 .services-header {
-  padding: 0 0 6vh 0; /* Aligned with container bounds */
+  padding: 0 0 6vh 0; 
 }
 
 .services-title {
@@ -503,23 +467,23 @@ html.lenis body {
   font-weight: 300;
   letter-spacing: -0.02em;
   margin: 0;
-  color: #050505; /* Black text for white background */
+  color: #050505; 
 }
 
 .services-grid {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start; /* CRITICAL: aligns items to top so they grow downwards independently */
+  align-items: flex-start; 
   width: 100%;
 }
 
 .service-box {
   flex: 1;
   min-width: 220px;
-  height: 420px; /* Base height */
+  height: 420px; 
   display: flex;
   flex-direction: column;
-  padding: 0; /* Remove padding from card to allow split color background to be full bleed */
+  padding: 0; 
   position: relative;
   overflow: hidden;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -546,7 +510,7 @@ html.lenis body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 5, 5, 0.55); /* Elegant dark tint overlay */
+  background: rgba(5, 5, 5, 0.55); 
   z-index: 2;
   opacity: 0;
   pointer-events: none;
@@ -570,14 +534,14 @@ html.lenis body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 1.5rem 1rem 1.5rem; /* Reduced padding to match screenshot layout */
+  padding: 1.5rem 1.5rem 1rem 1.5rem; 
   position: relative;
   z-index: 3;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .box-footer {
-  padding: 1.25rem 1.5rem; /* Reduced padding to keep footer strip narrow and clean */
+  padding: 1.25rem 1.5rem; 
   position: relative;
   z-index: 3;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -585,7 +549,7 @@ html.lenis body {
 
 .box-num {
   font-family: var(--font-display);
-  font-size: 0.75rem; /* Smaller size matching screenshot */
+  font-size: 0.75rem; 
   font-weight: 700;
   letter-spacing: 0.1em;
   opacity: 0.9;
@@ -608,7 +572,7 @@ html.lenis body {
 
 .box-title {
   font-family: var(--font-display);
-  font-size: 1.15rem; /* Smaller font size matching screenshot */
+  font-size: 1.15rem; 
   font-weight: 500;
   line-height: 1.2;
   margin: 0;
@@ -616,13 +580,11 @@ html.lenis body {
   transition: var(--transition-smooth);
 }
 
-/* Orange Volt Color Theme Progression with Split Header/Footer Colors */
-/* Box 01: Audits & Architecture */
 .box-01 .box-main {
-  background-color: #ce600e; /* Darker header/body */
+  background-color: #ce600e; 
 }
 .box-01 .box-footer {
-  background-color: var(--color-volt); /* #f4791f footer */
+  background-color: var(--color-volt); 
 }
 .box-01 {
   color: #ffffff;
@@ -637,12 +599,11 @@ html.lenis body {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Box 02: The Search Matrix & GEO */
 .box-02 .box-main {
-  background-color: #b34f0d; /* Darker header/body */
+  background-color: #b34f0d; 
 }
 .box-02 .box-footer {
-  background-color: #d86518; /* Footer */
+  background-color: #d86518; 
 }
 .box-02 {
   color: #ffffff;
@@ -657,12 +618,11 @@ html.lenis body {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Box 03: New Media & SMO */
 .box-03 .box-main {
-  background-color: #803807; /* Darker header/body */
+  background-color: #803807; 
 }
 .box-03 .box-footer {
-  background-color: #a34c0e; /* Footer */
+  background-color: #a34c0e; 
 }
 .box-03 {
   color: #ffffff;
@@ -677,12 +637,11 @@ html.lenis body {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Box 04: Performance Scale & CRO */
 .box-04 .box-main {
-  background-color: #4d2102; /* Darker header/body */
+  background-color: #4d2102; 
 }
 .box-04 .box-footer {
-  background-color: #6d3207; /* Footer */
+  background-color: #6d3207; 
 }
 .box-04 {
   color: #ffffff;
@@ -697,7 +656,6 @@ html.lenis body {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Equal-Width Hover Effects (No width collapse, only expand downwards) */
 @media (min-width: 768px) {
   .services-grid:hover .service-box {
     opacity: 0.8;
@@ -705,22 +663,20 @@ html.lenis body {
   }
   
   .services-grid .service-box:hover {
-    height: 570px; /* Expand downwards only */
+    height: 570px; 
     opacity: 1;
     filter: brightness(1);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12); /* Soft shadow on white bg */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12); 
     z-index: 5;
   }
 }
 
-/* Reveal description content on hover */
 .service-box:hover .box-content {
   max-height: 180px;
   opacity: 1;
   margin-top: 1.8rem;
 }
 
-/* Micro-interaction on Box Hover */
 .service-box:hover .box-num {
   transform: translateY(-3px);
   opacity: 1;
@@ -730,7 +686,6 @@ html.lenis body {
   transform: translateY(-3px);
 }
 
-/* Responsiveness for Smaller Viewports */
 @media (max-width: 767.98px) {
   .services-grid {
     flex-direction: column;
@@ -746,7 +701,7 @@ html.lenis body {
   }
   
   .service-box:hover {
-    height: 48vh; /* Expand downwards on touch/hover on mobile too */
+    height: 48vh; 
     min-height: 380px;
   }
 

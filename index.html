@@ -9,7 +9,6 @@
       content="Sayus is a digital growth and systems consultancy based in Los Angeles. We engineer high-performance website architectures and optimize your brand footprint to drive organic authority and commercial growth."
     />
 
-    <!-- Latest Bootstrap 5.3 CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,25 +16,18 @@
       crossorigin="anonymous"
     />
 
-    <!-- Custom Premium Stylesheet -->
     <link rel="stylesheet" href="css/style.css?v=1.3" />
   </head>
   <body>
-    <!-- The Giant Logo (Starts huge, will fly into navbar on scroll) -->
     <img
       class="giant-logo"
       src="images/sayus-logo-light.png"
       alt="SAYUS Logo"
     />
 
-    <!-- ==========================================================================
-       Header / Navbar Section
-       ========================================================================== -->
     <header class="header-nav" id="main-header">
-      <!-- GSAP will fly the giant logo directly into this target container -->
       <div id="logo-target"></div>
 
-      <!-- Menu Toggle -->
       <button class="menu-btn" aria-label="Toggle Navigation Menu">
         <span>MENU</span>
         <svg
@@ -54,22 +46,15 @@
       </button>
     </header>
 
-    <!-- ==========================================================================
-       Epic Hero Pinned Container
-       ========================================================================== -->
     <main id="hero-container" class="hero-scroll-container">
-      <!-- Pinned Video Background Container -->
       <div class="video-background-container">
         <div class="hero-tint"></div>
         <video class="hero-video" autoplay loop muted playsinline>
           <source src="images/hero-video.webm" type="video/webm" />
         </video>
-        <!-- Premium ambient dimming layer (Fades darker on scroll to heighten text legibility) -->
         <div class="grid-dark-overlay"></div>
       </div>
 
-      <!-- Overlay content layers -->
-      <!-- Content 1: Initial Screen (Text on bottom right) -->
       <div class="hero-content-layer" id="hero-content-1">
         <div class="sub-headline">
           Engineering <span>the</span><br />absolute<br />brand
@@ -77,7 +62,6 @@
         </div>
       </div>
 
-      <!-- Content 2: Transitioned Screen (Branding copy centered, fades in on scroll) -->
       <div class="hero-content-layer" id="hero-content-2">
         <div class="center-showcase">
           <p class="showcase-text">
@@ -105,18 +89,12 @@
       </div>
     </main>
 
-    <!-- ==========================================================================
-       Subsequent Content Sections (Demonstrating Reusable Scroll Animations)
-       ========================================================================== -->
-
-    <!-- Section 1: Core Services -->
     <section class="services-section" id="services">
       <div class="services-container">
         <div class="services-header">
           <h2 class="services-title">Services</h2>
         </div>
         <div class="services-grid">
-          <!-- Box 01: Audits & Architecture -->
           <div class="service-box box-01">
             <video class="box-video" loop muted playsinline>
               <source src="images/col-1.webm" type="video/webm" />
@@ -132,7 +110,6 @@
               <h3 class="box-title">Audits &amp; Architecture</h3>
             </div>
           </div>
-          <!-- Box 02: The Search Matrix & GEO -->
           <div class="service-box box-02">
             <video class="box-video" loop muted playsinline>
               <source src="images/col-2.webm" type="video/webm" />
@@ -148,7 +125,6 @@
               <h3 class="box-title">The Search Matrix &amp; GEO</h3>
             </div>
           </div>
-          <!-- Box 03: New Media & SMO -->
           <div class="service-box box-03">
             <video class="box-video" loop muted playsinline>
               <source src="images/col-3.webm" type="video/webm" />
@@ -164,7 +140,6 @@
               <h3 class="box-title">New Media &amp; SMO</h3>
             </div>
           </div>
-          <!-- Box 04: Performance Scale & CRO -->
           <div class="service-box box-04">
             <video class="box-video" loop muted playsinline>
               <source src="images/col-4.webm" type="video/webm" />
@@ -183,26 +158,15 @@
         </div>
       </div>
     </section>
-    <!-- ==========================================================================
-       External Scripts & Libraries
-       ========================================================================== -->
-    <!-- Lenis Smooth Scroll Library (Ultra-lightweight, high-performance) -->
+
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-
-    <!-- GSAP Core Library -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-
-    <!-- GSAP ScrollTrigger Plugin -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-    <!-- Bootstrap 5.3 JavaScript Bundle -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-
-    <!-- Main Animated Logic Script -->
     <script src="js/main.js"></script>
   </body>
 </html>
