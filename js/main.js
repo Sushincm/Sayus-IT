@@ -13,6 +13,7 @@ window.addEventListener("load", () => {
   initScrollReveals();
   initInteractiveHoverEffects();
   initServiceBoxVideoHover();
+  initKeyFactsAnimation();
   initTooltips();
 });
 
@@ -246,6 +247,94 @@ function initScrollReveals() {
         toggleActions: "play none none reverse",
         once: false
       }
+    });
+  });
+}
+
+// ==========================================================================
+// Key Facts Scroll Animation
+// ==========================================================================
+function initKeyFactsAnimation() {
+  const section = document.querySelector(".key-facts-section");
+  if (!section) return;
+
+  const cards = section.querySelectorAll(".fact-card");
+  if (cards.length < 3) return;
+
+  let mm = gsap.matchMedia();
+
+  // Desktop (min-width: 768px)
+  mm.add("(min-width: 768px)", () => {
+    gsap.set(cards[0], {
+      opacity: 0,
+      y: 150,
+      rotateY: 15,
+      skewY: -6,
+      transformOrigin: "center center"
+    });
+    gsap.set(cards[1], {
+      opacity: 0,
+      y: 180,
+      rotateY: 0,
+      skewY: 0,
+      transformOrigin: "center center"
+    });
+    gsap.set(cards[2], {
+      opacity: 0,
+      y: 150,
+      rotateY: -15,
+      skewY: 6,
+      transformOrigin: "center center"
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 85%",
+        end: "top 25%",
+        scrub: 1.5,
+        invalidateOnRefresh: true
+      }
+    });
+
+    tl.to(cards[0], {
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      skewY: 0,
+      ease: "power2.out"
+    }, 0)
+    .to(cards[1], {
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      skewY: 0,
+      ease: "power2.out"
+    }, 0.1)
+    .to(cards[2], {
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      skewY: 0,
+      ease: "power2.out"
+    }, 0.2);
+  });
+
+  // Mobile (max-width: 767.98px)
+  mm.add("(max-width: 767.98px)", () => {
+    cards.forEach((card) => {
+      gsap.set(card, { opacity: 0, y: 50 });
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none reverse"
+        }
+      });
     });
   });
 }
