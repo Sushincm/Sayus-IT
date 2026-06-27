@@ -180,6 +180,7 @@ function initHeroScrollAnimation() {
 
   ScrollTrigger.create({
     trigger: ".services-section",
+    endTrigger: ".key-facts-section",
     start: "top 60px",
     end: "bottom 60px",
     onEnter: () => {
