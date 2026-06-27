@@ -7,12 +7,31 @@ gsap.registerPlugin(ScrollTrigger);
 // App Initialization
 // ==========================================================================
 window.addEventListener("load", () => {
+  prepareWordReveal();
   initLenis();
   initHeroScrollAnimation();
   initScrollReveals();
   initInteractiveHoverEffects();
   initServiceBoxVideoHover();
 });
+
+// ==========================================================================
+// Word Splitting Reveal Helper
+// ==========================================================================
+function prepareWordReveal() {
+  const showcaseText = document.querySelector(".showcase-text");
+  if (!showcaseText) return;
+
+  const text = showcaseText.innerText;
+  const words = text.split(/\s+/);
+
+  showcaseText.innerHTML = words.map(word => {
+    if (word.toLowerCase().includes("sayus")) {
+      return `<span class="word highlight">Sayus</span>`;
+    }
+    return `<span class="word">${word}</span>`;
+  }).join(" ");
+}
 
 // ==========================================================================
 // Lenis Smooth Scroll Setup
@@ -95,17 +114,37 @@ function initHeroScrollAnimation() {
     ease: "power1.inOut"
   }, 0);
 
-  heroTimeline.to("#hero-content-1", {
+  heroTimeline.to("#hero-content-1 .sub-headline", {
     opacity: 0,
-    y: -80,
+    scale: 0.8,
+    filter: "blur(15px)",
     ease: "power1.inOut"
   }, 0);
 
   heroTimeline.to("#hero-content-2", {
     opacity: 1,
-    y: 0,
-    ease: "power2.out"
-  }, 0.4);
+    duration: 0.1,
+    ease: "none"
+  }, 0.3);
+
+  const words = document.querySelectorAll(".showcase-text .word");
+  heroTimeline.to(words, {
+    opacity: 1,
+    stagger: 0.05,
+    duration: 1,
+    ease: "none"
+  }, 0.3);
+
+  const servicesBtn = document.querySelector("#hero-content-2 .btn-volt");
+  if (servicesBtn) {
+    gsap.set(servicesBtn, { opacity: 0, y: 30 });
+    heroTimeline.to(servicesBtn, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "power2.out"
+    }, 0.3 + (words.length * 0.05));
+  }
 
   ScrollTrigger.create({
     trigger: "body",

@@ -224,7 +224,6 @@ body {
   align-items: center;
   justify-content: center;
   opacity: 0; 
-  transform: translateY(40px); 
 }
 
 .center-showcase {
@@ -241,7 +240,12 @@ body {
   margin-bottom: 2.5rem;
 }
 
-.showcase-text span,
+.showcase-text .word {
+  display: inline-block;
+  opacity: 0.15;
+}
+
+.showcase-text .word.highlight,
 .text-truth {
   font-family: var(--font-display);
   font-weight: 800;
