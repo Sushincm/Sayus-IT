@@ -22,16 +22,38 @@ window.addEventListener("load", () => {
 function prepareWordReveal() {
   const showcaseText = document.querySelector(".showcase-text");
   if (!showcaseText) return;
+  wrapWordsInTextNodes(showcaseText);
+}
 
-  const text = showcaseText.innerText;
-  const words = text.split(/\s+/);
+function wrapWordsInTextNodes(node) {
+  if (node.nodeType === Node.TEXT_NODE) {
+    const text = node.nodeValue;
+    if (!text.trim()) return;
 
-  showcaseText.innerHTML = words.map(word => {
-    if (word.toLowerCase().includes("sayus")) {
-      return `<span class="word highlight">Sayus</span>`;
-    }
-    return `<span class="word">${word}</span>`;
-  }).join(" ");
+    const tokens = text.split(/(\s+)/);
+    const parent = node.parentNode;
+    
+    tokens.forEach(token => {
+      if (token.trim()) {
+        const span = document.createElement("span");
+        span.className = "word";
+        if (token.toLowerCase().includes("sayus")) {
+          span.classList.add("highlight");
+        }
+        span.textContent = token;
+        parent.insertBefore(span, node);
+      } else {
+        parent.insertBefore(document.createTextNode(token), node);
+      }
+    });
+    
+    parent.removeChild(node);
+  } else if (node.nodeType === Node.ELEMENT_NODE) {
+    if (node.classList.contains("word")) return;
+    
+    const children = Array.from(node.childNodes);
+    children.forEach(child => wrapWordsInTextNodes(child));
+  }
 }
 
 // ==========================================================================
