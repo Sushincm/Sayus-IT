@@ -181,21 +181,31 @@ function initHeroScrollAnimation() {
     end: "bottom bottom",
     onUpdate: (self) => {
       const currentScroll = self.scroll();
+      // Safely determine when the hero animation pin ends
+      const heroEnd = heroTimeline.scrollTrigger ? heroTimeline.scrollTrigger.end : window.innerHeight * 2;
       
-      if (currentScroll < 80) {
-        // Always show and make transparent in the hero section
+      if (currentScroll < heroEnd) {
+        // Inside hero section: keep header and logo visible (let timeline handle logo positioning)
         gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
-        header.classList.remove("scrolled");
+        gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
+        
+        if (currentScroll < 80) {
+          header.classList.remove("scrolled");
+        } else {
+          header.classList.add("scrolled");
+        }
       } else {
         // Scrolled past hero section
         header.classList.add("scrolled");
         
         if (self.direction === 1) {
-          // Scrolling down - hide header
+          // Scrolling down - hide header & logo
           gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
+          gsap.to(logo, { opacity: 0, duration: 0.3, ease: "power2.out" });
         } else if (self.direction === -1) {
-          // Scrolling up - show header
+          // Scrolling up - show header & logo
           gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
+          gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
         }
       }
     }
@@ -227,6 +237,9 @@ function initScrollReveals() {
     else if (direction === "left") xVal = offset;
     else if (direction === "right") xVal = -offset;
 
+    // Temporarily disable transition during setup & reveal animation to prevent conflicts
+    element.style.transition = "none";
+
     gsap.set(element, {
       opacity: 0,
       x: xVal,
@@ -244,7 +257,27 @@ function initScrollReveals() {
         trigger: element,
         start: startPoint,
         toggleActions: "play none none reverse",
-        once: false
+        once: false,
+        onEnter: () => {
+          element.style.transition = "none";
+          element.classList.remove("is-revealed");
+        },
+        onLeaveBack: () => {
+          element.style.transition = "none";
+          element.classList.remove("is-revealed");
+        },
+        onEnterBack: () => {
+          element.style.transition = "none";
+          element.classList.remove("is-revealed");
+        }
+      },
+      onComplete: () => {
+        element.style.transition = "";
+        element.classList.add("is-revealed");
+      },
+      onReverseComplete: () => {
+        element.style.transition = "";
+        element.classList.remove("is-revealed");
       }
     });
   });
@@ -356,6 +389,11 @@ function initInteractiveHoverEffects() {
   const buttons = document.querySelectorAll(".btn-volt, .menu-btn, .header-icon-link");
   
   buttons.forEach(button => {
+    button.addEventListener("mouseenter", () => {
+      // Disable CSS transitions so GSAP handles magnetic motion without lag
+      button.style.transition = "none";
+    });
+
     button.addEventListener("mousemove", (e) => {
       const rect = button.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
@@ -374,7 +412,13 @@ function initInteractiveHoverEffects() {
         x: 0,
         y: 0,
         duration: 0.5,
-        ease: "elastic.out(1, 0.5)"
+        ease: "elastic.out(1, 0.5)",
+        onComplete: () => {
+          // Only restore transition if mouse has not re-entered
+          if (!button.matches(':hover')) {
+            button.style.transition = "";
+          }
+        }
       });
     });
   });
