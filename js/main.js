@@ -11,10 +11,12 @@ window.addEventListener("load", () => {
   initLenis();
   initHeroScrollAnimation();
   initScrollReveals();
+  initPortfolioHorizontalScroll();
   initInteractiveHoverEffects();
   initServiceBoxVideoHover();
   initKeyFactsAnimation();
   initCounters();
+  initShutterReveal();
   initTooltips();
 });
 
@@ -459,3 +461,170 @@ function initTooltips() {
     });
   });
 }
+
+// ==========================================================================
+// Portfolio Horizontal Scroll (Selected Work Section)
+// ==========================================================================
+function initPortfolioHorizontalScroll() {
+  const track = document.querySelector(".portfolio-scroll-track");
+  const section = document.querySelector(".portfolio-horizontal-section");
+  if (!track || !section) return;
+
+  let mm = gsap.matchMedia();
+
+  // Desktop (Pin & scroll horizontally)
+  mm.add("(min-width: 768px)", () => {
+    // Dynamic calculate scroll amount based on track width
+    const scrollAmount = track.scrollWidth - window.innerWidth;
+
+    const scrollTween = gsap.to(track, {
+      x: -scrollAmount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        pin: true,
+        scrub: 1.0,
+        start: "top top",
+        end: () => `+=${scrollAmount}`,
+        invalidateOnRefresh: true
+      }
+    });
+
+    // Subtly animate card entry as it enters screen viewport (slide up from bottom)
+    const cards = section.querySelectorAll(".portfolio-card");
+    cards.forEach((card) => {
+      gsap.fromTo(card, 
+        { opacity: 0, y: 150 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            containerAnimation: scrollTween,
+            start: "left right",
+            end: "left center",
+            scrub: true
+          }
+        }
+      );
+    });
+  });
+
+  // Mobile (Vertical stack layout reveal)
+  mm.add("(max-width: 767.98px)", () => {
+    const panels = section.querySelectorAll(".portfolio-panel");
+    panels.forEach((panel) => {
+      const card = panel.querySelector(".portfolio-card");
+      const textGroup = panel.querySelector(".header-content-inner, .end-cta-content-inner");
+      
+      if (card) {
+        gsap.fromTo(card, 
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: panel,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      }
+      
+      if (textGroup) {
+        gsap.fromTo(textGroup,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.0,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: panel,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      }
+    });
+  });
+}
+
+// ==========================================================================
+// Shutter Reveal Animation
+// ==========================================================================
+function initShutterReveal() {
+  const section = document.querySelector(".shutter-reveal-section");
+  if (!section) return;
+
+  const slats = section.querySelectorAll(".shutter-slat");
+  const bgVideo = section.querySelector(".shutter-bg-video");
+  const label = section.querySelector(".shutter-label");
+  const title = section.querySelector(".shutter-title");
+  const desc = section.querySelector(".shutter-desc");
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      start: "top top",
+      end: "+=150%",
+      pin: true,
+      scrub: 1.2,
+      invalidateOnRefresh: true,
+    }
+  });
+
+  // 1. Animate slats to scaleY(0) to reveal the image
+  tl.to(slats, {
+    scaleY: 0,
+    stagger: {
+      each: 0.03,
+      from: "start"
+    },
+    duration: 0.8,
+    ease: "power1.inOut"
+  }, 0);
+
+  // 2. Subtle zoom out of the background video
+  if (bgVideo) {
+    tl.to(bgVideo, {
+      scale: 1,
+      duration: 1.0,
+      ease: "power1.out"
+    }, 0);
+  }
+
+  // 3. Fade and lift the overlay text elements
+  if (label) {
+    tl.to(label, {
+      opacity: 1,
+      y: 0,
+      duration: 0.4,
+      ease: "power2.out"
+    }, 0.35);
+  }
+
+  if (title) {
+    tl.to(title, {
+      opacity: 1,
+      y: 0,
+      duration: 0.4,
+      ease: "power2.out"
+    }, 0.45);
+  }
+
+  if (desc) {
+    tl.to(desc, {
+      opacity: 1,
+      y: 0,
+      duration: 0.4,
+      ease: "power2.out"
+    }, 0.55);
+  }
+}
+
