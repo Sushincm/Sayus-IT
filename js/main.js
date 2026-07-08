@@ -17,6 +17,7 @@ window.addEventListener("load", () => {
   initKeyFactsAnimation();
   initCounters();
   initShutterReveal();
+  initFaqAccordion();
   initTooltips();
 });
 
@@ -509,6 +510,26 @@ function initPortfolioHorizontalScroll() {
         }
       );
     });
+
+    // Animate the portfolio ending CTA text group as it enters screen viewport
+    const endCta = section.querySelector(".end-cta-content-inner");
+    if (endCta) {
+      gsap.fromTo(endCta, 
+        { opacity: 0, y: 150 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: endCta,
+            containerAnimation: scrollTween,
+            start: "left right",
+            end: "left center",
+            scrub: true
+          }
+        }
+      );
+    }
   });
 
   // Mobile (Vertical stack layout reveal)
@@ -563,10 +584,16 @@ function initShutterReveal() {
   if (!section) return;
 
   const slats = section.querySelectorAll(".shutter-slat");
-  const bgVideo = section.querySelector(".shutter-bg-video");
-  const label = section.querySelector(".shutter-label");
-  const title = section.querySelector(".shutter-title");
-  const desc = section.querySelector(".shutter-desc");
+  const faqHeading = section.querySelector(".faq-main-heading");
+  const faqItems = section.querySelectorAll(".faq-item");
+
+  // Set initial states to avoid flash of content and ensure they start from below
+  if (faqHeading) {
+    gsap.set(faqHeading, { opacity: 0, y: 80 });
+  }
+  if (faqItems.length) {
+    gsap.set(faqItems, { opacity: 0, y: 80 });
+  }
 
   const tl = gsap.timeline({
     scrollTrigger: {
@@ -579,7 +606,7 @@ function initShutterReveal() {
     }
   });
 
-  // 1. Animate slats to scaleY(0) to reveal the image
+  // 1. Animate slats to scaleY(0) to reveal the background
   tl.to(slats, {
     scaleY: 0,
     stagger: {
@@ -590,41 +617,71 @@ function initShutterReveal() {
     ease: "power1.inOut"
   }, 0);
 
-  // 2. Subtle zoom out of the background video
-  if (bgVideo) {
-    tl.to(bgVideo, {
-      scale: 1,
-      duration: 1.0,
-      ease: "power1.out"
-    }, 0);
-  }
-
-  // 3. Fade and lift the overlay text elements
-  if (label) {
-    tl.to(label, {
+  // 2. Fade and lift the FAQ heading
+  if (faqHeading) {
+    tl.to(faqHeading, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
+      duration: 0.5,
       ease: "power2.out"
     }, 0.35);
   }
 
-  if (title) {
-    tl.to(title, {
+  // 3. Fade and lift each FAQ item staggered (block by block)
+  if (faqItems.length) {
+    tl.to(faqItems, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
+      stagger: 0.1,
+      duration: 0.5,
       ease: "power2.out"
     }, 0.45);
   }
+}
 
-  if (desc) {
-    tl.to(desc, {
-      opacity: 1,
-      y: 0,
-      duration: 0.4,
-      ease: "power2.out"
-    }, 0.55);
-  }
+// ==========================================================================
+// FAQ Accordion Interaction
+// ==========================================================================
+function initFaqAccordion() {
+  const faqItems = document.querySelectorAll(".faq-item");
+  faqItems.forEach(item => {
+    const trigger = item.querySelector(".faq-trigger");
+    trigger.addEventListener("click", () => {
+      const isOpen = item.classList.contains("active");
+      
+      // Close all other items
+      faqItems.forEach(i => {
+        if (i !== item) {
+          i.classList.remove("active");
+          const panel = i.querySelector(".faq-panel");
+          gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.out" });
+          const icon = i.querySelector(".faq-icon");
+          if (icon) {
+            gsap.to(icon, { rotation: 0, duration: 0.3 });
+          }
+        }
+      });
+      
+      // Toggle current item
+      if (!isOpen) {
+        item.classList.add("active");
+        const panel = item.querySelector(".faq-panel");
+        const answer = item.querySelector(".faq-answer-wrapper");
+        gsap.to(panel, { height: answer.scrollHeight, duration: 0.4, ease: "power2.out" });
+        const icon = item.querySelector(".faq-icon");
+        if (icon) {
+          gsap.to(icon, { rotation: 45, duration: 0.3 });
+        }
+      } else {
+        item.classList.remove("active");
+        const panel = item.querySelector(".faq-panel");
+        gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.out" });
+        const icon = item.querySelector(".faq-icon");
+        if (icon) {
+          gsap.to(icon, { rotation: 0, duration: 0.3 });
+        }
+      }
+    });
+  });
 }
 
