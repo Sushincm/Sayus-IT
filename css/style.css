@@ -1707,9 +1707,14 @@ html.lenis body {
   color: #ffffff;
 }
 
-.contact-footer-note {
+.contact-btn-note {
+  max-width: 480px;
+}
+
+.contact-btn-note p {
   font-family: var(--font-body);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
   color: rgba(5, 5, 5, 0.55);
   margin: 0;
 }
