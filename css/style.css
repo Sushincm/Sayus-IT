@@ -1616,6 +1616,7 @@ html.lenis body {
   flex-direction: column;
   justify-content: space-between;
   gap: 2.5rem;
+  margin-top: 2rem;
 }
 
 .contact-cta-group {
@@ -1736,11 +1737,42 @@ html.lenis body {
 }
 
 @media (min-width: 992px) {
-  .contact-image-container {
-    margin-top: 3rem;
+  .contact-cta-section .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 5%;
+    row-gap: 3.5rem;
   }
+
+  .contact-cta-section .col-lg-6 {
+    width: auto;
+    max-width: none;
+    display: contents !important;
+  }
+
+  .contact-title-wrapper {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .contact-subheading-wrapper {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .contact-image-container {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 0 !important;
+  }
+
   .contact-right-bottom {
-    padding-left: 2.5rem;
-    margin-top: 3rem;
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 0;
+    margin-top: 0 !important;
   }
 }
