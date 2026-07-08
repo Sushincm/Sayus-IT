@@ -1598,6 +1598,9 @@ html.lenis body {
   width: 100%;
   margin-top: 2rem;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .contact-image {
@@ -1608,11 +1611,24 @@ html.lenis body {
   display: block;
 }
 
-.contact-details-wrapper {
+.contact-right-bottom {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 2.5rem;
-  height: 100%;
+}
+
+.contact-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-footer-note {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(5, 5, 5, 0.55);
+  margin: 0;
 }
 
 .contact-subheading h3 {
@@ -1723,8 +1739,8 @@ html.lenis body {
   .contact-image-container {
     margin-top: 3rem;
   }
-  .contact-details-wrapper {
-    gap: 3.5rem;
-    padding-left: 2rem;
+  .contact-right-bottom {
+    padding-left: 2.5rem;
+    margin-top: 3rem;
   }
 }

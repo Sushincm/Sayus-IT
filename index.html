@@ -736,7 +736,7 @@
       <div class="container-fluid px-4 px-md-5 py-5 py-md-6">
         <div class="row gy-5">
           <!-- Left Column: Start a project & Image -->
-          <div class="col-lg-6 d-flex flex-column justify-content-between">
+          <div class="col-lg-6 d-flex flex-column">
             <div
               data-scroll="reveal"
               data-scroll-direction="up"
@@ -745,7 +745,7 @@
               <h2 class="contact-title">Start a project.</h2>
             </div>
             <div
-              class="contact-image-container"
+              class="contact-image-container flex-grow-1"
               data-scroll="reveal"
               data-scroll-direction="up"
               data-scroll-delay="0.1"
@@ -759,19 +759,27 @@
           </div>
 
           <!-- Right Column: Details & CTA -->
-          <div class="col-lg-6 d-flex flex-column justify-content-between">
+          <div class="col-lg-6 d-flex flex-column">
             <div
-              class="contact-details-wrapper"
               data-scroll="reveal"
               data-scroll-direction="up"
-              data-scroll-delay="0.2"
+              data-scroll-delay="0.15"
             >
               <div class="contact-subheading">
                 <h3>
                   Book a call or send us a message.<br />We read everything.
                 </h3>
               </div>
+            </div>
 
+            <!-- This wrapper stretches to match the height of the left image container -->
+            <div
+              class="contact-right-bottom flex-grow-1"
+              data-scroll="reveal"
+              data-scroll-direction="up"
+              data-scroll-delay="0.25"
+            >
+              <!-- Top Block: Email address -->
               <div class="contact-methods-group">
                 <div>
                   <a href="mailto:contact@sayus.com" class="contact-email"
@@ -783,28 +791,36 @@
                 </div>
               </div>
 
-              <div class="contact-link-group">
-                <a
-                  href="mailto:contact@good-fella.com"
-                  class="contact-text-link"
-                  >Get in touch</a
-                >
+              <!-- Middle Block: Call to Action buttons -->
+              <div class="contact-cta-group">
+                <div class="contact-link-group">
+                  <a
+                    href="mailto:contact@sayus.com"
+                    class="contact-text-link"
+                    >Get in touch</a
+                  >
+                </div>
+
+                <div class="contact-btn-group">
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener"
+                    class="btn-book-call"
+                  >
+                    <span class="btn-book-call-text">BOOK A 15-MIN CALL</span>
+                    <span class="btn-book-call-icon">+</span>
+                  </a>
+                </div>
+
+                <div class="contact-btn-note mt-3">
+                  <p>We typically respond within 24 hours. No sales pitch, just pure systems engineering strategy.</p>
+                </div>
               </div>
 
-              <div class="contact-btn-group">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener"
-                  class="btn-book-call"
-                >
-                  <span class="btn-book-call-text">BOOK A 15-MIN CALL</span>
-                  <span class="btn-book-call-icon">+</span>
-                </a>
-              </div>
-
-              <div class="contact-btn-note mt-3">
-                <p>We typically respond within 24 hours. No sales pitch, just pure systems engineering strategy.</p>
+              <!-- Bottom Block: Footer note -->
+              <div class="contact-footer-group">
+                <p class="contact-footer-note">Both brothers on every project.</p>
               </div>
             </div>
           </div>
