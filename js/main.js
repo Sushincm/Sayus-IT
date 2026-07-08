@@ -19,6 +19,7 @@ window.addEventListener("load", () => {
   initShutterReveal();
   initFaqAccordion();
   initTooltips();
+  initFooterCanvas();
 });
 
 // ==========================================================================
@@ -684,4 +685,92 @@ function initFaqAccordion() {
     });
   });
 }
+
+// ==========================================================================
+// Footer Particle Canvas Animation
+// ==========================================================================
+function initFooterCanvas() {
+  const canvas = document.getElementById("footer-particles");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let animationFrameId;
+  let particles = [];
+  
+  function resize() {
+    canvas.width = canvas.parentElement.offsetWidth;
+    canvas.height = canvas.parentElement.offsetHeight;
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.radius = Math.random() * 1.5 + 0.5;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+      if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(244, 121, 31, 0.25)"; // Volt orange with opacity
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 40; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw lines between close particles
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(244, 121, 31, ${0.1 * (1 - dist / 100)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    
+    animationFrameId = requestAnimationFrame(animate);
+  }
+
+  // Use IntersectionObserver to run animation only when visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate();
+      } else {
+        cancelAnimationFrame(animationFrameId);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(canvas);
+}
+
+
+
+
 

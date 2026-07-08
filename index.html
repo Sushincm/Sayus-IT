@@ -796,9 +796,7 @@
               <!-- Middle Block: Call to Action buttons -->
               <div class="contact-cta-group">
                 <div class="contact-link-group">
-                  <a
-                    href="mailto:contact@sayus.com"
-                    class="contact-text-link"
+                  <a href="mailto:contact@sayus.com" class="contact-text-link"
                     >Get in touch</a
                   >
                 </div>
@@ -818,13 +816,163 @@
 
               <!-- Bottom Block: Response note -->
               <div class="contact-btn-note">
-                <p>We typically respond within 24 hours. No sales pitch, just pure systems engineering strategy.</p>
+                <p>
+                  We typically respond within 24 hours. No sales pitch, just
+                  pure systems engineering strategy.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- Footer Section -->
+    <footer class="footer-section" id="main-footer">
+      <!-- Background canvas for hand animation -->
+      <div class="footer-canvas-container">
+        <canvas id="footer-particles"></canvas>
+      </div>
+
+      <!-- Giant Watermark Text -->
+      <div class="footer-watermark">
+        <span>SAYUS</span>
+      </div>
+
+      <div class="container-fluid px-4 px-md-5 position-relative z-index-2">
+        <div class="row gy-5">
+          <!-- Left Column: Newsletter & Waitlist -->
+          <div class="col-lg-5 col-md-12">
+            <div class="footer-block footer-newsletter-block">
+              <div class="footer-heading mb-3">
+                <h4>Don't miss out on future updates.</h4>
+              </div>
+              <form
+                class="footer-subscribe-form mb-3"
+                onsubmit="event.preventDefault()"
+              >
+                <div class="row g-2">
+                  <div class="col-12">
+                    <div class="form-input-wrapper">
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        class="footer-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-input-wrapper mt-2">
+                      <input
+                        type="email"
+                        placeholder="Email"
+                        class="footer-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <div class="footer-btn-wrapper">
+                      <button type="submit" class="btn-footer-subscribe">
+                        <span class="btn-subscribe-text">SUBSCRIBE</span>
+                        <span class="btn-subscribe-icon">+</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="footer-note mb-4">
+                <p>Unsubscribe anytime.</p>
+              </div>
+
+              <!-- Waitlist / Status indicators -->
+              <div class="footer-status-group">
+                <div class="footer-status-item mb-2">
+                  <span class="status-dot">■</span>
+                  <span class="status-text"
+                    >ACCEPTING PROJECTS. JOIN THE WAITLIST.</span
+                  >
+                </div>
+                <div class="footer-status-item">
+                  <span class="status-dot">■</span>
+                  <span class="status-text">ONLY 3 SPOTS LEFT.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Column: Navigation links -->
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-block d-flex flex-column align-items-lg-center">
+              <nav class="footer-nav-links">
+                <div class="mb-2">
+                  <a href="#hero-container" class="footer-nav-link">HOME</a>
+                </div>
+                <div class="mb-2">
+                  <a href="#portfolio" class="footer-nav-link">WORK</a>
+                </div>
+                <div class="mb-2">
+                  <a href="#key-facts" class="footer-nav-link">PRICING</a>
+                </div>
+                <div class="mb-2">
+                  <a href="#services" class="footer-nav-link">ABOUT</a>
+                </div>
+                <div>
+                  <a href="#contact" class="footer-nav-link">CONTACT</a>
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Right Column: Contact & Policies -->
+          <div class="col-lg-4 col-md-6">
+            <div
+              class="footer-block d-flex flex-column align-items-md-end text-md-end"
+            >
+              <div class="footer-contact-info mb-4">
+                <div class="mb-2">
+                  <a href="mailto:contact@sayus.com" class="footer-contact-link"
+                    >contact@sayus.com</a
+                  >
+                </div>
+                <div class="mb-2">
+                  <a href="mailto:julian@sayus.com" class="footer-contact-link"
+                    >julian@sayus.com</a
+                  >
+                </div>
+                <div>
+                  <a href="mailto:adrian@sayus.com" class="footer-contact-link"
+                    >adrian@sayus.com</a
+                  >
+                </div>
+              </div>
+
+              <div class="footer-policy-links">
+                <div class="mb-2">
+                  <a href="#" class="footer-policy-link">Privacy Policy</a>
+                </div>
+                <div>
+                  <a href="#" class="footer-policy-link">Legal Notice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright Row -->
+        <div class="row mt-5 pt-4 align-items-center">
+          <div class="col-12 text-center">
+            <div class="footer-copyright-block">
+              <p>© 2026</p>
+              <p>
+                PMC Viii 172/1, Sayus Consultancy Services, Koorkkara, Payyanur,
+                Kannur, Kerala, 670307
+              </p>
+              <p>Let Sayus handle it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <!-- External Scripts & Main Logic -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
