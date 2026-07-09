@@ -3,12 +3,15 @@
 // ==========================================================================
 gsap.registerPlugin(ScrollTrigger);
 
+let lenis;
+
 // ==========================================================================
 // App Initialization
 // ==========================================================================
 window.addEventListener("load", () => {
   prepareWordReveal();
   initLenis();
+  initMenuOverlay();
   initHeroScrollAnimation();
   initScrollReveals();
   initPortfolioHorizontalScroll();
@@ -20,6 +23,7 @@ window.addEventListener("load", () => {
   initFaqAccordion();
   initTooltips();
   initFooterCanvas();
+  initBackToTop();
 });
 
 // ==========================================================================
@@ -66,7 +70,7 @@ function wrapWordsInTextNodes(node) {
 // Lenis Smooth Scroll Setup
 // ==========================================================================
 function initLenis() {
-  const lenis = new Lenis({
+  lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     direction: 'vertical',
@@ -768,6 +772,162 @@ function initFooterCanvas() {
   }, { threshold: 0.1 });
 
   observer.observe(canvas);
+}
+
+// ==========================================================================
+// Menu Overlay Logic
+// ==========================================================================
+function initMenuOverlay() {
+  const menuBtn = document.querySelector(".menu-btn");
+  const menuOverlay = document.getElementById("menu-overlay");
+  if (!menuBtn || !menuOverlay) return;
+
+  const menuBackdrop = menuOverlay.querySelector(".menu-backdrop");
+  const menuPanel = menuOverlay.querySelector(".menu-panel");
+  const navLinks = menuOverlay.querySelectorAll(".menu-nav-link");
+  const infoItems = menuOverlay.querySelectorAll(".menu-info-section");
+  let isOpen = false;
+
+  // Set initial hidden state for animation elements
+  gsap.set(menuOverlay, { display: "none" });
+  gsap.set(menuBackdrop, { opacity: 0 });
+  gsap.set(menuPanel, { xPercent: 100 });
+  gsap.set(navLinks, { y: 40, opacity: 0 });
+  gsap.set(infoItems, { y: 20, opacity: 0 });
+
+  function openMenu() {
+    isOpen = true;
+    document.body.classList.add("menu-open");
+    
+    if (lenis) {
+      lenis.stop();
+    }
+
+    gsap.killTweensOf(menuOverlay);
+    gsap.killTweensOf(menuBackdrop);
+    gsap.killTweensOf(menuPanel);
+    gsap.killTweensOf(navLinks);
+    gsap.killTweensOf(infoItems);
+
+    // Animate overlay elements
+    gsap.timeline()
+      .set(menuOverlay, { display: "block" })
+      .to(menuBackdrop, {
+        opacity: 1,
+        duration: 0.5,
+        ease: "power2.out"
+      })
+      .to(menuPanel, {
+        xPercent: 0,
+        duration: 0.6,
+        ease: "power3.out"
+      }, "-=0.5")
+      .to(navLinks, {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "power2.out"
+      }, "-=0.3")
+      .to(infoItems, {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.04,
+        ease: "power2.out"
+      }, "-=0.3");
+  }
+
+  function closeMenu() {
+    isOpen = false;
+    document.body.classList.remove("menu-open");
+    
+    if (lenis) {
+      lenis.start();
+    }
+
+    gsap.killTweensOf(menuOverlay);
+    gsap.killTweensOf(menuBackdrop);
+    gsap.killTweensOf(menuPanel);
+    gsap.killTweensOf(navLinks);
+    gsap.killTweensOf(infoItems);
+
+    gsap.timeline()
+      .to(infoItems, {
+        y: 20,
+        opacity: 0,
+        duration: 0.3,
+        stagger: 0.03,
+        ease: "power2.in"
+      })
+      .to(navLinks, {
+        y: 40,
+        opacity: 0,
+        duration: 0.3,
+        stagger: 0.03,
+        ease: "power2.in"
+      }, "-=0.2")
+      .to(menuPanel, {
+        xPercent: 100,
+        duration: 0.5,
+        ease: "power3.inOut"
+      }, "-=0.2")
+      .to(menuBackdrop, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.out"
+      }, "-=0.4")
+      .set(menuOverlay, { display: "none" });
+  }
+
+  menuBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  // Close when clicking nav links and smoothly scroll
+  const allOverlayLinks = menuOverlay.querySelectorAll("a");
+  allOverlayLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      closeMenu();
+    });
+  });
+
+  // Close when clicking the backdrop
+  if (menuBackdrop) {
+    menuBackdrop.addEventListener("click", () => {
+      closeMenu();
+    });
+  }
+}
+
+function initBackToTop() {
+  const backToTopBtn = document.getElementById("back-to-top");
+  if (!backToTopBtn) return;
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      backToTopBtn.classList.add("visible");
+    } else {
+      backToTopBtn.classList.remove("visible");
+    }
+  });
+
+  backToTopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (lenis) {
+      lenis.scrollTo(0);
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    }
+  });
 }
 
 
