@@ -101,126 +101,191 @@ function initHeroScrollAnimation() {
   
   if (!logo || !target || !heroContainer) return;
 
-  let logoRect, targetRect, scale, xDiff, yDiff;
+  let mm = gsap.matchMedia();
 
-  function calculateTransitionParameters() {
-    gsap.set(logo, { clearProps: "x,y,scale,transformOrigin" });
-    
-    logoRect = logo.getBoundingClientRect();
-    targetRect = target.getBoundingClientRect();
-    
-    scale = targetRect.height / logoRect.height;
-    
-    xDiff = targetRect.left - logoRect.left;
-    yDiff = targetRect.top - logoRect.top;
-  }
+  // Desktop (min-width: 992px)
+  mm.add("(min-width: 992px)", () => {
+    let logoRect, targetRect, scale, xDiff, yDiff;
 
-  calculateTransitionParameters();
-
-  const heroTimeline = gsap.timeline({
-    scrollTrigger: {
-      trigger: "#hero-container",
-      start: "top top",
-      end: "+=200%",
-      pin: true,
-      scrub: 1.2,
-      invalidateOnRefresh: true,
-    }
-  });
-
-  heroTimeline.to(logo, {
-    x: () => xDiff,
-    y: () => yDiff,
-    scale: () => scale,
-    filter: "drop-shadow(0px 0px 0px rgba(244, 121, 31, 0))",
-    transformOrigin: "left top",
-    ease: "none"
-  }, 0);
-
-  heroTimeline.to(".hero-video", {
-    scale: 1,
-    ease: "power1.inOut"
-  }, 0);
-
-  heroTimeline.to(".grid-dark-overlay", {
-    backgroundColor: "rgba(5, 5, 5, 0.8)",
-    ease: "power1.inOut"
-  }, 0);
-
-  heroTimeline.to("#hero-content-1 .sub-headline", {
-    opacity: 0,
-    scale: 0.8,
-    filter: "blur(15px)",
-    duration: 0.5,
-    ease: "power1.inOut"
-  }, 0);
-
-  heroTimeline.to("#hero-content-2", {
-    opacity: 1,
-    duration: 0.1,
-    ease: "none"
-  }, 0.3);
-
-  const words = document.querySelectorAll(".showcase-text .word");
-  const staggerDuration = 0.55 / (words.length || 1);
-  heroTimeline.to(words, {
-    opacity: 1,
-    stagger: staggerDuration,
-    duration: 0.1,
-    ease: "none"
-  }, 0.3);
-
-  const servicesBtn = document.querySelector("#hero-content-2 .btn-volt");
-  if (servicesBtn) {
-    gsap.set(servicesBtn, { opacity: 0, y: 30 });
-    heroTimeline.to(servicesBtn, {
-      opacity: 1,
-      y: 0,
-      duration: 0.15,
-      ease: "power2.out"
-    }, 0.85);
-  }
-
-  const header = document.querySelector(".header-nav");
-
-  ScrollTrigger.create({
-    trigger: "body",
-    start: "top top",
-    end: "bottom bottom",
-    onUpdate: (self) => {
-      const currentScroll = self.scroll();
-      // Safely determine when the hero animation pin ends
-      const heroEnd = heroTimeline.scrollTrigger ? heroTimeline.scrollTrigger.end : window.innerHeight * 2;
+    function calculateTransitionParameters() {
+      gsap.set(logo, { clearProps: "x,y,scale,transformOrigin" });
       
-      if (currentScroll < heroEnd) {
-        // Inside hero section: keep header and logo visible (let timeline handle logo positioning)
-        gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
-        gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
+      logoRect = logo.getBoundingClientRect();
+      targetRect = target.getBoundingClientRect();
+      
+      scale = targetRect.height / logoRect.height;
+      
+      xDiff = targetRect.left - logoRect.left;
+      yDiff = targetRect.top - logoRect.top;
+    }
+
+    calculateTransitionParameters();
+
+    const heroTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: "#hero-container",
+        start: "top top",
+        end: "+=200%",
+        pin: true,
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    heroTimeline.to(logo, {
+      x: () => xDiff,
+      y: () => yDiff,
+      scale: () => scale,
+      filter: "drop-shadow(0px 0px 0px rgba(244, 121, 31, 0))",
+      transformOrigin: "left top",
+      ease: "none"
+    }, 0);
+
+    heroTimeline.to(".hero-video", {
+      scale: 1,
+      ease: "power1.inOut"
+    }, 0);
+
+    heroTimeline.to(".grid-dark-overlay", {
+      backgroundColor: "rgba(5, 5, 5, 0.8)",
+      ease: "power1.inOut"
+    }, 0);
+
+    heroTimeline.to("#hero-content-1 .sub-headline", {
+      opacity: 0,
+      scale: 0.8,
+      filter: "blur(15px)",
+      duration: 0.5,
+      ease: "power1.inOut"
+    }, 0);
+
+    heroTimeline.to("#hero-content-2", {
+      opacity: 1,
+      duration: 0.1,
+      ease: "none"
+    }, 0.3);
+
+    const words = document.querySelectorAll(".showcase-text .word");
+    const staggerDuration = 0.55 / (words.length || 1);
+    heroTimeline.to(words, {
+      opacity: 1,
+      stagger: staggerDuration,
+      duration: 0.1,
+      ease: "none"
+    }, 0.3);
+
+    const servicesBtn = document.querySelector("#hero-content-2 .btn-volt");
+    if (servicesBtn) {
+      gsap.set(servicesBtn, { opacity: 0, y: 30 });
+      heroTimeline.to(servicesBtn, {
+        opacity: 1,
+        y: 0,
+        duration: 0.15,
+        ease: "power2.out"
+      }, 0.85);
+    }
+
+    const header = document.querySelector(".header-nav");
+
+    ScrollTrigger.create({
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const currentScroll = self.scroll();
+        // Safely determine when the hero animation pin ends
+        const heroEnd = heroTimeline.scrollTrigger ? heroTimeline.scrollTrigger.end : window.innerHeight * 2;
         
-        if (currentScroll < 80) {
-          header.classList.remove("scrolled");
-        } else {
-          header.classList.add("scrolled");
-        }
-      } else {
-        // Scrolled past hero section
-        header.classList.add("scrolled");
-        
-        if (self.direction === 1) {
-          // Scrolling down - hide header & logo
-          gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
-          gsap.to(logo, { opacity: 0, duration: 0.3, ease: "power2.out" });
-        } else if (self.direction === -1) {
-          // Scrolling up - show header & logo
+        if (currentScroll < heroEnd) {
+          // Inside hero section: keep header and logo visible (let timeline handle logo positioning)
           gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
           gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          
+          if (currentScroll < 80) {
+            header.classList.remove("scrolled");
+            logo.classList.remove("scrolled");
+          } else {
+            header.classList.add("scrolled");
+            logo.classList.add("scrolled");
+          }
+        } else {
+          // Scrolled past hero section
+          header.classList.add("scrolled");
+          logo.classList.add("scrolled");
+          
+          if (self.direction === 1) {
+            // Scrolling down - hide header & logo
+            gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
+            gsap.to(logo, { opacity: 0, duration: 0.3, ease: "power2.out" });
+          } else if (self.direction === -1) {
+            // Scrolling up - show header & logo
+            gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
+            gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          }
         }
       }
-    }
+    });
+
+    const handleRefreshInit = () => {
+      calculateTransitionParameters();
+    };
+
+    ScrollTrigger.addEventListener("refreshInit", handleRefreshInit);
+
+    return () => {
+      ScrollTrigger.removeEventListener("refreshInit", handleRefreshInit);
+    };
   });
 
-  ScrollTrigger.addEventListener("refreshInit", () => {
-    calculateTransitionParameters();
+  // Responsive / Mobile layout (max-width: 991px)
+  mm.add("(max-width: 991px)", () => {
+    // Reset properties on logo, header, & content layers
+    gsap.set(logo, { clearProps: "all" });
+    gsap.set(".header-nav", { clearProps: "all" });
+    gsap.set("#hero-content-1 .sub-headline", { clearProps: "all" });
+    gsap.set("#hero-content-2", { clearProps: "all" });
+    gsap.set(".showcase-text .word", { clearProps: "all" });
+    const servicesBtn = document.querySelector("#hero-content-2 .btn-volt");
+    if (servicesBtn) {
+      gsap.set(servicesBtn, { clearProps: "all" });
+    }
+
+    const header = document.querySelector(".header-nav");
+
+    // Simple scroll trigger for mobile header toggle
+    ScrollTrigger.create({
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const currentScroll = self.scroll();
+        
+        // Toggle scrolled background
+        if (currentScroll < 80) {
+          header.classList.remove("scrolled");
+          logo.classList.remove("scrolled");
+        } else {
+          header.classList.add("scrolled");
+          logo.classList.add("scrolled");
+        }
+
+        // Hide/show header & logo on scroll
+        if (currentScroll > 150) {
+          if (self.direction === 1) {
+            // Scrolling down - hide
+            gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
+            gsap.to(logo, { y: "-200%", duration: 0.3, ease: "power2.out" });
+          } else if (self.direction === -1) {
+            // Scrolling up - show
+            gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
+            gsap.to(logo, { y: 0, duration: 0.3, ease: "power2.out" });
+          }
+        } else {
+          gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
+          gsap.to(logo, { y: 0, duration: 0.3, ease: "power2.out" });
+        }
+      }
+    });
   });
 }
 
@@ -296,15 +361,16 @@ function initScrollReveals() {
 // ==========================================================================
 function initKeyFactsAnimation() {
   const section = document.querySelector(".key-facts-section");
-  if (!section) return;
-
-  const cards = section.querySelectorAll(".fact-card");
-  if (cards.length < 3) return;
-
+  const sectionMobile = document.querySelector(".key-facts-section-mobile");
+  
   let mm = gsap.matchMedia();
 
   // Desktop (min-width: 768px)
   mm.add("(min-width: 768px)", () => {
+    if (!section) return;
+    const cards = section.querySelectorAll(".fact-card");
+    if (cards.length < 3) return;
+
     gsap.set(cards, {
       opacity: 0,
       x: 0,
@@ -345,19 +411,45 @@ function initKeyFactsAnimation() {
 
   // Mobile (max-width: 767.98px)
   mm.add("(max-width: 767.98px)", () => {
-    cards.forEach((card) => {
-      gsap.set(card, { opacity: 0, y: 50 });
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
+    if (!sectionMobile) return;
+    const track = sectionMobile.querySelector(".metrics-scroll-track");
+    if (!track) return;
+
+    const cards = sectionMobile.querySelectorAll(".fact-card");
+
+    // Fade in / slide up cards when the section itself is reached
+    gsap.fromTo(cards, 
+      { opacity: 0, y: 60 },
+      { 
+        opacity: 1, 
+        y: 0, 
         duration: 0.8,
+        stagger: 0.15,
         ease: "power2.out",
         scrollTrigger: {
-          trigger: card,
-          start: "top 90%",
+          trigger: sectionMobile,
+          start: "top 80%",
           toggleActions: "play none none reverse"
         }
-      });
+      }
+    );
+
+    // Calculate dynamic horizontal scroll amount
+    const getScrollAmount = () => {
+      return -(track.scrollWidth - window.innerWidth);
+    };
+
+    gsap.to(track, {
+      x: getScrollAmount,
+      ease: "none",
+      scrollTrigger: {
+        trigger: sectionMobile,
+        pin: true,
+        scrub: 1.0,
+        start: "top top",
+        end: () => `+=${track.scrollWidth - window.innerWidth}`,
+        invalidateOnRefresh: true
+      }
     });
   });
 }
@@ -373,12 +465,16 @@ function initCounters() {
     const decimals = parseInt(counter.getAttribute("data-decimals")) || 0;
     const countObj = { value: 0 };
     
+    // Find nearest section to use as trigger
+    const section = counter.closest("section");
+    const triggerElement = section ? section : ".key-facts-section";
+    
     gsap.to(countObj, {
       value: target,
       duration: 2.0,
       ease: "power2.out",
       scrollTrigger: {
-        trigger: ".key-facts-section",
+        trigger: triggerElement,
         start: "top 60%",
         toggleActions: "play none none none",
         once: true

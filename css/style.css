@@ -971,9 +971,47 @@ html.lenis body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
+.key-facts-section-mobile {
+  display: none;
+}
+
 @media (max-width: 767.98px) {
+  .key-facts-section {
+    display: none !important;
+  }
+  .key-facts-section-mobile {
+    display: block !important;
+    background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .metrics-sticky-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .metrics-horizontal-wrapper {
+    width: 100%;
+    overflow: hidden;
+    padding: 2vh 0;
+  }
+  .metrics-scroll-track {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2rem;
+    width: max-content;
+    will-change: transform;
+  }
+  .metric-card-col {
+    flex-shrink: 0;
+    width: 78vw;
+    max-width: 320px;
+  }
   .fact-card {
-    height: 400px;
+    height: 380px;
     padding: 2rem;
   }
   .fact-circle {
@@ -2315,5 +2353,155 @@ body.menu-open .back-to-top {
 .back-to-top:focus-visible {
   outline: none !important;
   box-shadow: none !important;
+}
+
+/* ==========================================================================
+   Responsive Hero Section & Header Overrides
+   ========================================================================== */
+@media (max-width: 991px) {
+  /* Hero Container Layout */
+  .hero-scroll-container {
+    height: auto !important;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 120px 4vw 60px 4vw;
+  }
+
+  /* Full height video overlay on mobile */
+  .video-background-container,
+  .hero-tint,
+  .grid-dark-overlay {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .hero-video {
+    transform: translate(-50%, -50%) scale(1) !important;
+  }
+
+  .grid-dark-overlay {
+    background: rgba(5, 5, 5, 0.75) !important;
+  }
+
+  /* Stack and left-align hero contents */
+  .hero-content-layer {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  #hero-content-1 {
+    margin-bottom: 2.5rem;
+  }
+
+  .sub-headline {
+    max-width: 100% !important;
+    font-size: clamp(1.8rem, 5vw, 2.8rem) !important;
+    text-align: left !important;
+  }
+
+  .center-showcase {
+    max-width: 600px !important;
+    padding-top: 0 !important;
+    text-align: left !important;
+  }
+
+  .showcase-text {
+    font-size: clamp(1.1rem, 3.5vw, 1.4rem) !important;
+    margin-bottom: 2rem !important;
+    text-align: left !important;
+  }
+
+  .showcase-text .word {
+    opacity: 1 !important;
+  }
+
+  /* Statically fixed logo in the header nav */
+  .giant-logo {
+    position: fixed !important;
+    top: 1.5rem !important;
+    left: 4vw !important;
+    bottom: auto !important;
+    height: 40px !important;
+    width: auto !important;
+    filter: none !important;
+    pointer-events: auto !important;
+    z-index: 1005 !important;
+    transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1), height 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  }
+
+  .giant-logo.scrolled {
+    top: 1rem !important;
+    height: 35px !important;
+  }
+}
+
+/* Responsive Header Icons & Buttons */
+@media (max-width: 768px) {
+  .header-icon-link {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .header-icon-link svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  .menu-btn {
+    padding: 0.5rem 1.1rem !important;
+    font-size: 0.8rem !important;
+    gap: 6px !important;
+  }
+  .menu-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .btn-volt {
+    padding: 0.9rem 2.2rem !important;
+    font-size: 0.85rem !important;
+  }
+  .btn-volt svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-icon-link {
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .header-icon-link svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+  .menu-btn {
+    padding: 0.45rem 0.9rem !important;
+    font-size: 0.75rem !important;
+    gap: 4px !important;
+  }
+  .menu-btn svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  .btn-volt {
+    padding: 0.8rem 1.8rem !important;
+    font-size: 0.8rem !important;
+  }
+  .btn-volt svg {
+    width: 14px !important;
+    height: 14px !important;
+  }
 }
 
