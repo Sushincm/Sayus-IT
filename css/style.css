@@ -461,6 +461,49 @@ body {
     padding: 1rem 4vw;
   }
 
+  .h2,
+  .contact-title,
+  .portfolio-main-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .section-header {
+    padding-bottom: 4vh !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Shutter Reveal Section Responsive Overrides */
+  .shutter-reveal-section {
+    height: auto !important;
+    overflow: visible !important;
+    padding: 6rem 0;
+  }
+
+  .shutter-sticky-wrapper {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .shutter-content {
+    position: relative !important;
+    height: auto !important;
+    width: 100% !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    pointer-events: auto !important;
+  }
+
+  .shutter-content .container {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  .shutter-slats {
+    display: none !important;
+  }
+
   #logo-target {
     width: 87px;
     height: 50px;
@@ -477,6 +520,16 @@ body {
 
   .sub-headline {
     text-align: center;
+  }
+
+  /* Footer Watermark Responsive Overrides */
+  .footer-watermark {
+    bottom: -2% !important;
+  }
+
+  .footer-watermark span {
+    font-size: clamp(5rem, 18vw, 12rem) !important;
+    color: rgba(255, 255, 255, 0.04) !important;
   }
 }
 
@@ -536,6 +589,7 @@ html.lenis body {
 
 .section-header {
   padding: 0 0 6vh 0;
+  margin-bottom: 0 !important;
 }
 
 .h2 {
@@ -578,6 +632,7 @@ html.lenis body {
     background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
+  margin-bottom: 15px;
 }
 
 .service-box.is-revealed {
@@ -790,7 +845,7 @@ html.lenis body {
 /* ==========================================================================
    Responsive Layout (Services - Mobile Stack)
    ========================================================================== */
-@media (max-width: 767.98px) {
+@media (max-width: 991.5px) {
   .services-grid {
     flex-direction: column;
     align-items: stretch;
@@ -799,18 +854,75 @@ html.lenis body {
   .service-box {
     flex: none;
     width: 100%;
-    min-height: 250px;
-    height: 35vh;
+    min-height: 280px;
+    height: auto;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
+  /* Disable hover expansions and transforms on mobile */
   .service-box:hover {
-    height: 42vh;
-    min-height: 340px;
+    height: auto !important;
+    min-height: 280px !important;
+    transform: none !important;
+    box-shadow: none !important;
   }
 
   .service-box:last-child {
     border-bottom: none;
+  }
+
+  /* Show the video permanently on mobile */
+  .service-box .box-video {
+    opacity: 1 !important;
+  }
+
+  /* Hide default dark overlay */
+  .service-box .box-video-overlay {
+    opacity: 0 !important;
+  }
+
+  /* Make the box content description always visible on mobile */
+  .service-box .box-content {
+    max-height: 180px !important;
+    opacity: 1 !important;
+    margin-top: 1rem !important;
+  }
+
+  /* Make the orange overlays semi-transparent to see the video underneath */
+  .service-box.box-01 .box-main,
+  .service-box.box-01:hover .box-main {
+    background-color: rgba(206, 96, 14, 0.3) !important;
+  }
+  .service-box.box-01 .box-footer,
+  .service-box.box-01:hover .box-footer {
+    background-color: var(--color-volt) !important;
+  }
+
+  .service-box.box-02 .box-main,
+  .service-box.box-02:hover .box-main {
+    background-color: rgba(179, 79, 13, 0.3) !important;
+  }
+  .service-box.box-02 .box-footer,
+  .service-box.box-02:hover .box-footer {
+    background-color: #d86518 !important;
+  }
+
+  .service-box.box-03 .box-main,
+  .service-box.box-03:hover .box-main {
+    background-color: rgba(128, 56, 7, 0.3) !important;
+  }
+  .service-box.box-03 .box-footer,
+  .service-box.box-03:hover .box-footer {
+    background-color: #a34c0e !important;
+  }
+
+  .service-box.box-04 .box-main,
+  .service-box.box-04:hover .box-main {
+    background-color: rgba(77, 33, 2, 0.3) !important;
+  }
+  .service-box.box-04 .box-footer,
+  .service-box.box-04:hover .box-footer {
+    background-color: #6d3207 !important;
   }
 }
 
@@ -975,7 +1087,7 @@ html.lenis body {
   display: none;
 }
 
-@media (max-width: 767.98px) {
+@media (max-width: 991.5px) {
   .key-facts-section {
     display: none !important;
   }
@@ -985,6 +1097,11 @@ html.lenis body {
     width: 100%;
     overflow: hidden;
     position: relative;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  .key-facts-section-mobile .section-header {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   .metrics-sticky-wrapper {
     height: 100vh;
@@ -996,23 +1113,28 @@ html.lenis body {
   .metrics-horizontal-wrapper {
     width: 100%;
     overflow: hidden;
-    padding: 2vh 0;
+    padding: 1.5vh 0;
   }
   .metrics-scroll-track {
     display: flex;
-    gap: 2rem;
-    padding: 0 2rem;
+    gap: 1.5rem;
+    padding: 0 1.5rem;
     width: max-content;
     will-change: transform;
   }
   .metric-card-col {
     flex-shrink: 0;
-    width: 78vw;
+    width: 80vw;
     max-width: 320px;
   }
   .fact-card {
     height: 380px;
     padding: 2rem;
+    transition: none !important;
+  }
+  .fact-card:hover {
+    transform: none !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04) !important;
   }
   .fact-circle {
     width: 140px;
@@ -1405,6 +1527,7 @@ html.lenis body {
 
   .panel-content-wrapper {
     padding: 4.5rem 1.5rem;
+    padding-bottom: 0;
   }
 
   .header-content-inner,
@@ -1413,12 +1536,12 @@ html.lenis body {
     padding-left: 0;
   }
 
-  .portfolio-main-title {
-    font-size: clamp(2rem, 8vw, 2.6rem);
+  .portfolio-end-title {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
   }
 
-  .portfolio-end-title {
-    font-size: clamp(1.5rem, 6vw, 1.8rem);
+  .portfolio-cta-link {
+    display: none !important;
   }
 
   .card-image-container {
@@ -1452,7 +1575,7 @@ html.lenis body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background-color: var(--color-bg);
+  background-color: #141314;
 }
 
 .shutter-sticky-wrapper {
@@ -2213,7 +2336,8 @@ body.menu-open .header-nav {
 }
 
 body.menu-open .giant-logo {
-  filter: drop-shadow(0 0 45px rgba(244, 121, 31, 0.35)) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 body.menu-open .header-icon-link {
@@ -2269,16 +2393,48 @@ body.menu-open .menu-btn svg {
   -webkit-tap-highlight-color: transparent !important;
 }
 
+@media (max-width: 991px) {
+  .menu-panel {
+    width: 400px;
+  }
+  .menu-overlay-content {
+    padding: 100px 40px 40px 40px;
+    gap: 2rem;
+  }
+  .menu-nav-link {
+    font-size: 1.6rem;
+  }
+  .menu-info-item .info-label,
+  .menu-info-item .info-link,
+  .social-link {
+    font-size: 0.95rem;
+  }
+  .menu-social-grid {
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 576px) {
   .menu-panel {
     width: 100%;
   }
   .menu-overlay-content {
-    padding: 120px 24px 60px 24px;
-    gap: 2.5rem;
+    padding: 90px 24px 30px 24px;
+    gap: 1.5rem;
   }
   .menu-nav-link {
-    font-size: 2.5rem;
+    font-size: 1.4rem;
+  }
+  .menu-info-item .info-label,
+  .menu-info-item .info-link,
+  .social-link {
+    font-size: 0.85rem;
+  }
+  .menu-section-title {
+    font-size: 0.6rem;
+  }
+  .menu-social-grid {
+    gap: 2rem;
   }
 }
 
@@ -2289,7 +2445,12 @@ body.menu-open .menu-btn svg {
   width: 44px;
   height: 44px;
   border-radius: 4px; /* Uniform square shape with 4px radius */
-  background: rgba(13, 13, 13, 0.95); /* Semi-transparent blackish background for visibility on white sections */
+  background: rgba(
+    13,
+    13,
+    13,
+    0.95
+  ); /* Semi-transparent blackish background for visibility on white sections */
   border: 1px solid rgba(255, 255, 255, 0.15); /* Faint white border for definition */
   color: #ffffff !important;
   display: flex;
@@ -2303,12 +2464,12 @@ body.menu-open .menu-btn svg {
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent !important;
-  transition: 
-    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-    background-color 0.3s ease, 
-    border-color 0.3s ease, 
-    color 0.3s ease, 
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease,
     box-shadow 0.3s ease;
 }
 
@@ -2358,7 +2519,7 @@ body.menu-open .back-to-top {
 /* ==========================================================================
    Responsive Hero Section & Header Overrides
    ========================================================================== */
-@media (max-width: 991px) {
+@media (max-width: 991.5px) {
   /* Hero Container Layout */
   .hero-scroll-container {
     height: auto !important;
@@ -2439,7 +2600,9 @@ body.menu-open .back-to-top {
     filter: none !important;
     pointer-events: auto !important;
     z-index: 1005 !important;
-    transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1), height 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition:
+      top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      height 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .giant-logo.scrolled {
@@ -2448,8 +2611,14 @@ body.menu-open .back-to-top {
   }
 }
 
+@media (max-width: 991px) {
+  .services-section {
+    padding-bottom: 0;
+  }
+}
+
 /* Responsive Header Icons & Buttons */
-@media (max-width: 768px) {
+@media (max-width: 768.5px) {
   .header-icon-link {
     width: 38px !important;
     height: 38px !important;
@@ -2504,4 +2673,3 @@ body.menu-open .back-to-top {
     height: 14px !important;
   }
 }
-

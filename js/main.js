@@ -365,8 +365,8 @@ function initKeyFactsAnimation() {
   
   let mm = gsap.matchMedia();
 
-  // Desktop (min-width: 768px)
-  mm.add("(min-width: 768px)", () => {
+  // Desktop (min-width: 992px)
+  mm.add("(min-width: 992px)", () => {
     if (!section) return;
     const cards = section.querySelectorAll(".fact-card");
     if (cards.length < 3) return;
@@ -409,8 +409,8 @@ function initKeyFactsAnimation() {
     }, 0.2);
   });
 
-  // Mobile (max-width: 767.98px)
-  mm.add("(max-width: 767.98px)", () => {
+  // Mobile (max-width: 991.5px)
+  mm.add("(max-width: 991.5px)", () => {
     if (!sectionMobile) return;
     const track = sectionMobile.querySelector(".metrics-scroll-track");
     if (!track) return;
@@ -533,6 +533,8 @@ function initInteractiveHoverEffects() {
 // ==========================================================================
 function initServiceBoxVideoHover() {
   const boxes = document.querySelectorAll(".service-box");
+  
+  // Set up desktop hover listeners
   boxes.forEach((box) => {
     const video = box.querySelector(".box-video");
     if (!video) return;
@@ -540,16 +542,50 @@ function initServiceBoxVideoHover() {
     video.pause();
 
     box.addEventListener("mouseenter", () => {
-      video.play().catch((err) => {
-        console.warn("Service box video play interrupted or blocked:", err);
-      });
+      // Only play on hover if we are on desktop
+      if (window.innerWidth > 991.5) {
+        video.play().catch((err) => {
+          console.warn("Service box video play interrupted or blocked:", err);
+        });
+      }
     });
 
     box.addEventListener("mouseleave", () => {
-      video.pause();
-      video.currentTime = 0;
+      if (window.innerWidth > 991.5) {
+        video.pause();
+        video.currentTime = 0;
+      }
     });
   });
+
+  // Handle mobile autoplay of videos
+  const playMobileVideos = () => {
+    if (window.innerWidth <= 991.5) {
+      boxes.forEach((box) => {
+        const video = box.querySelector(".box-video");
+        if (video && video.paused) {
+          video.play().catch((err) => {
+            console.log("Autoplay failed or blocked by browser:", err);
+          });
+        }
+      });
+    } else {
+      // Pause mobile videos if resized back to desktop
+      boxes.forEach((box) => {
+        const video = box.querySelector(".box-video");
+        if (video && !video.paused) {
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    }
+  };
+
+  // Run on load
+  playMobileVideos();
+
+  // Run on window resize
+  window.addEventListener("resize", playMobileVideos);
 }
 
 // ==========================================================================
@@ -688,56 +724,93 @@ function initShutterReveal() {
   const faqHeading = section.querySelector(".faq-main-heading");
   const faqItems = section.querySelectorAll(".faq-item");
 
-  // Set initial states to avoid flash of content and ensure they start from below
-  if (faqHeading) {
-    gsap.set(faqHeading, { opacity: 0, y: 80 });
-  }
-  if (faqItems.length) {
-    gsap.set(faqItems, { opacity: 0, y: 80 });
-  }
+  let mm = gsap.matchMedia();
 
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      start: "top top",
-      end: "+=150%",
-      pin: true,
-      scrub: 1.2,
-      invalidateOnRefresh: true,
+  // Desktop (min-width: 992px)
+  mm.add("(min-width: 992px)", () => {
+    // Set initial states to avoid flash of content and ensure they start from below
+    if (faqHeading) {
+      gsap.set(faqHeading, { opacity: 0, y: 80 });
+    }
+    if (faqItems.length) {
+      gsap.set(faqItems, { opacity: 0, y: 80 });
+    }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=150%",
+        pin: true,
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    // 1. Animate slats to scaleY(0) to reveal the background
+    tl.to(slats, {
+      scaleY: 0,
+      stagger: {
+        each: 0.03,
+        from: "start"
+      },
+      duration: 0.8,
+      ease: "power1.inOut"
+    }, 0);
+
+    // 2. Fade and lift the FAQ heading
+    if (faqHeading) {
+      tl.to(faqHeading, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out"
+      }, 0.35);
+    }
+
+    // 3. Fade and lift each FAQ item staggered (block by block)
+    if (faqItems.length) {
+      tl.to(faqItems, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        ease: "power2.out"
+      }, 0.45);
     }
   });
 
-  // 1. Animate slats to scaleY(0) to reveal the background
-  tl.to(slats, {
-    scaleY: 0,
-    stagger: {
-      each: 0.03,
-      from: "start"
-    },
-    duration: 0.8,
-    ease: "power1.inOut"
-  }, 0);
+  // Mobile / Responsive (max-width: 991.98px)
+  mm.add("(max-width: 991.98px)", () => {
+    // On mobile, just fade in the heading and items on scroll without pinning or slats
+    if (faqHeading) {
+      gsap.set(faqHeading, { opacity: 0, y: 30 });
+      gsap.to(faqHeading, {
+        opacity: 1,
+        y: 0,
+        scrollTrigger: {
+          trigger: faqHeading,
+          start: "top 85%",
+          toggleActions: "play none none reverse",
+        }
+      });
+    }
 
-  // 2. Fade and lift the FAQ heading
-  if (faqHeading) {
-    tl.to(faqHeading, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: "power2.out"
-    }, 0.35);
-  }
-
-  // 3. Fade and lift each FAQ item staggered (block by block)
-  if (faqItems.length) {
-    tl.to(faqItems, {
-      opacity: 1,
-      y: 0,
-      stagger: 0.1,
-      duration: 0.5,
-      ease: "power2.out"
-    }, 0.45);
-  }
+    if (faqItems.length) {
+      faqItems.forEach((item) => {
+        gsap.set(item, { opacity: 0, y: 30 });
+        gsap.to(item, {
+          opacity: 1,
+          y: 0,
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          }
+        });
+      });
+    }
+  });
 }
 
 // ==========================================================================
