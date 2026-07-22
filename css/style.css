@@ -476,7 +476,7 @@ body {
   .shutter-reveal-section {
     height: auto !important;
     overflow: visible !important;
-    padding: 6rem 0;
+    padding: 0 !important;
   }
 
   .shutter-sticky-wrapper {
@@ -493,15 +493,12 @@ body {
     left: auto !important;
     transform: none !important;
     pointer-events: auto !important;
+    padding: 1rem 0 !important;
   }
 
   .shutter-content .container {
     height: auto !important;
     min-height: auto !important;
-  }
-
-  .shutter-slats {
-    display: none !important;
   }
 
   #logo-target {
@@ -578,7 +575,7 @@ html.lenis body {
    ========================================================================== */
 .services-section {
   background-color: #ffffff;
-  padding: 12vh 0 16vh 0;
+  padding: 1rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -854,7 +851,7 @@ html.lenis body {
   .service-box {
     flex: none;
     width: 100%;
-    min-height: 280px;
+    min-height: 380px;
     height: auto;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
@@ -862,7 +859,7 @@ html.lenis body {
   /* Disable hover expansions and transforms on mobile */
   .service-box:hover {
     height: auto !important;
-    min-height: 280px !important;
+    min-height: 380px !important;
     transform: none !important;
     box-shadow: none !important;
   }
@@ -881,45 +878,32 @@ html.lenis body {
     opacity: 0 !important;
   }
 
-  /* Make the box content description always visible on mobile */
+  /* Hide box content description on mobile */
   .service-box .box-content {
-    max-height: 180px !important;
-    opacity: 1 !important;
-    margin-top: 1rem !important;
+    display: none !important;
   }
 
   /* Make the orange overlays semi-transparent to see the video underneath */
-  .service-box.box-01 .box-main,
-  .service-box.box-01:hover .box-main {
-    background-color: rgba(206, 96, 14, 0.3) !important;
+  .service-box .box-main,
+  .service-box:hover .box-main {
+    background-color: rgba(244, 121, 31, 0.35) !important;
   }
+
   .service-box.box-01 .box-footer,
   .service-box.box-01:hover .box-footer {
     background-color: var(--color-volt) !important;
   }
 
-  .service-box.box-02 .box-main,
-  .service-box.box-02:hover .box-main {
-    background-color: rgba(179, 79, 13, 0.3) !important;
-  }
   .service-box.box-02 .box-footer,
   .service-box.box-02:hover .box-footer {
     background-color: #d86518 !important;
   }
 
-  .service-box.box-03 .box-main,
-  .service-box.box-03:hover .box-main {
-    background-color: rgba(128, 56, 7, 0.3) !important;
-  }
   .service-box.box-03 .box-footer,
   .service-box.box-03:hover .box-footer {
     background-color: #a34c0e !important;
   }
 
-  .service-box.box-04 .box-main,
-  .service-box.box-04:hover .box-main {
-    background-color: rgba(77, 33, 2, 0.3) !important;
-  }
   .service-box.box-04 .box-footer,
   .service-box.box-04:hover .box-footer {
     background-color: #6d3207 !important;
@@ -931,7 +915,7 @@ html.lenis body {
    ========================================================================== */
 .key-facts-section {
   background: linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
-  padding: 10vh 0 16vh 0;
+  padding: 1rem 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
@@ -1098,37 +1082,39 @@ html.lenis body {
     overflow: hidden;
     position: relative;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 0 !important;
   }
   .key-facts-section-mobile .section-header {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
   }
   .metrics-sticky-wrapper {
-    height: 100vh;
+    height: 100vh !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    overflow: hidden;
+    overflow: hidden !important;
   }
   .metrics-horizontal-wrapper {
     width: 100%;
-    overflow: hidden;
-    padding: 1.5vh 0;
+    overflow: hidden !important;
+    padding: 1.5rem 0;
   }
   .metrics-scroll-track {
     display: flex;
+    flex-direction: row !important;
     gap: 1.5rem;
     padding: 0 1.5rem;
-    width: max-content;
+    width: max-content !important;
     will-change: transform;
   }
   .metric-card-col {
     flex-shrink: 0;
-    width: 80vw;
+    width: 80vw !important;
     max-width: 320px;
   }
   .fact-card {
-    height: 380px;
+    height: 530px;
     padding: 2rem;
     transition: none !important;
   }
@@ -1526,7 +1512,7 @@ html.lenis body {
   }
 
   .panel-content-wrapper {
-    padding: 4.5rem 1.5rem;
+    padding: 2rem 1.5rem;
     padding-bottom: 0;
   }
 
@@ -1743,7 +1729,7 @@ html.lenis body {
 .contact-cta-section {
   background-color: #eae6e3;
   color: #050505;
-  padding: 6rem 0;
+  padding: 1rem 0;
   position: relative;
   z-index: 10;
 }
@@ -2520,17 +2506,6 @@ body.menu-open .back-to-top {
    Responsive Hero Section & Header Overrides
    ========================================================================== */
 @media (max-width: 991.5px) {
-  /* Hero Container Layout */
-  .hero-scroll-container {
-    height: auto !important;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 120px 4vw 60px 4vw;
-  }
-
   /* Full height video overlay on mobile */
   .video-background-container,
   .hero-tint,
@@ -2547,24 +2522,15 @@ body.menu-open .back-to-top {
     background: rgba(5, 5, 5, 0.75) !important;
   }
 
-  /* Stack and left-align hero contents */
+  /* Alignment adjustments on mobile while keeping animations */
   .hero-content-layer {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    width: 100% !important;
-    height: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    padding: 0 !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    padding: 0 4vw !important;
   }
 
   #hero-content-1 {
-    margin-bottom: 2.5rem;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-bottom: 0 !important;
   }
 
   .sub-headline {
@@ -2573,41 +2539,21 @@ body.menu-open .back-to-top {
     text-align: left !important;
   }
 
+  #hero-content-2 {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
   .center-showcase {
-    max-width: 600px !important;
+    max-width: 100% !important;
     padding-top: 0 !important;
-    text-align: left !important;
+    text-align: center !important;
   }
 
   .showcase-text {
-    font-size: clamp(1.1rem, 3.5vw, 1.4rem) !important;
+    font-size: clamp(1.1rem, 3.5vw, 1.5rem) !important;
     margin-bottom: 2rem !important;
-    text-align: left !important;
-  }
-
-  .showcase-text .word {
-    opacity: 1 !important;
-  }
-
-  /* Statically fixed logo in the header nav */
-  .giant-logo {
-    position: fixed !important;
-    top: 1.5rem !important;
-    left: 4vw !important;
-    bottom: auto !important;
-    height: 40px !important;
-    width: auto !important;
-    filter: none !important;
-    pointer-events: auto !important;
-    z-index: 1005 !important;
-    transition:
-      top 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      height 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  }
-
-  .giant-logo.scrolled {
-    top: 1rem !important;
-    height: 35px !important;
+    text-align: center !important;
   }
 }
 
@@ -2671,5 +2617,52 @@ body.menu-open .back-to-top {
   .btn-volt svg {
     width: 14px !important;
     height: 14px !important;
+  }
+}
+
+/* ==========================================================================
+   Swiper Services Carousel Responsive Overrides
+   ========================================================================== */
+@media (min-width: 992px) {
+  /* On desktop, reset Swiper wrappers and slides to ensure grid looks identical */
+  .services-carousel {
+    overflow: visible !important;
+  }
+  .services-grid.swiper-wrapper {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .services-grid.swiper-wrapper > .service-box.swiper-slide {
+    width: auto !important;
+    flex: 1 !important;
+    height: 420px !important;
+  }
+}
+
+@media (max-width: 991.5px) {
+  /* When Swiper is active on mobile/tablet, force horizontal flow */
+  .services-carousel.swiper-initialized {
+    width: 100% !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+  }
+  
+  .services-carousel.swiper-initialized .services-grid.swiper-wrapper {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    height: auto !important;
+  }
+  
+  .services-carousel.swiper-initialized .service-box.swiper-slide {
+    flex: none !important;
+    height: 420px !important;
+    width: 100% !important;
+    max-width: none !important;
+    border-bottom: none !important;
+    border-right: none !important;
   }
 }
