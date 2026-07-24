@@ -240,15 +240,9 @@ function initHeroScrollAnimation() {
         header.classList.add("scrolled");
         logo.classList.add("scrolled");
 
-        if (self.direction === 1) {
-          // Scrolling down - hide header & logo
-          gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
-          gsap.to(logo, { opacity: 0, duration: 0.3, ease: "power2.out" });
-        } else if (self.direction === -1) {
-          // Scrolling up - show header & logo
-          gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
-          gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
-        }
+        // Keep header and logo hidden past the hero section (regardless of scroll direction)
+        gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
+        gsap.to(logo, { opacity: 0, duration: 0.3, ease: "power2.out" });
       }
     },
   });
@@ -1193,7 +1187,7 @@ function initServicesCarousel() {
             disableOnInteraction: false,
           },
           slidesPerView: 1,
-          spaceBetween: 0,
+          spaceBetween: 24,
           centeredSlides: false,
           grabCursor: true,
           speed: 800,
@@ -1210,3 +1204,4 @@ function initServicesCarousel() {
   handleResponsiveInit();
   window.addEventListener("resize", handleResponsiveInit);
 }
+

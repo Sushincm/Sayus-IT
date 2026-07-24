@@ -461,10 +461,11 @@ body {
     padding: 1rem 4vw;
   }
 
+  h2,
   .h2,
   .contact-title,
   .portfolio-main-title {
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1.67rem, 4vw, 3.5rem) !important;
   }
 
   .section-header {
@@ -1087,12 +1088,15 @@ html.lenis body {
   .key-facts-section-mobile .section-header {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+    margin-bottom: 2.2rem !important;
   }
   .metrics-sticky-wrapper {
     height: 100vh !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 4.5rem !important;
+    padding-bottom: 2rem !important;
     overflow: hidden !important;
   }
   .metrics-horizontal-wrapper {
@@ -1114,7 +1118,7 @@ html.lenis body {
     max-width: 320px;
   }
   .fact-card {
-    height: 530px;
+    height: 300px;
     padding: 2rem;
     transition: none !important;
   }
@@ -1508,6 +1512,10 @@ html.lenis body {
   }
 
   .portfolio-panel:last-child {
+    display: none !important;
+  }
+
+  .portfolio-panel:nth-last-child(2) {
     border-bottom: none;
   }
 
@@ -2649,14 +2657,14 @@ body.menu-open .back-to-top {
     overflow: hidden !important;
     padding: 0 !important;
   }
-  
+
   .services-carousel.swiper-initialized .services-grid.swiper-wrapper {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     height: auto !important;
   }
-  
+
   .services-carousel.swiper-initialized .service-box.swiper-slide {
     flex: none !important;
     height: 420px !important;
@@ -2664,5 +2672,22 @@ body.menu-open .back-to-top {
     max-width: none !important;
     border-bottom: none !important;
     border-right: none !important;
+  }
+}
+
+/* ==========================================================================
+   Desktop Section Gap Overrides (min-width: 992px)
+   ========================================================================== */
+@media (min-width: 992px) {
+  .services-section {
+    padding: 8rem 0 !important;
+  }
+
+  .key-facts-section {
+    padding: 8rem 0 !important;
+  }
+
+  .contact-cta-section {
+    padding: 8rem 0 !important;
   }
 }
