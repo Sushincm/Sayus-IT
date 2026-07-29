@@ -25,6 +25,7 @@ window.addEventListener("load", () => {
   initFooterCanvas();
   initBackToTop();
   initServicesCarousel();
+  initDesignMotion();
 });
 
 // ==========================================================================
@@ -1204,4 +1205,127 @@ function initServicesCarousel() {
   handleResponsiveInit();
   window.addEventListener("resize", handleResponsiveInit);
 }
+
+// ==========================================================================
+// Design Motion Section Animations (GSAP + ScrollTrigger)
+// ==========================================================================
+function initDesignMotion() {
+  const section = document.querySelector(".design-motion-section");
+  if (!section) return;
+
+  const cards = section.querySelectorAll(".motion-card");
+  const leftLine = section.querySelector(".left-line");
+  const rightLine = section.querySelector(".right-line");
+  const desc = section.querySelector(".motion-desc");
+  const subtitle = section.querySelector(".motion-subtitle");
+  const dribbbleLink = section.querySelector(".motion-dribbble-link");
+
+  let mm = gsap.matchMedia();
+
+  // Desktop Animation: 3D Curve flight path transitioning into a flat 3x2 grid
+  mm.add("(min-width: 992px)", () => {
+    // 1. Initial State Setup
+    gsap.set(leftLine, { x: "-10vw", opacity: 0.15 });
+    gsap.set(rightLine, { x: "10vw", opacity: 0.15 });
+    gsap.set([desc, subtitle, dribbbleLink], { opacity: 0, y: 30 });
+
+    // 2. Timeline setup
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=240%",
+        pin: true,
+        scrub: 1.2,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // 3. Animate watermark text background in
+    tl.to(leftLine, { x: 0, opacity: 0.85, ease: "power2.out", duration: 0.35 }, 0)
+      .to(rightLine, { x: 0, opacity: 0.85, ease: "power2.out", duration: 0.35 }, 0);
+
+    // 4. Staggered 3D Curve Flight
+    cards.forEach((card, idx) => {
+      const col = idx % 3;
+      const row = Math.floor(idx / 3);
+      const gridX = (col - 1) * 350;
+      const gridY = (row - 0.5) * 230;
+
+      // Flight starts staggered (0 to 0.45)
+      const startTime = idx * 0.085;
+
+      // Concurrent tweens with different eases to create a mathematically smooth 3D curved sweep
+      tl.fromTo(
+        card,
+        {
+          x: -800,
+          opacity: 0,
+        },
+        {
+          x: gridX,
+          opacity: 1,
+          duration: 1.0,
+          ease: "power2.out",
+        },
+        startTime
+      );
+
+      tl.fromTo(
+        card,
+        {
+          y: gridY + 150,
+          z: -600,
+          rotateX: 25,
+          rotateY: 55,
+          rotateZ: -12,
+          scale: 0.4,
+        },
+        {
+          y: gridY,
+          z: 0,
+          rotateX: 0,
+          rotateY: 0,
+          rotateZ: 0,
+          scale: 1,
+          duration: 1.0,
+          ease: "power3.out",
+        },
+        startTime
+      );
+    });
+
+    // 5. Fade watermark texts to subtle background and lift side contents as grid lands
+    tl.to(leftLine, { opacity: 0.25, duration: 0.4, ease: "none" }, 0.65)
+      .to(rightLine, { opacity: 0.25, duration: 0.4, ease: "none" }, 0.65)
+      .to([desc, subtitle, dribbbleLink], { opacity: 1, y: 0, stagger: 0.1, duration: 0.45, ease: "power2.out" }, 0.7);
+  });
+
+  // Mobile / Responsive Animation: Staggered simple vertical reveal
+  mm.add("(max-width: 991.5px)", () => {
+    // Reset any inline desktop styles first
+    gsap.set([leftLine, rightLine, desc, subtitle, dribbbleLink, cards], {
+      clearProps: "all",
+    });
+
+    // Staggered reveal of cards when reaching the section
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  });
+}
+
 

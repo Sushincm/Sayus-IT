@@ -2691,3 +2691,290 @@ body.menu-open .back-to-top {
     padding: 8rem 0 !important;
   }
 }
+
+/* ==========================================================================
+   Design Motion Section Styles
+   ========================================================================== */
+.design-motion-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #eaeaea;
+  color: #111111;
+  z-index: 9;
+}
+
+.motion-sticky-wrapper {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Background Large Typography */
+.motion-background-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.motion-background-text .text-line {
+  font-family: var(--font-display, 'Neue Haas Display', sans-serif);
+  font-size: clamp(4rem, 15vw, 16rem);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Corner/Side Texts */
+.motion-content-left {
+  position: absolute;
+  bottom: 8%;
+  left: 5%;
+  max-width: 320px;
+  z-index: 10;
+}
+
+.motion-desc {
+  font-family: var(--font-body, sans-serif);
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  line-height: 1.6;
+  color: #555555;
+  margin: 0;
+}
+
+.motion-content-center {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  text-align: center;
+  width: 90%;
+}
+
+.motion-subtitle {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(0.75rem, 1vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #222222;
+  text-transform: uppercase;
+}
+
+.motion-content-right {
+  position: absolute;
+  bottom: 8%;
+  right: 5%;
+  z-index: 10;
+}
+
+.motion-dribbble-link {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  font-weight: 700;
+  color: #111111;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 4px;
+  border-bottom: 2px solid #111111;
+  transition: all 0.3s ease;
+}
+
+.motion-dribbble-link:hover {
+  color: var(--color-volt, #ec8026);
+  border-bottom-color: var(--color-volt, #ec8026);
+}
+
+/* 3D Cards Container */
+.motion-cards-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.motion-card {
+  position: absolute;
+  width: 320px;
+  height: 200px;
+  left: -160px; /* center horizontally */
+  top: -100px;  /* center vertically */
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.motion-card-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  cursor: pointer;
+}
+
+.motion-card:hover .motion-card-inner {
+  transform: translate3d(0, -8px, 15px) rotateX(4deg) rotateY(-2deg);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 20px rgba(236, 128, 38, 0.15);
+  border-color: rgba(236, 128, 38, 0.3);
+}
+
+.m-card-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: rgba(17, 17, 17, 0.8);
+  color: #ffffff;
+  font-family: var(--font-body, monospace);
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.m-card-title {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .motion-cards-container {
+    transform: translate(-50%, -50%) scale(0.75);
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 1201px) {
+  .motion-cards-container {
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+/* Mobile Responsive Setup */
+@media (max-width: 991.5px) {
+  .design-motion-section {
+    min-height: auto;
+    height: auto;
+    background-color: #eaeaea;
+    padding: 6rem 0;
+  }
+
+  .motion-sticky-wrapper {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    flex-direction: column;
+    padding: 0 24px;
+    gap: 3rem;
+  }
+
+  .motion-background-text {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .motion-background-text .text-line {
+    font-size: clamp(3rem, 10vw, 5rem);
+    color: rgba(0, 0, 0, 0.20);
+  }
+
+  .motion-content-left {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .motion-content-center {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    text-align: center;
+    order: -1;
+  }
+
+  .motion-content-right {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .motion-cards-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    perspective: none;
+    transform-style: flat;
+  }
+
+  .motion-card {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    left: auto;
+    top: auto;
+    transform: none;
+  }
+
+  .motion-card-inner {
+    border-radius: 8px;
+  }
+  
+  .motion-card:hover .motion-card-inner {
+    transform: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+}
+
