@@ -9,6 +9,7 @@ let lenis;
 // App Initialization
 // ==========================================================================
 window.addEventListener("load", () => {
+  initResponsiveVideos();
   prepareWordReveal();
   initLenis();
   initMenuOverlay();
@@ -92,6 +93,43 @@ function initLenis() {
 
   gsap.ticker.lagSmoothing(0);
 }
+
+// ==========================================================================
+// Responsive Video Loader (Optimizes Low-End & Mobile Devices)
+// ==========================================================================
+function initResponsiveVideos() {
+  const isDesktop = window.innerWidth >= 992;
+  const videos = document.querySelectorAll("video[data-src]");
+
+  videos.forEach((video) => {
+    if (isDesktop) {
+      const src = video.getAttribute("data-src");
+      if (src && !video.querySelector("source")) {
+        const source = document.createElement("source");
+        source.src = src;
+        source.type = "video/webm";
+        video.appendChild(source);
+        video.load();
+      }
+    } else {
+      // Clear video sources on mobile to prevent network request and decoding memory load
+      const sources = video.querySelectorAll("source");
+      if (sources.length > 0) {
+        sources.forEach((s) => s.remove());
+        video.removeAttribute("src");
+        video.load();
+      }
+    }
+  });
+}
+
+let resizeVideoTimeout;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeVideoTimeout);
+  resizeVideoTimeout = setTimeout(() => {
+    initResponsiveVideos();
+  }, 250);
+});
 
 // ==========================================================================
 // Hero Scroll Animation
@@ -478,10 +516,12 @@ function initInteractiveHoverEffects() {
     button.addEventListener("mouseenter", () => {
       // Disable CSS transitions so GSAP handles magnetic motion without lag
       button.style.transition = "none";
+      // Cache button dimensions to prevent layout thrashing (forced synchronous reflows)
+      button._cachedRect = button.getBoundingClientRect();
     });
 
     button.addEventListener("mousemove", (e) => {
-      const rect = button.getBoundingClientRect();
+      const rect = button._cachedRect || button.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
 
@@ -508,6 +548,12 @@ function initInteractiveHoverEffects() {
       });
     });
   });
+
+  window.addEventListener("resize", () => {
+    buttons.forEach((button) => {
+      button._cachedRect = null;
+    });
+  });
 }
 
 // ==========================================================================
@@ -524,8 +570,8 @@ function initServiceBoxVideoHover() {
     video.pause();
 
     box.addEventListener("mouseenter", () => {
-      // Only play on hover if we are on desktop
-      if (window.innerWidth > 991.5) {
+      // Only play on hover if we are on desktop and source is present
+      if (window.innerWidth > 991.5 && video.querySelector("source")) {
         video.play().catch((err) => {
           console.warn("Service box video play interrupted or blocked:", err);
         });
@@ -545,7 +591,7 @@ function initServiceBoxVideoHover() {
     if (window.innerWidth <= 991.5) {
       boxes.forEach((box) => {
         const video = box.querySelector(".box-video");
-        if (video && video.paused) {
+        if (video && video.paused && video.querySelector("source")) {
           video.play().catch((err) => {
             console.log("Autoplay failed or blocked by browser:", err);
           });

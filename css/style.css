@@ -222,6 +222,9 @@ body {
   margin: 0;
   padding: 0;
   filter: drop-shadow(0 0 45px rgba(244, 121, 31, 0.35));
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .hero-content-layer {
@@ -509,6 +512,7 @@ body {
 
   .giant-logo {
     height: 24vw;
+    filter: none !important;
   }
 
   #hero-content-1 {
@@ -535,6 +539,7 @@ body {
   .giant-logo {
     height: 30vw;
     bottom: 0;
+    filter: none !important;
   }
 
   #hero-content-1 {
@@ -942,6 +947,9 @@ html.lenis body {
   transition:
     box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .fact-card.card-dark {
@@ -1278,6 +1286,9 @@ html.lenis body {
   display: flex;
   flex-direction: column;
   gap: 1.8rem;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 .card-image-container {
   width: 100%;
@@ -1625,6 +1636,8 @@ html.lenis body {
   background-color: var(--color-volt);
   transform-origin: center;
   will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   /* Prevent browser sub-pixel rounding gaps on 13-inch and smaller screens */
   box-shadow: 0 0 0 1px var(--color-volt);
 }
@@ -2824,6 +2837,8 @@ body.menu-open .back-to-top {
   top: -100px;  /* center vertically */
   transform-style: preserve-3d;
   will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .motion-card-inner {
