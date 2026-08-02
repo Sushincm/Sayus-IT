@@ -87,6 +87,17 @@ function initLenis() {
 
   lenis.on("scroll", ScrollTrigger.update);
 
+  const header = document.querySelector(".header-nav");
+  if (header) {
+    lenis.on("scroll", (e) => {
+      if (e.scroll > 50) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+  }
+
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
