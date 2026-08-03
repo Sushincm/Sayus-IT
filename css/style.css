@@ -3122,7 +3122,7 @@ body.menu-open .back-to-top {
 .principles-heading {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.2;
   color: #111111;
   letter-spacing: -0.02em;
@@ -3134,10 +3134,15 @@ body.menu-open .back-to-top {
   font-weight: 500;
 }
 
+.principles-heading .word {
+  display: inline;
+  will-change: opacity;
+}
+
 /* 3-Card Grid & Card Typography */
 .principle-card {
   background: #ffffff;
-  border-radius: 20px;
+  border-radius: 5px;
   padding: 2.5rem 2.2rem;
   height: 100%;
   display: flex;
@@ -3200,5 +3205,347 @@ body.menu-open .back-to-top {
 
   .principle-card {
     padding: 2rem 1.6rem;
+  }
+}
+
+/* ==========================================================================
+   About Us Section 3: Our Values & Mission (Full-Bleed Section & Unfold Reveal)
+   ========================================================================== */
+.about-values-section {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f3f3f5;
+  color: #111111;
+  padding: 0 0 9rem 0;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Top Area Divider Line with Plus Icon */
+.values-top-divider {
+  position: relative;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  margin-bottom: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divider-plus-wrapper {
+  position: absolute;
+  background-color: #f3f3f5;
+  padding: 0 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.divider-plus {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: rgba(0, 0, 0, 0.35);
+  line-height: 1;
+  display: inline-block;
+}
+
+/* Left Sticky Title — Pure CSS Sticky */
+.values-left-col {
+  position: relative;
+  align-self: stretch; /* Stretches left column to match full height of right column */
+}
+
+.values-sticky-title {
+  position: sticky;
+  top: 140px; /* Sticks top title while scrolling cards */
+  z-index: 10;
+}
+
+/* Matches Home Page Title size (.h2 class) */
+.values-main-title {
+  margin: 0;
+}
+
+.values-lead-text {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  line-height: 1.55;
+  color: #44444a;
+  font-weight: 500;
+  max-width: 580px;
+  margin: 0;
+}
+
+/* Unfolding Cards Stack (Sequential layout without overlapping stacking) */
+.values-cards-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; /* tight spacing between paper cards */
+  position: relative;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  background: transparent; /* transparent stack background so grey section bg shows during fold */
+  border-radius: 0px;
+  border: none;
+  box-shadow: none;
+}
+
+.value-strip-card {
+  background: transparent;
+  border-radius: 0px;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  position: relative;
+  transform-origin: 50% 0% 0px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.paperfold-card-inner {
+  background: #ffffff;
+  padding: 1.5rem; /* Aligned card padding exactly to 2.5rem */
+  position: relative;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+  transition: background-color 0.35s ease;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.paperfold-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 3;
+  will-change: opacity;
+  transform: translateZ(0);
+}
+
+/* Rounded corners on start and end cards of the stack */
+.value-strip-card.card-fold-1 {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.value-strip-card.card-fold-6 {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom: none; /* no border on the last card */
+}
+
+.value-strip-card:hover {
+  z-index: 5;
+}
+
+.value-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem); /* Aligned compact title size */
+  font-weight: 600;
+  color: #111111;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.value-card-desc {
+  font-family: var(--font-body);
+  font-size: clamp(
+    0.88rem,
+    1.1vw,
+    0.95rem
+  ); /* Aligned compact description size */
+  line-height: 1.45;
+  color: #444444; /* Clean subtle dark gray color */
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Bottom Footer Tag */
+.values-tag-wrapper {
+  display: inline-block;
+  padding-top: 1.8rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.values-footer-tag {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #777780;
+  text-transform: uppercase;
+}
+
+@media (max-width: 991px) {
+  .about-values-section {
+    min-height: auto;
+    padding: 5rem 0 6rem 0;
+  }
+
+  .values-top-divider {
+    margin-bottom: 4rem;
+  }
+
+  .values-sticky-title {
+    position: relative;
+    top: auto;
+  }
+
+  .value-strip-card {
+    padding: 1.8rem 1.6rem;
+  }
+}
+
+/* ==========================================================================
+   About Us Section 4: Our Process / How We Work (Minimalist Dark Layout)
+   ========================================================================== */
+.about-process-section {
+  background-color: #050505;
+  color: #ffffff;
+  padding: 7rem 0 5rem 0;
+  position: relative;
+  z-index: 3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.process-left-label-wrapper {
+  padding-top: 0.4rem;
+}
+
+.process-section-label {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #8e8e93;
+  text-transform: uppercase;
+}
+
+.process-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.process-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  color: #8e8e93;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 480px;
+}
+
+.process-step-item {
+  padding-top: 1rem;
+}
+
+.process-step-tag {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: #8e8e93;
+  text-transform: uppercase;
+}
+
+.process-step-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.process-step-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #8e8e93;
+  font-weight: 400;
+  margin: 0;
+}
+
+.process-step-item {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Single Continuous Fill-Line Divider with Absolute SVG Plus Markers */
+.fill-line {
+  position: relative;
+  width: 100%;
+  margin-top: 4rem;
+}
+
+.fill-line .line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-50%) translateZ(0);
+  transform-origin: 0% 50%;
+  z-index: 1;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.plus-marker-pos {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) translateZ(0);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background-color: #050505;
+  color: rgba(255, 255, 255, 0.55);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.plus-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .about-process-section {
+    padding: 5rem 0 4rem 0;
+  }
+
+  .fill-line {
+    margin-top: 3rem;
   }
 }

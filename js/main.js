@@ -8,7 +8,7 @@ let lenis;
 // ==========================================================================
 // App Initialization
 // ==========================================================================
-window.addEventListener("load", () => {
+function initApp() {
   initResponsiveVideos();
   prepareWordReveal();
   initLenis();
@@ -27,7 +27,20 @@ window.addEventListener("load", () => {
   initBackToTop();
   initServicesCarousel();
   initDesignMotion();
-});
+  initValuesCardUnfold();
+  initPrinciplesWordReveal();
+  initProcessScrollAnimation();
+
+  setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 150);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
 
 // ==========================================================================
 // Word Splitting Reveal Helper
@@ -631,6 +644,7 @@ function initServiceBoxVideoHover() {
 // Bootstrap Tooltips Setup
 // ==========================================================================
 function initTooltips() {
+  if (typeof bootstrap === "undefined") return;
   const tooltipTriggerList = document.querySelectorAll(
     '[data-bs-toggle="tooltip"]',
   );
@@ -1384,5 +1398,204 @@ function initDesignMotion() {
     );
   });
 }
+
+// ==========================================================================
+// Values Section Card Unfold Reveal Animation
+// ==========================================================================
+function initValuesCardUnfold() {
+  const cards = document.querySelectorAll(".value-strip-card");
+  if (!cards.length) return;
+
+  cards.forEach((card) => {
+    const shadow = card.querySelector(".paperfold-shadow");
+    const inner = card.querySelector(".paperfold-card-inner");
+
+    // GSAP 3D Paper-Fold Animation per card on scroll (optimized 60fps scrub)
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: card,
+        start: "top 92%",
+        end: "top 65%",
+        scrub: true,
+        fastScrollEnd: true,
+      },
+    });
+
+    // 1. 3D Rotation & Position on the card wrapper
+    tl.fromTo(
+      card,
+      {
+        opacity: 1,
+        rotationX: -60,
+        y: 20,
+        transformOrigin: "50% 0% 0px",
+        transformPerspective: 1200,
+        force3D: true,
+      },
+      {
+        opacity: 1,
+        rotationX: 0,
+        y: 0,
+        ease: "none",
+        force3D: true,
+      },
+      0
+    );
+
+    // 2. Opacity transition on inner card content (0 -> 1)
+    if (inner) {
+      tl.fromTo(
+        inner,
+        { opacity: 0, force3D: true },
+        { opacity: 1, ease: "none", force3D: true },
+        0
+      );
+    }
+
+    // 3. Crease Depth Shadow Overlay fading out (0.3 -> 0)
+    if (shadow) {
+      tl.fromTo(
+        shadow,
+        { opacity: 0.3, force3D: true },
+        { opacity: 0, ease: "none", force3D: true },
+        0
+      );
+    }
+
+    // Subtle Hover Interaction (Background color transition)
+    const targetInner = inner || card;
+    card.addEventListener("mouseenter", () => {
+      gsap.to(targetInner, {
+        backgroundColor: "#fafafb",
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(targetInner, {
+        backgroundColor: "#ffffff",
+        duration: 0.25,
+        ease: "power2.out",
+      });
+    });
+  });
+}
+
+// ==========================================================================
+// Principles Heading Word-by-Word Opacity Reveal
+// ==========================================================================
+function initPrinciplesWordReveal() {
+  const heading = document.querySelector(".principles-heading");
+  if (!heading) return;
+
+  wrapWordsInTextNodes(heading);
+
+  const wordSpans = heading.querySelectorAll(".word");
+  if (!wordSpans.length) return;
+
+  gsap.fromTo(
+    wordSpans,
+    { opacity: 0.15 },
+    {
+      opacity: 1,
+      stagger: 0.02,
+      ease: "none",
+      force3D: true,
+      scrollTrigger: {
+        trigger: heading,
+        start: "top 85%",
+        end: "bottom 55%",
+        scrub: true,
+        fastScrollEnd: true,
+      },
+    }
+  );
+}
+
+// ==========================================================================
+// Our Process Section - Pinned Scroll & Line Fill Animation
+// ==========================================================================
+function initProcessScrollAnimation() {
+  const section = document.querySelector("#mission, #process, .about-process-section");
+  if (!section) return;
+
+  const line = section.querySelector(".fill-line .line");
+  const markers = section.querySelectorAll(".plus-marker-pos");
+  const cards = section.querySelectorAll(".process-step-item");
+
+  if (!line || !cards.length) return;
+
+  let mm = gsap.matchMedia();
+
+  // Desktop Pinned Scrub Animation (min-width: 992px)
+  mm.add("(min-width: 992px)", () => {
+    // Initial States: Line at scaleX 0, cards faded down, markers 2-4 scaled down & hidden with forced 3D
+    gsap.set(line, { scaleX: 0, transformOrigin: "0% 50%", force3D: true });
+    gsap.set(cards, { opacity: 0, y: 40, force3D: true });
+    gsap.set(markers, { opacity: 0, scale: 0.5, force3D: true });
+
+    // Marker 1 (at left: 0%) starts visible
+    if (markers[0]) {
+      gsap.set(markers[0], { opacity: 1, scale: 1, force3D: true });
+    }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=250%",
+        pin: true,
+        scrub: 1.2,
+        fastScrollEnd: true,
+        preventOverlaps: true,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    // Step 1 Reveal: Line grows to 33.333%, Card 1 fades up, Marker 2 pops in
+    tl.to(line, { scaleX: 0.3333, duration: 1, ease: "none", force3D: true }, 0)
+      .to(cards[0], { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", force3D: true }, 0.25)
+      .to(markers[1], { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)", force3D: true }, 0.8);
+
+    // Step 2 Reveal: Line grows to 66.666%, Card 2 fades up, Marker 3 pops in
+    tl.to(line, { scaleX: 0.6666, duration: 1, ease: "none", force3D: true }, 1)
+      .to(cards[1], { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", force3D: true }, 1.25)
+      .to(markers[2], { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)", force3D: true }, 1.8);
+
+    // Step 3 Reveal: Line grows to 100%, Card 3 fades up, Marker 4 pops in
+    tl.to(line, { scaleX: 1.0, duration: 1, ease: "none", force3D: true }, 2)
+      .to(cards[2], { opacity: 1, y: 0, duration: 0.7, ease: "power2.out", force3D: true }, 2.25)
+      .to(markers[3], { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(1.7)", force3D: true }, 2.8);
+  });
+
+  // Mobile / Responsive Staggered Reveal (max-width: 991.98px)
+  mm.add("(max-width: 991.98px)", () => {
+    gsap.set(line, { scaleX: 1, force3D: true });
+    gsap.set(cards, { opacity: 1, y: 0, force3D: true });
+    gsap.set(markers, { opacity: 1, scale: 1, force3D: true });
+
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+        force3D: true,
+        scrollTrigger: {
+          trigger: section,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+          fastScrollEnd: true,
+        },
+      }
+    );
+  });
+}
+
+
 
 
