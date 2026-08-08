@@ -30,6 +30,7 @@ function initApp() {
   initValuesCardUnfold();
   initPrinciplesWordReveal();
   initProcessScrollAnimation();
+  initContactForm();
 
   setTimeout(() => {
     ScrollTrigger.refresh();
@@ -863,145 +864,146 @@ function initPortfolioHorizontalScroll() {
 // Shutter Reveal Animation
 // ==========================================================================
 function initShutterReveal() {
-  const section = document.querySelector(".shutter-reveal-section");
-  if (!section) return;
+  const sections = document.querySelectorAll(".shutter-reveal-section");
+  if (!sections.length) return;
 
-  const slats = section.querySelectorAll(".shutter-slat");
-  const faqHeading = section.querySelector(".faq-main-heading");
-  const faqItems = section.querySelectorAll(".faq-item");
+  sections.forEach((section) => {
+    const slats = section.querySelectorAll(".shutter-slat");
+    const heading = section.querySelector(".shutter-heading, .faq-main-heading");
+    const animItems = section.querySelectorAll(".shutter-anim-item, .faq-item");
 
-  let mm = gsap.matchMedia();
+    let mm = gsap.matchMedia();
 
-  // Desktop (min-width: 992px)
-  mm.add("(min-width: 992px)", () => {
-    // Set initial states to avoid flash of content and ensure they start from below
-    if (faqHeading) {
-      gsap.set(faqHeading, { opacity: 0, y: 80 });
-    }
-    if (faqItems.length) {
-      gsap.set(faqItems, { opacity: 0, y: 80 });
-    }
+    // Desktop (min-width: 992px)
+    mm.add("(min-width: 992px)", () => {
+      // Set initial states to avoid flash of content and ensure they start from below
+      if (heading) {
+        gsap.set(heading, { opacity: 0, y: 80 });
+      }
+      if (animItems.length) {
+        gsap.set(animItems, { opacity: 0, y: 80 });
+      }
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "+=150%",
-        pin: true,
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-      },
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=150%",
+          pin: true,
+          scrub: 1.2,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // 1. Animate slats to scaleY(0) to reveal the background
+      tl.to(
+        slats,
+        {
+          scaleY: 0,
+          stagger: {
+            each: 0.03,
+            from: "start",
+          },
+          duration: 0.8,
+          ease: "power1.inOut",
+        },
+        0,
+      );
+
+      // 2. Fade and lift the section heading
+      if (heading) {
+        tl.to(
+          heading,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0.35,
+        );
+      }
+
+      // 3. Fade and lift content items/cards staggered
+      if (animItems.length) {
+        tl.to(
+          animItems,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0.45,
+        );
+      }
     });
 
-    // 1. Animate slats to scaleY(0) to reveal the background
-    tl.to(
-      slats,
-      {
-        scaleY: 0,
-        stagger: {
-          each: 0.03,
-          from: "start",
-        },
-        duration: 0.8,
-        ease: "power1.inOut",
-      },
-      0,
-    );
+    // Mobile / Responsive (max-width: 991.98px)
+    mm.add("(max-width: 991.98px)", () => {
+      gsap.set(slats, { scaleY: 1 });
+      if (heading) {
+        gsap.set(heading, { opacity: 0, y: 50 });
+      }
+      if (animItems.length) {
+        gsap.set(animItems, { opacity: 0, y: 40 });
+      }
 
-    // 2. Fade and lift the FAQ heading
-    if (faqHeading) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          end: "top 20%",
+          scrub: 1.2,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      // 1. Animate slats to scaleY(0) to reveal the background
       tl.to(
-        faqHeading,
+        slats,
         {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
+          scaleY: 0,
+          stagger: {
+            each: 0.03,
+            from: "start",
+          },
+          duration: 0.8,
+          ease: "power1.inOut",
         },
-        0.35,
+        0,
       );
-    }
 
-    // 3. Fade and lift each FAQ item staggered (block by block)
-    if (faqItems.length) {
-      tl.to(
-        faqItems,
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.1,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        0.45,
-      );
-    }
-  });
+      // 2. Fade and lift the section heading
+      if (heading) {
+        tl.to(
+          heading,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0.35,
+        );
+      }
 
-  // Mobile / Responsive (max-width: 991.98px)
-  mm.add("(max-width: 991.98px)", () => {
-    // Set initial states to avoid flash of content and ensure they start closed
-    gsap.set(slats, { scaleY: 1 });
-    if (faqHeading) {
-      gsap.set(faqHeading, { opacity: 0, y: 50 });
-    }
-    if (faqItems.length) {
-      gsap.set(faqItems, { opacity: 0, y: 40 });
-    }
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: "top 80%",
-        end: "top 20%",
-        scrub: 1.2,
-        invalidateOnRefresh: true,
-      },
+      // 3. Fade and lift content items staggered
+      if (animItems.length) {
+        tl.to(
+          animItems,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.08,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0.45,
+        );
+      }
     });
-
-    // 1. Animate slats to scaleY(0) to reveal the background
-    tl.to(
-      slats,
-      {
-        scaleY: 0,
-        stagger: {
-          each: 0.03,
-          from: "start",
-        },
-        duration: 0.8,
-        ease: "power1.inOut",
-      },
-      0,
-    );
-
-    // 2. Fade and lift the FAQ heading
-    if (faqHeading) {
-      tl.to(
-        faqHeading,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        0.35,
-      );
-    }
-
-    // 3. Fade and lift each FAQ item staggered
-    if (faqItems.length) {
-      tl.to(
-        faqItems,
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.08,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        0.45,
-      );
-    }
   });
 }
 
@@ -1678,6 +1680,34 @@ function initProcessScrollAnimation() {
         },
       }
     );
+  });
+}
+
+// ==========================================================================
+// Contact Form Interactive Submit Handler
+// ==========================================================================
+function initContactForm() {
+  const form = document.querySelector("#contact-form");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const btn = form.querySelector(".btn-submit-form");
+    if (btn) {
+      const originalHTML = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span>SUBMITTED! WE WILL BE IN TOUCH.</span>`;
+      btn.style.backgroundColor = "#28a745";
+      btn.style.color = "#ffffff";
+
+      setTimeout(() => {
+        form.reset();
+        btn.disabled = false;
+        btn.innerHTML = originalHTML;
+        btn.style.backgroundColor = "";
+        btn.style.color = "";
+      }, 4000);
+    }
   });
 }
 
