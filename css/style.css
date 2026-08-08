@@ -3843,21 +3843,18 @@ body.menu-open .back-to-top {
 }
 
 .contact-shutter-form-card {
-  background: rgba(18, 18, 20, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: #121215;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 2.5rem 2.2rem;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-  transition: var(--transition-smooth);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contact-shutter-form-card:hover {
-  /* border-color: rgba(244, 121, 31, 0.35); */
-  box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.7),
-    0 0 30px rgba(244, 121, 31, 0.1);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
 }
 
 .contact-form-label {

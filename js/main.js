@@ -867,30 +867,42 @@ function initShutterReveal() {
   const sections = document.querySelectorAll(".shutter-reveal-section");
   if (!sections.length) return;
 
+  const isLowEnd =
+    window.innerWidth < 992 ||
+    (window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
   sections.forEach((section) => {
     const slats = section.querySelectorAll(".shutter-slat");
-    const heading = section.querySelector(".shutter-heading, .faq-main-heading");
-    const animItems = section.querySelectorAll(".shutter-anim-item, .faq-item");
+    const heading = section.querySelector(
+      ".shutter-heading, .faq-main-heading",
+    );
+    const animItems = section.querySelectorAll(
+      ".shutter-anim-item, .faq-item",
+    );
 
     let mm = gsap.matchMedia();
 
     // Desktop (min-width: 992px)
     mm.add("(min-width: 992px)", () => {
-      // Set initial states to avoid flash of content and ensure they start from below
+      // Force 3D hardware acceleration on all anim elements
+      gsap.set(slats, { force3D: true });
       if (heading) {
-        gsap.set(heading, { opacity: 0, y: 80 });
+        gsap.set(heading, { opacity: 0, y: 60, force3D: true });
       }
       if (animItems.length) {
-        gsap.set(animItems, { opacity: 0, y: 80 });
+        gsap.set(animItems, { opacity: 0, y: 60, force3D: true });
       }
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=150%",
+          end: "+=120%",
           pin: true,
-          scrub: 1.2,
+          scrub: isLowEnd ? 0.4 : 0.8,
+          fastScrollEnd: true,
+          preventOverlaps: true,
           invalidateOnRefresh: true,
         },
       });
@@ -901,11 +913,12 @@ function initShutterReveal() {
         {
           scaleY: 0,
           stagger: {
-            each: 0.03,
+            each: 0.025,
             from: "start",
           },
-          duration: 0.8,
+          duration: 0.7,
           ease: "power1.inOut",
+          force3D: true,
         },
         0,
       );
@@ -917,37 +930,39 @@ function initShutterReveal() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.5,
+            duration: 0.45,
             ease: "power2.out",
+            force3D: true,
           },
-          0.35,
+          0.3,
         );
       }
 
-      // 3. Fade and lift content items/cards staggered
+      // 3. Fade and lift content items/cards
       if (animItems.length) {
         tl.to(
           animItems,
           {
             opacity: 1,
             y: 0,
-            stagger: 0.1,
-            duration: 0.5,
+            stagger: 0.08,
+            duration: 0.45,
             ease: "power2.out",
+            force3D: true,
           },
-          0.45,
+          0.4,
         );
       }
     });
 
     // Mobile / Responsive (max-width: 991.98px)
     mm.add("(max-width: 991.98px)", () => {
-      gsap.set(slats, { scaleY: 1 });
+      gsap.set(slats, { scaleY: 1, force3D: true });
       if (heading) {
-        gsap.set(heading, { opacity: 0, y: 50 });
+        gsap.set(heading, { opacity: 0, y: 40, force3D: true });
       }
       if (animItems.length) {
-        gsap.set(animItems, { opacity: 0, y: 40 });
+        gsap.set(animItems, { opacity: 0, y: 30, force3D: true });
       }
 
       const tl = gsap.timeline({
@@ -955,7 +970,9 @@ function initShutterReveal() {
           trigger: section,
           start: "top 80%",
           end: "top 20%",
-          scrub: 1.2,
+          scrub: 0.8,
+          fastScrollEnd: true,
+          preventOverlaps: true,
           invalidateOnRefresh: true,
         },
       });
@@ -966,11 +983,12 @@ function initShutterReveal() {
         {
           scaleY: 0,
           stagger: {
-            each: 0.03,
+            each: 0.025,
             from: "start",
           },
-          duration: 0.8,
+          duration: 0.7,
           ease: "power1.inOut",
+          force3D: true,
         },
         0,
       );
@@ -982,10 +1000,11 @@ function initShutterReveal() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.5,
+            duration: 0.45,
             ease: "power2.out",
+            force3D: true,
           },
-          0.35,
+          0.3,
         );
       }
 
@@ -996,11 +1015,12 @@ function initShutterReveal() {
           {
             opacity: 1,
             y: 0,
-            stagger: 0.08,
-            duration: 0.5,
+            stagger: 0.06,
+            duration: 0.45,
             ease: "power2.out",
+            force3D: true,
           },
-          0.45,
+          0.4,
         );
       }
     });
