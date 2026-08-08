@@ -3582,6 +3582,10 @@ body.menu-open .back-to-top {
   z-index: 2;
 }
 
+.contact-info-section.contact-page-top {
+  padding-top: 9rem;
+}
+
 .contact-main-title {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 5vw, 4rem);
