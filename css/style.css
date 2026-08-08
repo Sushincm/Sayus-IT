@@ -77,8 +77,6 @@ body {
 
 .header-nav.scrolled {
   background: #050505 !important;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   padding: 1rem 4vw;
   mix-blend-mode: normal !important;
 }
@@ -3038,8 +3036,6 @@ body.menu-open .back-to-top {
 
 .header-nav.about-header.scrolled {
   background: #050505 !important;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
 }
 
 .header-logo-img {

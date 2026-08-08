@@ -116,7 +116,7 @@ function initLenis() {
     lenis.raf(time * 1000);
   });
 
-  gsap.ticker.lagSmoothing(0);
+  gsap.ticker.lagSmoothing(500, 33);
 }
 
 // ==========================================================================
@@ -216,6 +216,8 @@ function initHeroScrollAnimation() {
       end: scrollEndDistance,
       pin: true,
       scrub: scrubSpeed,
+      fastScrollEnd: true,
+      preventOverlaps: true,
       invalidateOnRefresh: true,
     },
   });
@@ -432,6 +434,7 @@ function initScrollReveals() {
       opacity: 0,
       x: xVal,
       y: yVal,
+      force3D: true,
     });
 
     gsap.to(element, {
@@ -441,6 +444,7 @@ function initScrollReveals() {
       duration: duration,
       delay: delay,
       ease: "power3.out",
+      force3D: true,
       scrollTrigger: {
         trigger: element,
         start: startPoint,
@@ -1412,9 +1416,11 @@ function initDesignMotion() {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=240%",
+        end: "+=200%",
         pin: true,
-        scrub: 1.2,
+        scrub: 0.8,
+        fastScrollEnd: true,
+        preventOverlaps: true,
         invalidateOnRefresh: true,
       },
     });
@@ -1651,9 +1657,9 @@ function initProcessScrollAnimation() {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=250%",
+        end: "+=180%",
         pin: true,
-        scrub: 1.2,
+        scrub: 0.8,
         fastScrollEnd: true,
         preventOverlaps: true,
         invalidateOnRefresh: true,
