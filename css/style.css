@@ -626,6 +626,7 @@ html.lenis body {
   flex-wrap: wrap;
   align-items: flex-start;
   width: 100%;
+  background-color: #050505;
 }
 
 .service-box {
@@ -2658,17 +2659,28 @@ body.menu-open .back-to-top {
   .services-carousel {
     overflow: visible !important;
   }
+  .services-grid,
   .services-grid.swiper-wrapper {
     display: flex !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     transform: none !important;
     width: 100% !important;
     height: auto !important;
+    background-color: #050505 !important;
   }
+  .service-box,
   .services-grid.swiper-wrapper > .service-box.swiper-slide {
-    width: auto !important;
-    flex: 1 !important;
+    width: calc(25% + 1px) !important;
+    flex: 0 0 calc(25% + 1px) !important;
+    margin-right: -1px !important;
+    margin-bottom: 0 !important;
     height: 420px !important;
+  }
+  .service-box:last-child,
+  .services-grid.swiper-wrapper > .service-box.swiper-slide:last-child {
+    width: 25% !important;
+    flex: 0 0 25% !important;
+    margin-right: 0 !important;
   }
 }
 
