@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ========================================================================== -->
+    <!-- Meta & Head Setup -->
+    <!-- ========================================================================== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us — Sayus Digital Growth & Systems Consultancy</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <meta
+      name="description"
+      content="Get in touch with Sayus. Reach out to our digital growth and systems engineering team for inquiries, consultations, and support."
+    />
+
+    <!-- Stylesheets & Fonts -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css?v=2.4" />
+  </head>
+  <body>
+    <!-- Giant Logo for Hero Scroll Animation -->
+    <a href="index.html" class="giant-logo-link" aria-label="Sayus Home">
+      <img
+        class="giant-logo"
+        src="images/sayus-logo-light.webp"
+        alt="SAYUS Logo"
+      />
+    </a>
+
+    <!-- ========================================================================== -->
+    <!-- Header / Navigation Section -->
+    <!-- ========================================================================== -->
+    <header class="header-nav about-header" id="main-header">
+      <div id="logo-target"></div>
+
+      <div class="header-actions d-flex align-items-center gap-3">
+        <a
+          href="tel:+1234567890"
+          class="header-icon-link d-inline-flex align-items-center justify-content-center text-decoration-none"
+          aria-label="Phone Call"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          data-bs-title="Call Us"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+        </a>
+        <a
+          href="mailto:contact@sayus.com"
+          class="header-icon-link d-inline-flex align-items-center justify-content-center text-decoration-none"
+          aria-label="Send Email"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          data-bs-title="Email Us"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
+        <button class="menu-btn" aria-label="Toggle Navigation Menu">
+          <span>MENU</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================================================================== -->
+    <!-- Main Content Area -->
+    <!-- ========================================================================== -->
+    <main>
+      <!-- Section 1: Hero Banner -->
+      <section class="hero-scroll-container about-hero-banner" id="hero-container">
+        <div class="about-hero-bg">
+          <img
+            src="images/about-hero-bg.png"
+            alt="Contact Us Hero Background"
+            class="about-hero-img"
+          />
+          <div class="about-hero-overlay"></div>
+        </div>
+        <div class="about-hero-content">
+          <div>
+            <h1 class="about-hero-title">Contact Us</h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Get In Touch & Address/Contact Info Cards (Reference Layout) -->
+      <section class="contact-info-section" id="contact-info">
+        <div class="container px-4 px-md-5">
+          <div class="row g-4 g-lg-5 align-items-start">
+            <!-- Left Column: Title & Description -->
+            <div class="col-lg-5 col-xl-6" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.1">
+              <div>
+                <span class="principles-badge">Contact Us</span>
+              </div>
+              <div>
+                <h2 class="contact-main-title">Get In Touch</h2>
+              </div>
+              <div class="mt-3">
+                <p class="contact-lead-desc">
+                  We'd love to hear from you! Whether you have questions, need support, or want to learn more about our services, our team is here to help.
+                </p>
+              </div>
+            </div>
+
+            <!-- Right Column: 2 Info Cards (Our Address & Our Contact Info) -->
+            <div class="col-lg-7 col-xl-6" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.2">
+              <div class="row g-4">
+                <!-- Address Card -->
+                <div class="col-sm-6">
+                  <div class="contact-info-card">
+                    <div class="contact-icon-box">
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="contact-info-card-title">Our Address</h3>
+                    </div>
+                    <div class="contact-info-text">
+                      <p>PMC Viii 172/1, Sayus Consultancy Services</p>
+                      <p>Koorkkara, Payyanur, Kannur, Kerala 670307</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Contact Info Card -->
+                <div class="col-sm-6">
+                  <div class="contact-info-card">
+                    <div class="contact-icon-box">
+                      <svg
+                        width="22"
+                        height="22"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="contact-info-card-title">Our Contact Info</h3>
+                    </div>
+                    <div class="contact-info-text">
+                      <p><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                      <p><a href="mailto:contact@sayus.com">contact@sayus.com</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Full-Width Interactive Dark Map with Floating Get Directions Button (Reference Layout) -->
+      <section class="contact-map-section" id="map-section" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.1">
+        <iframe
+          class="contact-map-iframe"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3902.937812903746!2d75.2012!3d12.1009!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba46e29f8f2b7a9%3A0x8a97f37476e73238!2sPayyanur%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Sayus Location Map"
+        ></iframe>
+
+        <!-- Floating Get Directions Button -->
+        <a
+          href="https://maps.google.com/?q=Payyanur,Kerala,India"
+          target="_blank"
+          rel="noopener"
+          class="btn-get-directions"
+          aria-label="Get Directions on Google Maps"
+        >
+          <span>Get Directions</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </section>
+
+      <!-- Section 4: Send Us a Message Direct Inquiry Form -->
+      <section class="contact-form-section" id="contact-form-section">
+        <div class="container px-4 px-md-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.1">
+              <div class="contact-form-card">
+                <div class="mb-4 text-center">
+                  <span class="principles-badge">Inquiry</span>
+                  <div class="mt-2">
+                    <h2 class="h2 h2-light">Send Us a Message</h2>
+                  </div>
+                </div>
+
+                <form id="contact-form" action="#" method="POST">
+                  <div class="row g-4">
+                    <div class="col-md-6">
+                      <div>
+                        <label for="contact-name" class="contact-form-label">Your Name</label>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          id="contact-name"
+                          name="name"
+                          class="contact-form-input"
+                          placeholder="John Doe"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div>
+                        <label for="contact-email" class="contact-form-label">Email Address</label>
+                      </div>
+                      <div>
+                        <input
+                          type="email"
+                          id="contact-email"
+                          name="email"
+                          class="contact-form-input"
+                          placeholder="john@example.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div>
+                        <label for="contact-subject" class="contact-form-label">Subject</label>
+                      </div>
+                      <div>
+                        <input
+                          type="text"
+                          id="contact-subject"
+                          name="subject"
+                          class="contact-form-input"
+                          placeholder="Digital Growth Inquiry"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <div>
+                        <label for="contact-message" class="contact-form-label">Message</label>
+                      </div>
+                      <div>
+                        <textarea
+                          id="contact-message"
+                          name="message"
+                          rows="5"
+                          class="contact-form-input"
+                          placeholder="Tell us about your project or inquiry..."
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-12 text-center mt-4">
+                      <button type="submit" class="btn-volt">
+                        <span>SEND MESSAGE</span>
+                        <svg
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        >
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ========================================================================== -->
+    <!-- Footer Section -->
+    <!-- ========================================================================== -->
+    <footer class="footer-section" id="main-footer">
+      <canvas id="footer-canvas" class="footer-particle-canvas"></canvas>
+
+      <div class="footer-signature-wrap">
+        <h2 class="footer-signature-text">SAYUS</h2>
+      </div>
+
+      <div class="container footer-content-container">
+        <div class="row g-4 align-items-start justify-content-between">
+          <!-- Col 1: Brand Info -->
+          <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-brand-block">
+              <div class="footer-logo mb-3">
+                <img
+                  src="images/sayus-logo-light.webp"
+                  alt="Sayus Logo"
+                  class="footer-logo-img"
+                />
+              </div>
+              <div>
+                <p class="footer-tagline">
+                  Engineering high-performance website architectures and brand authority.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Col 2: Navigation Links -->
+          <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-nav-block">
+              <div class="footer-heading-wrap mb-3">
+                <h4 class="footer-heading">Navigation</h4>
+              </div>
+              <ul class="footer-links-list list-unstyled">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#portfolio">Work</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Col 3: Contact Info -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <div class="footer-contact-block">
+              <div class="footer-heading-wrap mb-3">
+                <h4 class="footer-heading">Contact Us</h4>
+              </div>
+              <ul class="footer-contact-list list-unstyled">
+                <li>
+                  <a href="mailto:contact@sayus.com" class="footer-contact-link">
+                    contact@sayus.com
+                  </a>
+                </li>
+                <li>
+                  <a href="tel:+1234567890" class="footer-contact-link">
+                    +1 (234) 567-890
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Col 4: Legal & Policies -->
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-legal-block">
+              <div class="footer-heading-wrap mb-3">
+                <h4 class="footer-heading">Legal</h4>
+              </div>
+              <div class="footer-policy-links">
+                <div>
+                  <a href="#" class="footer-policy-link">Privacy Policy</a>
+                </div>
+                <div>
+                  <a href="#" class="footer-policy-link">Legal Notice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright Row -->
+        <div class="row mt-5 pt-4 align-items-center">
+          <div class="col-12 text-center">
+            <div class="footer-copyright-block">
+              <p>© 2026</p>
+              <p>
+                PMC Viii 172/1, Sayus Consultancy Services, Koorkkara, Payyanur,
+                Kannur, Kerala, 670307
+              </p>
+              <p>Let Sayus handle it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========================================================================== -->
+    <!-- Navigation Overlay Menu -->
+    <!-- ========================================================================== -->
+    <div class="menu-overlay" id="menu-overlay">
+      <div class="menu-backdrop"></div>
+      <div class="menu-panel">
+        <div class="menu-overlay-content">
+          <div class="menu-main-nav">
+            <div class="menu-nav-item">
+              <a href="index.html" class="menu-nav-link">Home</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="index.html#portfolio" class="menu-nav-link">Work</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="index.html#services" class="menu-nav-link">Services</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="about.html" class="menu-nav-link">About</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="contact.html" class="menu-nav-link">Contact</a>
+            </div>
+          </div>
+
+          <div class="menu-info-section">
+            <div class="menu-section-title">
+              <span>BUSINESS ENQUIRY</span>
+            </div>
+            <div class="menu-info-item">
+              <a href="mailto:contact@sayus.com" class="info-link"
+                >contact@sayus.com</a
+              >
+            </div>
+            <div class="menu-info-item">
+              <a href="tel:+1234567890" class="info-link">+1 (234) 567-890</a>
+            </div>
+          </div>
+
+          <div class="menu-info-section">
+            <div class="menu-section-title">
+              <span>SOCIAL</span>
+            </div>
+            <div class="menu-social-grid">
+              <div class="menu-social-col">
+                <div class="menu-social-item">
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Linkedin</a
+                  >
+                </div>
+                <div class="menu-social-item">
+                  <a
+                    href="https://dribbble.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Dribbble</a
+                  >
+                </div>
+              </div>
+              <div class="menu-social-col">
+                <div class="menu-social-item">
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Facebook</a
+                  >
+                </div>
+                <div class="menu-social-item">
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Instagram</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!-- Back to Top Button -->
+    <!-- ========================================================================== -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </button>
+
+    <!-- ========================================================================== -->
+    <!-- External Scripts & Application Logic -->
+    <!-- ========================================================================== -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js?v=2.4"></script>
+  </body>
+</html>
