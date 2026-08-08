@@ -89,6 +89,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .header-actions {
@@ -203,10 +204,17 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 5, 5, 0.35);
+  background: #050505;
+  opacity: 0.35;
   pointer-events: none;
   z-index: 2;
-  will-change: background;
+  will-change: opacity;
+}
+
+.giant-logo-link {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .giant-logo {
@@ -218,11 +226,12 @@ body {
   height: 15vw;
   z-index: 1005;
   transform-origin: left top;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   margin: 0;
   padding: 0;
   filter: drop-shadow(0 0 45px rgba(244, 121, 31, 0.35));
-  will-change: transform, opacity;
+  will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
@@ -3030,8 +3039,8 @@ body.menu-open .back-to-top {
 .about-hero-banner {
   position: relative;
   width: 100%;
-  min-height: 70vh;
-  height: 600px;
+  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3195,8 +3204,8 @@ body.menu-open .back-to-top {
 /* Mobile Responsive Typography Adjustments */
 @media (max-width: 768px) {
   .about-hero-banner {
-    min-height: 55vh;
-    height: 450px;
+    min-height: 100vh;
+    height: 100vh;
   }
 
   .about-principles-section {

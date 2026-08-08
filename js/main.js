@@ -165,6 +165,24 @@ function initHeroScrollAnimation() {
 
   if (!logo || !target || !heroContainer) return;
 
+  const handleLogoClick = (e) => {
+    const isHomePage =
+      window.location.pathname.endsWith("index.html") ||
+      window.location.pathname.endsWith("/") ||
+      window.location.pathname === "";
+
+    if (isHomePage) {
+      if (window.scrollY > 0) {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    } else {
+      window.location.href = "index.html";
+    }
+  };
+
+  logo.addEventListener("click", handleLogoClick);
+  target.addEventListener("click", handleLogoClick);
+
   let logoRect, targetRect, scale, xDiff, yDiff;
 
   function calculateTransitionParameters() {
@@ -173,7 +191,9 @@ function initHeroScrollAnimation() {
     logoRect = logo.getBoundingClientRect();
     targetRect = target.getBoundingClientRect();
 
-    scale = targetRect.height / logoRect.height;
+    const logoH = logoRect.height || 150;
+    const targetH = targetRect.height || 60;
+    scale = targetH / logoH;
 
     xDiff = targetRect.left - logoRect.left;
     yDiff = targetRect.top - logoRect.top;
@@ -181,96 +201,155 @@ function initHeroScrollAnimation() {
 
   calculateTransitionParameters();
 
+  const isLowEnd = window.innerWidth < 992 || (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const scrubSpeed = isLowEnd ? 0.3 : 1.0;
+
+  const hasHeroContent2 = !!document.querySelector("#hero-content-2");
+  const scrollEndDistance = hasHeroContent2 ? "+=200%" : "+=100%";
+  const logoDuration = hasHeroContent2 ? 0.5 : 1.0;
+
   const heroTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: "#hero-container",
       start: "top top",
-      end: "+=200%",
+      end: scrollEndDistance,
       pin: true,
-      scrub: 1.2,
+      scrub: scrubSpeed,
       invalidateOnRefresh: true,
     },
   });
 
+  // 100% Composite-Only GPU Accelerated Logo Animation (Smoothly reaches header and immediately transitions into next section)
   heroTimeline.to(
     logo,
     {
       x: () => xDiff,
       y: () => yDiff,
       scale: () => scale,
-      filter: "drop-shadow(0px 0px 0px rgba(244, 121, 31, 0))",
       transformOrigin: "left top",
+      force3D: true,
+      duration: logoDuration,
       ease: "none",
     },
     0,
   );
 
-  heroTimeline.to(
-    ".hero-video",
-    {
-      scale: 1,
-      ease: "power1.inOut",
-    },
-    0,
-  );
-
-  heroTimeline.to(
-    ".grid-dark-overlay",
-    {
-      backgroundColor: "rgba(5, 5, 5, 0.8)",
-      ease: "power1.inOut",
-    },
-    0,
-  );
-
-  heroTimeline.to(
-    "#hero-content-1 .sub-headline",
-    {
-      opacity: 0,
-      scale: 0.8,
-      filter: "blur(15px)",
-      duration: 0.5,
-      ease: "power1.inOut",
-    },
-    0,
-  );
-
-  heroTimeline.to(
-    "#hero-content-2",
-    {
-      opacity: 1,
-      duration: 0.1,
-      ease: "none",
-    },
-    0.3,
-  );
-
-  const words = document.querySelectorAll(".showcase-text .word");
-  const staggerDuration = 0.55 / (words.length || 1);
-  heroTimeline.to(
-    words,
-    {
-      opacity: 1,
-      stagger: staggerDuration,
-      duration: 0.1,
-      ease: "none",
-    },
-    0.3,
-  );
-
-  const servicesBtn = document.querySelector("#hero-content-2 .btn-volt");
-  if (servicesBtn) {
-    gsap.set(servicesBtn, { opacity: 0, y: 30 });
+  const heroVideo = document.querySelector(".hero-video");
+  if (heroVideo) {
     heroTimeline.to(
-      servicesBtn,
+      heroVideo,
+      {
+        scale: 1,
+        force3D: true,
+        duration: logoDuration,
+        ease: "power1.inOut",
+      },
+      0,
+    );
+  }
+
+  const darkOverlay = document.querySelector(".grid-dark-overlay");
+  if (darkOverlay) {
+    heroTimeline.to(
+      darkOverlay,
+      {
+        opacity: 0.8,
+        force3D: true,
+        duration: logoDuration,
+        ease: "power1.inOut",
+      },
+      0,
+    );
+  }
+
+  const subHeadline = document.querySelector("#hero-content-1 .sub-headline");
+  if (subHeadline) {
+    heroTimeline.to(
+      subHeadline,
+      {
+        opacity: 0,
+        scale: 0.8,
+        force3D: true,
+        duration: logoDuration,
+        ease: "power1.inOut",
+      },
+      0,
+    );
+  }
+
+  const aboutHeroImg = document.querySelector(".about-hero-img");
+  if (aboutHeroImg) {
+    heroTimeline.to(
+      aboutHeroImg,
+      {
+        scale: 1.08,
+        opacity: 0.4,
+        force3D: true,
+        duration: logoDuration,
+        ease: "power1.inOut",
+      },
+      0,
+    );
+  }
+
+  const aboutHeroContent = document.querySelector(".about-hero-content");
+  if (aboutHeroContent) {
+    heroTimeline.to(
+      aboutHeroContent,
+      {
+        opacity: 0,
+        scale: 0.85,
+        force3D: true,
+        duration: logoDuration,
+        ease: "power1.inOut",
+      },
+      0,
+    );
+  }
+
+  const heroContent2 = document.querySelector("#hero-content-2");
+  if (heroContent2) {
+    heroTimeline.to(
+      heroContent2,
       {
         opacity: 1,
-        y: 0,
-        duration: 0.15,
-        ease: "power2.out",
+        force3D: true,
+        duration: 0.1,
+        ease: "none",
       },
-      0.85,
+      0.3,
     );
+
+    const words = document.querySelectorAll(".showcase-text .word");
+    if (words.length > 0) {
+      const staggerDuration = 0.55 / words.length;
+      heroTimeline.to(
+        words,
+        {
+          opacity: 1,
+          stagger: staggerDuration,
+          duration: 0.1,
+          ease: "none",
+        },
+        0.3,
+      );
+    }
+
+    const servicesBtn = document.querySelector("#hero-content-2 .btn-volt");
+    if (servicesBtn) {
+      gsap.set(servicesBtn, { opacity: 0, y: 30 });
+      heroTimeline.to(
+        servicesBtn,
+        {
+          opacity: 1,
+          y: 0,
+          force3D: true,
+          duration: 0.15,
+          ease: "power2.out",
+        },
+        0.85,
+      );
+    }
   }
 
   const header = document.querySelector(".header-nav");
@@ -288,8 +367,8 @@ function initHeroScrollAnimation() {
 
       if (currentScroll < heroEnd) {
         // Inside hero section: keep header and logo visible (let timeline handle logo positioning)
-        gsap.to(header, { y: 0, duration: 0.3, ease: "power2.out" });
-        gsap.to(logo, { opacity: 1, duration: 0.3, ease: "power2.out" });
+        gsap.to(header, { y: 0, opacity: 1, duration: 0.3, force3D: true, ease: "power2.out" });
+        gsap.to(logo, { opacity: 1, duration: 0.3, force3D: true, ease: "power2.out" });
 
         if (currentScroll < 80) {
           header.classList.remove("scrolled");
@@ -299,13 +378,19 @@ function initHeroScrollAnimation() {
           logo.classList.add("scrolled");
         }
       } else {
-        // Scrolled past hero section
+        // Scrolled past hero section: hide header on scroll down, fade in on scroll up
         header.classList.add("scrolled");
         logo.classList.add("scrolled");
 
-        // Keep header and logo hidden past the hero section (regardless of scroll direction)
-        gsap.to(header, { y: "-100%", duration: 0.3, ease: "power2.out" });
-        gsap.to(logo, { opacity: 0, duration: 0.3, ease: "power2.out" });
+        if (self.direction === 1) {
+          // Scroll Down: hide header & logo
+          gsap.to(header, { y: "-100%", opacity: 0, duration: 0.3, force3D: true, ease: "power2.out" });
+          gsap.to(logo, { opacity: 0, duration: 0.3, force3D: true, ease: "power2.out" });
+        } else if (self.direction === -1) {
+          // Scroll Up: fade & slide header & logo back in
+          gsap.to(header, { y: 0, opacity: 1, duration: 0.3, force3D: true, ease: "power2.out" });
+          gsap.to(logo, { opacity: 1, duration: 0.3, force3D: true, ease: "power2.out" });
+        }
       }
     },
   });
