@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- ========================================================================== -->
+    <!-- Meta & Head Setup -->
+    <!-- ========================================================================== -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation — Website Audits, Architecture & UI/UX | Sayus</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <meta
+      name="description"
+      content="Sayus Foundation service provides forensic website audits, scalable information architecture, and high-conversion UI/UX design systems to engineer peak digital performance."
+    />
+
+    <!-- Stylesheets & Fonts -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css?v=2.4" />
+  </head>
+  <body>
+    <!-- ========================================================================== -->
+    <!-- Header / Navigation Section (Static Header Logo, No Hero Pin Animation) -->
+    <!-- ========================================================================== -->
+    <header class="header-nav" id="main-header">
+      <div id="logo-target">
+        <a href="index.html" aria-label="Sayus Home">
+          <img
+            src="images/sayus-logo-light.webp"
+            alt="SAYUS Logo"
+            style="height: 42px; width: auto; display: block;"
+          />
+        </a>
+      </div>
+
+      <div class="header-actions d-flex align-items-center gap-3">
+        <a
+          href="tel:+1234567890"
+          class="header-icon-link d-inline-flex align-items-center justify-content-center text-decoration-none"
+          aria-label="Phone Call"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          data-bs-title="Call Us"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+            ></path>
+          </svg>
+        </a>
+        <a
+          href="mailto:info@sayus.com"
+          class="header-icon-link d-inline-flex align-items-center justify-content-center text-decoration-none"
+          aria-label="Send Email"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          data-bs-title="Email Us"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+        </a>
+        <button class="menu-btn" aria-label="Toggle Navigation Menu">
+          <span>MENU</span>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- ========================================================================== -->
+    <!-- Main Content Area -->
+    <!-- ========================================================================== -->
+    <main>
+      <!-- ========================================================================== -->
+      <!-- Section 1: Hero Banner (Full-Width, 2-Line Banner Title) -->
+      <!-- ========================================================================== -->
+      <section class="services-hero-banner" id="services-hero-banner">
+        <div class="about-hero-bg">
+          <img
+            src="images/services-hero-bg.png"
+            alt="Foundation Service Hero Background"
+            class="about-hero-img"
+          />
+          <div class="about-hero-overlay"></div>
+        </div>
+        <div class="about-hero-content">
+          <div>
+            <span class="principles-badge contact-hero-badge">SERVICE 01 — FOUNDATION</span>
+          </div>
+          <div class="mt-3">
+            <h1 class="services-hero-title">Website Audits, Architecture<br />&amp; UI/UX</h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================== -->
+      <!-- Section 2: Executive Overview & Impact Metrics (Light Background Section) -->
+      <!-- ========================================================================== -->
+      <section class="about-principles-section" id="overview">
+        <div class="container px-4 px-md-5">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.1">
+              <div class="mb-4">
+                <span class="principles-badge">Engineering System Philosophy</span>
+              </div>
+              <div class="mb-4">
+                <h2 class="principles-heading">
+                  Eliminate Friction.
+                  <span class="text-muted-gray">Architect for absolute speed</span> &amp; conversion.
+                </h2>
+              </div>
+              <div>
+                <p class="principle-card-desc" style="font-size: 1.05rem; line-height: 1.65; color: #55555e;">
+                  Every high-growth digital entity requires an unshakeable technical baseline. Sayus Foundation delivers forensic codebase audits, scalable entity-driven information architecture, and psychological conversion UI/UX design systems. We eliminate DOM bloat, speed bottlenecks, and user drop-off points.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-6" data-scroll="reveal" data-scroll-direction="left" data-scroll-delay="0.2">
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <div class="principle-card">
+                    <div class="foundation-metric-number">
+                      <span class="count-value" data-target="99" data-decimals="0">0</span>+
+                    </div>
+                    <div class="mt-2">
+                      <h3 class="principle-card-title">Core Web Vitals Target</h3>
+                    </div>
+                    <div class="mt-1">
+                      <p class="principle-card-desc">Sub-second LCP, zero layout shifts, and instant INP responsiveness.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="principle-card">
+                    <div class="foundation-metric-number">
+                      <span class="count-value" data-target="0" data-decimals="0">0</span>%
+                    </div>
+                    <div class="mt-2">
+                      <h3 class="principle-card-title">Architectural Debt</h3>
+                    </div>
+                    <div class="mt-1">
+                      <p class="principle-card-desc">Clean entity graph taxonomies that maximize search engine crawlability.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="principle-card">
+                    <div class="foundation-metric-number">
+                      <span class="count-value" data-target="3.4" data-decimals="1">0.0</span>x
+                    </div>
+                    <div class="mt-2">
+                      <h3 class="principle-card-title">Conversion Velocity Lift</h3>
+                    </div>
+                    <div class="mt-1">
+                      <p class="principle-card-desc">Friction-free UX flows engineered specifically to drive qualified business actions.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================== -->
+      <!-- Section 3: Core Capabilities (The 3 Core Pillars of Foundation) -->
+      <!-- ========================================================================== -->
+      <section class="about-process-section" id="capabilities">
+        <div class="container px-4 px-md-5">
+          <div class="text-center mb-4" data-scroll="reveal" data-scroll-direction="up">
+            <span class="principles-badge text-white-50" style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75);">Core Capabilities</span>
+          </div>
+
+          <div class="text-center mb-5 col-lg-8 mx-auto" data-scroll="reveal" data-scroll-direction="up">
+            <h2 class="principles-heading text-white">
+              The Three Pillars <span class="text-muted-gray">of Foundation</span>
+            </h2>
+          </div>
+
+          <div class="row g-4">
+            <!-- Pillar 1 -->
+            <div class="col-lg-4" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.1">
+              <div class="foundation-strand-card">
+                <div>
+                  <span class="strand-badge">01. AUDIT & DIAGNOSTICS</span>
+                </div>
+                <div class="mt-3 mb-3">
+                  <h3 class="principle-card-title text-white">Forensic Codebase & Performance Audits</h3>
+                </div>
+                <ul class="strand-list">
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Full DOM node tree analysis & memory leak detection</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">LCP, INP, CLS Core Web Vitals optimization</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">OWASP security headers & SSL/CORS hardening</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Asset compression & critical CSS inline extraction</p></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pillar 2 -->
+            <div class="col-lg-4" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.2">
+              <div class="foundation-strand-card">
+                <div>
+                  <span class="strand-badge">02. ARCHITECTURE DESIGN</span>
+                </div>
+                <div class="mt-3 mb-3">
+                  <h3 class="principle-card-title text-white">Information Architecture & System Graph</h3>
+                </div>
+                <ul class="strand-list">
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Hierarchical URL taxonomy & canonical graph structuring</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Schema.org JSON-LD structured entity graphs</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Headless CMS & decoupled API content orchestration</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Crawl budget optimization & sitemap hierarchy</p></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pillar 3 -->
+            <div class="col-lg-4" data-scroll="reveal" data-scroll-direction="up" data-scroll-delay="0.3">
+              <div class="foundation-strand-card">
+                <div>
+                  <span class="strand-badge">03. CONVERSION UI/UX</span>
+                </div>
+                <div class="mt-3 mb-3">
+                  <h3 class="principle-card-title text-white">High-Conversion UI/UX Design System</h3>
+                </div>
+                <ul class="strand-list">
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Design system tokenization (Figma to CSS Variables)</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Kinetic scroll interactions & micro-animation mechanics</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">Fitts's Law CTA positioning & checkout friction elimination</p></div>
+                  </li>
+                  <li class="strand-list-item">
+                    <svg class="strand-list-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                    <div><p class="m-0">WCAG AAA accessibility & responsive fluid typography</p></div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ========================================================================== -->
+      <!-- Section 5: The 4-Stage Execution Methodology -->
+      <!-- ========================================================================== -->
+      <section class="about-principles-section" id="process">
+        <div class="container px-4 px-md-5">
+          <div class="text-center mb-4" data-scroll="reveal" data-scroll-direction="up">
+            <span class="principles-badge">Methodology</span>
+          </div>
+
+          <div class="text-center mb-5 col-lg-8 mx-auto" data-scroll="reveal" data-scroll-direction="up">
+            <h2 class="principles-heading">
+              4-Stage Execution <span class="text-muted-gray">Roadmap</span>
+            </h2>
+          </div>
+
+          <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+              <div class="principle-card">
+                <div class="deliverable-num">STAGE 01</div>
+                <div class="mt-2 mb-2">
+                  <h3 class="principle-card-title">Forensic Audit</h3>
+                </div>
+                <div class="mt-1">
+                  <p class="principle-card-desc">Deep codebase scanning, memory profiling, and bottleneck pinpointing.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="principle-card">
+                <div class="deliverable-num">STAGE 02</div>
+                <div class="mt-2 mb-2">
+                  <h3 class="principle-card-title">Architecture Blueprint</h3>
+                </div>
+                <div class="mt-1">
+                  <p class="principle-card-desc">Taxonomy, graph schema definition, and URL hierarchy restructuring.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="principle-card">
+                <div class="deliverable-num">STAGE 03</div>
+                <div class="mt-2 mb-2">
+                  <h3 class="principle-card-title">UI/UX Tokenization</h3>
+                </div>
+                <div class="mt-1">
+                  <p class="principle-card-desc">Design tokens in Figma translated to modular GPU-accelerated code.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+              <div class="principle-card">
+                <div class="deliverable-num">STAGE 04</div>
+                <div class="mt-2 mb-2">
+                  <h3 class="principle-card-title">Deploy &amp; Benchmark</h3>
+                </div>
+                <div class="mt-1">
+                  <p class="principle-card-desc">Zero-downtime deployment, Vitals certification, and monitoring setup.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================== -->
+      <!-- Section 7: Shutter Reveal FAQ Section (Grey Background & Black Typography) -->
+      <!-- ========================================================================== -->
+      <section class="shutter-reveal-section shutter-light" id="shutter-section">
+        <div class="shutter-sticky-wrapper">
+          <div
+            class="shutter-bg-container"
+            style="background-color: #f6f6f8"
+          ></div>
+
+          <!-- Shutter Slats for GSAP Scrub Reveal Animation -->
+          <div class="shutter-slats">
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+            <div class="shutter-slat"></div>
+          </div>
+
+          <!-- Content Overlay -->
+          <div class="shutter-content">
+            <div class="container h-100 d-flex align-items-center">
+              <div class="row w-100 align-items-start py-5">
+                <!-- Left Column: Title -->
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                  <div class="mb-3">
+                    <span class="principles-badge">FREQUENTLY ASKED QUESTIONS</span>
+                  </div>
+                  <div>
+                    <h2 class="h2 h2-dark faq-main-heading">
+                      Foundation<br /><span class="text-muted-gray">FAQ</span>
+                    </h2>
+                  </div>
+                </div>
+
+                <!-- Right Column: Accordion -->
+                <div class="col-lg-8">
+                  <div class="faq-accordion">
+                    <!-- Item 1 -->
+                    <div class="faq-item">
+                      <div class="faq-trigger">
+                        <div class="faq-question">
+                          <span
+                            >HOW LONG DOES A COMPLETE FOUNDATION AUDIT AND ARCHITECTURE REFACTOR TAKE?</span
+                          >
+                        </div>
+                        <div class="faq-icon-wrapper">
+                          <span class="faq-icon">+</span>
+                        </div>
+                      </div>
+                      <div class="faq-panel">
+                        <div class="faq-answer-wrapper">
+                          <p>
+                            A comprehensive forensic audit and initial architecture blueprint is completed within 7 to 10 business days. Full codebase refactoring and UI/UX design token implementation typically span 3 to 4 weeks depending on platform scale.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="faq-item">
+                      <div class="faq-trigger">
+                        <div class="faq-question">
+                          <span
+                            >CAN YOU AUDIT AND OPTIMIZE OUR EXISTING SITE WITHOUT A FULL REBUILD?</span
+                          >
+                        </div>
+                        <div class="faq-icon-wrapper">
+                          <span class="faq-icon">+</span>
+                        </div>
+                      </div>
+                      <div class="faq-panel">
+                        <div class="faq-answer-wrapper">
+                          <p>
+                            Yes. Our audits isolate critical bottlenecks. If your current codebase is salvageable, we perform targeted DOM tree flattening, asset compression, and schema graph injection without replacing your underlying stack.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="faq-item">
+                      <div class="faq-trigger">
+                        <div class="faq-question">
+                          <span
+                            >HOW DOES FOUNDATION UI/UX DIRECTLY IMPACT ORGANIC SEARCH AND SEO?</span
+                          >
+                        </div>
+                        <div class="faq-icon-wrapper">
+                          <span class="faq-icon">+</span>
+                        </div>
+                      </div>
+                      <div class="faq-panel">
+                        <div class="faq-answer-wrapper">
+                          <p>
+                            Search engines actively measure user interaction signals (INP, bounce rate, dwell time). A fast, intuitive UI/UX keeps visitors engaged, signaling high topic relevance to Google and boosting overall keyword rankings.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </main>
+
+    <!-- ========================================================================== -->
+    <!-- Footer Section -->
+    <!-- ========================================================================== -->
+    <footer class="footer-section" id="main-footer">
+      <!-- Background canvas for hand animation -->
+      <div class="footer-canvas-container">
+        <canvas id="footer-particles"></canvas>
+      </div>
+
+      <!-- Giant Watermark Text -->
+      <div class="footer-watermark">
+        <span>SAYUS</span>
+      </div>
+
+      <div class="container-fluid px-4 px-md-5 position-relative z-index-2">
+        <div class="row gy-5">
+          <!-- Left Column: Newsletter & Waitlist -->
+          <div class="col-lg-5 col-md-12">
+            <div class="footer-block footer-newsletter-block">
+              <div class="footer-heading mb-3">
+                <h4>Don't miss out on future updates.</h4>
+              </div>
+              <form
+                class="footer-subscribe-form mb-3"
+                onsubmit="event.preventDefault()"
+              >
+                <div class="row g-2">
+                  <div class="col-12">
+                    <div class="form-input-wrapper">
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        class="footer-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-input-wrapper mt-2">
+                      <input
+                        type="email"
+                        placeholder="Email"
+                        class="footer-input"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-12 mt-3">
+                    <div class="footer-btn-wrapper">
+                      <button type="submit" class="btn-footer-subscribe">
+                        <span class="btn-subscribe-text">SUBSCRIBE</span>
+                        <span class="btn-subscribe-icon">+</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="footer-note mb-4">
+                <p>Unsubscribe anytime.</p>
+              </div>
+
+              <!-- Waitlist / Status indicators -->
+              <div class="footer-status-group">
+                <div class="footer-status-item mb-2">
+                  <span class="status-dot">■</span>
+                  <span class="status-text"
+                    >ACCEPTING PROJECTS. JOIN THE WAITLIST.</span
+                  >
+                </div>
+                <div class="footer-status-item">
+                  <span class="status-dot">■</span>
+                  <span class="status-text">ONLY 3 SPOTS LEFT.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Middle Column: Navigation links -->
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-block d-flex flex-column align-items-lg-center">
+              <nav class="footer-nav-links">
+                <div class="mb-2">
+                  <a href="index.html" class="footer-nav-link">HOME</a>
+                </div>
+                <div class="mb-2">
+                  <a href="about.html" class="footer-nav-link">ABOUT</a>
+                </div>
+                <div class="mb-2">
+                  <a href="contact.html" class="footer-nav-link">CONTACT</a>
+                </div>
+                <div>
+                  <a href="service-foundation.html" class="footer-nav-link">SERVICES — FOUNDATION</a>
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <!-- Right Column: Contact & Policies -->
+          <div class="col-lg-4 col-md-6">
+            <div
+              class="footer-block d-flex flex-column align-items-md-end text-md-end"
+            >
+              <div class="footer-contact-info mb-4">
+                <div class="mb-2">
+                  <a href="mailto:contact@sayus.com" class="footer-contact-link"
+                    >contact@sayus.com</a
+                  >
+                </div>
+                <div class="mb-2">
+                  <a href="mailto:julian@sayus.com" class="footer-contact-link"
+                    >julian@sayus.com</a
+                  >
+                </div>
+                <div>
+                  <a href="mailto:adrian@sayus.com" class="footer-contact-link"
+                    >adrian@sayus.com</a
+                  >
+                </div>
+              </div>
+
+              <div class="footer-policy-links">
+                <div class="mb-2">
+                  <a href="#" class="footer-policy-link">Privacy Policy</a>
+                </div>
+                <div>
+                  <a href="#" class="footer-policy-link">Legal Notice</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copyright Row -->
+        <div class="row mt-5 pt-4 align-items-center">
+          <div class="col-12 text-center">
+            <div class="footer-copyright-block">
+              <p>© 2026</p>
+              <p>
+                PMC Viii 172/1, Sayus Consultancy Services, Koorkkara, Payyanur,
+                Kannur, Kerala, 670307
+              </p>
+              <p>Let Sayus handle it.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ========================================================================== -->
+    <!-- Navigation Overlay Menu -->
+    <!-- ========================================================================== -->
+    <div class="menu-overlay" id="menu-overlay">
+      <div class="menu-backdrop"></div>
+      <div class="menu-panel">
+        <div class="menu-overlay-content">
+          <div class="menu-main-nav">
+            <div class="menu-nav-item">
+              <a href="index.html" class="menu-nav-link">Home</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="about.html" class="menu-nav-link">About</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="contact.html" class="menu-nav-link">Contact</a>
+            </div>
+            <div class="menu-nav-item">
+              <a href="service-foundation.html" class="menu-nav-link">Services - Foundation</a>
+            </div>
+          </div>
+
+          <div class="menu-info-section">
+            <div class="menu-section-title">
+              <span>BUSINESS ENQUIRY</span>
+            </div>
+            <div class="menu-info-item">
+              <a href="mailto:contact@sayus.com" class="info-link"
+                >contact@sayus.com</a
+              >
+            </div>
+            <div class="menu-info-item">
+              <a href="tel:+1234567890" class="info-link">+1 (234) 567-890</a>
+            </div>
+          </div>
+
+          <div class="menu-info-section">
+            <div class="menu-section-title">
+              <span>SOCIAL</span>
+            </div>
+            <div class="menu-social-grid">
+              <div class="menu-social-col">
+                <div class="menu-social-item">
+                  <a
+                    href="https://linkedin.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Linkedin</a
+                  >
+                </div>
+                <div class="menu-social-item">
+                  <a
+                    href="https://dribbble.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Dribbble</a
+                  >
+                </div>
+              </div>
+              <div class="menu-social-col">
+                <div class="menu-social-item">
+                  <a
+                    href="https://facebook.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Facebook</a
+                  >
+                </div>
+                <div class="menu-social-item">
+                  <a
+                    href="https://instagram.com"
+                    target="_blank"
+                    rel="noopener"
+                    class="social-link"
+                    >Instagram</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================================== -->
+    <!-- Back to Top Button -->
+    <!-- ========================================================================== -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to Top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="19" x2="12" y2="5"></line>
+        <polyline points="5 12 12 5 19 12"></polyline>
+      </svg>
+    </button>
+
+    <!-- ========================================================================== -->
+    <!-- External Scripts & Application Logic -->
+    <!-- ========================================================================== -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js?v=2.4"></script>
+  </body>
+</html>

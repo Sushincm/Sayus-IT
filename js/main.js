@@ -12,6 +12,7 @@ function initApp() {
   initResponsiveVideos();
   prepareWordReveal();
   initLenis();
+  initHeaderScrollBehavior();
   initMenuOverlay();
   initHeroScrollAnimation();
   initScrollReveals();
@@ -30,6 +31,7 @@ function initApp() {
   initValuesCardUnfold();
   initPrinciplesWordReveal();
   initProcessScrollAnimation();
+  initProcessMethodologyAnimation();
   initContactForm();
 
   setTimeout(() => {
@@ -117,6 +119,45 @@ function initLenis() {
   });
 
   gsap.ticker.lagSmoothing(500, 33);
+}
+
+// ==========================================================================
+// Header Scroll Behavior (Hide on Scroll Down / Show on Scroll Up)
+// ==========================================================================
+function initHeaderScrollBehavior() {
+  const header = document.querySelector(".header-nav");
+  if (!header) return;
+
+  const heroContainer = document.querySelector("#hero-container");
+  const logo = document.querySelector(".giant-logo");
+
+  // On pages with pinned hero logo animation (Home, About), the hero timeline manages the initial phase.
+  // On all other pages (Service Foundation, Contact, Services, etc.), attach ScrollTrigger directly:
+  if (!heroContainer || !logo) {
+    ScrollTrigger.create({
+      trigger: "body",
+      start: "top top",
+      end: "bottom bottom",
+      onUpdate: (self) => {
+        const currentScroll = self.scroll();
+
+        if (currentScroll < 80) {
+          header.classList.remove("scrolled");
+          gsap.to(header, { y: 0, opacity: 1, duration: 0.3, force3D: true, ease: "power2.out" });
+        } else {
+          header.classList.add("scrolled");
+
+          if (self.direction === 1 && currentScroll > 120) {
+            // Scroll Down: hide header
+            gsap.to(header, { y: "-100%", opacity: 0, duration: 0.3, force3D: true, ease: "power2.out" });
+          } else if (self.direction === -1) {
+            // Scroll Up: fade & slide header back in
+            gsap.to(header, { y: 0, opacity: 1, duration: 0.3, force3D: true, ease: "power2.out" });
+          }
+        }
+      },
+    });
+  }
 }
 
 // ==========================================================================
@@ -239,10 +280,13 @@ function initHeroScrollAnimation() {
 
   const heroVideo = document.querySelector(".hero-video");
   if (heroVideo) {
+    gsap.set(heroVideo, { xPercent: -50, yPercent: -50, transformOrigin: "center center" });
     heroTimeline.to(
       heroVideo,
       {
-        scale: 1,
+        xPercent: -50,
+        yPercent: -50,
+        scale: 1.05,
         force3D: true,
         duration: logoDuration,
         ease: "power1.inOut",
@@ -280,12 +324,12 @@ function initHeroScrollAnimation() {
     );
   }
 
-  const aboutHeroImg = document.querySelector(".about-hero-img");
-  if (aboutHeroImg) {
+  const subpageHeroImgs = document.querySelectorAll(".about-hero-img, .contact-hero-img");
+  if (subpageHeroImgs.length > 0) {
     heroTimeline.to(
-      aboutHeroImg,
+      subpageHeroImgs,
       {
-        scale: 1.08,
+        scale: 1.0,
         opacity: 0.4,
         force3D: true,
         duration: logoDuration,
@@ -484,7 +528,7 @@ function initKeyFactsAnimation() {
 
   let mm = gsap.matchMedia();
 
-  // Desktop (min-width: 992px)
+  // Desktop (min-width: 992px): 3D hinge swing-down / fold reveal animation
   mm.add("(min-width: 992px)", () => {
     if (!section) return;
     const cards = section.querySelectorAll(".fact-card");
@@ -499,6 +543,7 @@ function initKeyFactsAnimation() {
       rotateY: 0,
       skewY: 0,
       transformOrigin: "center top",
+      force3D: true,
     });
 
     const tl = gsap.timeline({
@@ -587,32 +632,65 @@ function initKeyFactsAnimation() {
 }
 
 // ==========================================================================
-// Key Facts Counters Animation
+// Number Counting Animation (GSAP ScrollTrigger Driven)
 // ==========================================================================
 function initCounters() {
-  const counters = document.querySelectorAll(".count-value");
+  // 1. Animate any elements with .count-value (data-target, data-decimals)
+  const countElements = document.querySelectorAll(".count-value");
+  countElements.forEach((el) => {
+    const target = parseFloat(el.getAttribute("data-target")) || 0;
+    const decimals = parseInt(el.getAttribute("data-decimals"), 10) || 0;
+    const startVal = parseFloat(el.textContent) || 0;
+    const obj = { val: startVal };
 
-  counters.forEach((counter) => {
-    const target = parseFloat(counter.getAttribute("data-target")) || 0;
-    const decimals = parseInt(counter.getAttribute("data-decimals")) || 0;
-    const countObj = { value: 0 };
-
-    // Find nearest section to use as trigger
-    const section = counter.closest("section");
-    const triggerElement = section ? section : ".key-facts-section";
-
-    gsap.to(countObj, {
-      value: target,
-      duration: 2.0,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: triggerElement,
-        start: "top 60%",
-        toggleActions: "play none none none",
-        once: true,
+    ScrollTrigger.create({
+      trigger: el.closest(".fact-card, .principle-card, .foundation-metric-card, .col-sm-6, .col-12") || el,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(obj, {
+          val: target,
+          duration: 2.0,
+          ease: "power2.out",
+          onUpdate: () => {
+            el.textContent = obj.val.toFixed(decimals);
+          },
+        });
       },
-      onUpdate: () => {
-        counter.textContent = countObj.value.toFixed(decimals);
+    });
+  });
+
+  // 2. Animate .foundation-metric-number elements automatically!
+  const metricElements = document.querySelectorAll(".foundation-metric-number");
+  metricElements.forEach((metric) => {
+    if (metric.querySelector(".count-value")) return;
+
+    const rawText = metric.textContent.trim();
+    const match = rawText.match(/^([^\d.]*)([\d.]+)([^\d.]*)$/);
+    if (!match) return;
+
+    const prefix = match[1] || "";
+    const numStr = match[2];
+    const suffix = match[3] || "";
+    const target = parseFloat(numStr);
+    const decimals = numStr.includes(".") ? numStr.split(".")[1].length : 0;
+    const obj = { val: 0 };
+
+    metric.textContent = prefix + (0).toFixed(decimals) + suffix;
+
+    ScrollTrigger.create({
+      trigger: metric.closest(".principle-card, .foundation-metric-card, .foundation-section-white, .about-principles-section, .col-sm-6, .col-12") || metric,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(obj, {
+          val: target,
+          duration: 2.2,
+          ease: "power2.out",
+          onUpdate: () => {
+            metric.textContent = prefix + obj.val.toFixed(decimals) + suffix;
+          },
+        });
       },
     });
   });
@@ -666,6 +744,48 @@ function initInteractiveHoverEffects() {
   window.addEventListener("resize", () => {
     buttons.forEach((button) => {
       button._cachedRect = null;
+    });
+  });
+
+  // Interactive corner skew tilt on hover for .foundation-strand-card / .service-strand-card
+  const strandCards = document.querySelectorAll(
+    ".foundation-strand-card, .service-strand-card, .service-pillar-card",
+  );
+  strandCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -6;
+      const rotateY = ((x - centerX) / centerX) * 6;
+      const skewX = ((x - centerX) / centerX) * 2;
+      const skewY = ((y - centerY) / centerY) * -2;
+
+      gsap.to(card, {
+        rotateX: rotateX,
+        rotateY: rotateY,
+        skewX: skewX,
+        skewY: skewY,
+        y: 0,
+        transformPerspective: 800,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsap.to(card, {
+        rotateX: 0,
+        rotateY: 0,
+        skewX: 0,
+        skewY: 0,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out",
+      });
     });
   });
 }
@@ -1038,15 +1158,19 @@ function initFaqAccordion() {
   const faqItems = document.querySelectorAll(".faq-item");
   faqItems.forEach((item) => {
     const trigger = item.querySelector(".faq-trigger");
+    if (!trigger) return;
+
     trigger.addEventListener("click", () => {
       const isOpen = item.classList.contains("active");
+      const container = item.closest(".faq-accordion");
+      const siblingItems = container ? container.querySelectorAll(".faq-item") : faqItems;
 
-      // Close all other items
-      faqItems.forEach((i) => {
+      // Close all other items in same accordion
+      siblingItems.forEach((i) => {
         if (i !== item) {
           i.classList.remove("active");
           const panel = i.querySelector(".faq-panel");
-          gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.out" });
+          if (panel) gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.out" });
           const icon = i.querySelector(".faq-icon");
           if (icon) {
             gsap.to(icon, { rotation: 0, duration: 0.3 });
@@ -1059,11 +1183,13 @@ function initFaqAccordion() {
         item.classList.add("active");
         const panel = item.querySelector(".faq-panel");
         const answer = item.querySelector(".faq-answer-wrapper");
-        gsap.to(panel, {
-          height: answer.scrollHeight,
-          duration: 0.4,
-          ease: "power2.out",
-        });
+        if (panel && answer) {
+          gsap.to(panel, {
+            height: answer.scrollHeight,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        }
         const icon = item.querySelector(".faq-icon");
         if (icon) {
           gsap.to(icon, { rotation: 45, duration: 0.3 });
@@ -1071,7 +1197,7 @@ function initFaqAccordion() {
       } else {
         item.classList.remove("active");
         const panel = item.querySelector(".faq-panel");
-        gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.out" });
+        if (panel) gsap.to(panel, { height: 0, duration: 0.4, ease: "power2.out" });
         const icon = item.querySelector(".faq-icon");
         if (icon) {
           gsap.to(icon, { rotation: 0, duration: 0.3 });
@@ -1599,31 +1725,33 @@ function initValuesCardUnfold() {
 // Principles Heading Word-by-Word Opacity Reveal
 // ==========================================================================
 function initPrinciplesWordReveal() {
-  const heading = document.querySelector(".principles-heading");
-  if (!heading) return;
+  const headings = document.querySelectorAll(".principles-heading");
+  if (!headings.length) return;
 
-  wrapWordsInTextNodes(heading);
+  headings.forEach((heading) => {
+    wrapWordsInTextNodes(heading);
 
-  const wordSpans = heading.querySelectorAll(".word");
-  if (!wordSpans.length) return;
+    const wordSpans = heading.querySelectorAll(".word");
+    if (!wordSpans.length) return;
 
-  gsap.fromTo(
-    wordSpans,
-    { opacity: 0.15 },
-    {
-      opacity: 1,
-      stagger: 0.02,
-      ease: "none",
-      force3D: true,
-      scrollTrigger: {
-        trigger: heading,
-        start: "top 85%",
-        end: "bottom 55%",
-        scrub: true,
-        fastScrollEnd: true,
-      },
-    }
-  );
+    gsap.fromTo(
+      wordSpans,
+      { opacity: 0.15 },
+      {
+        opacity: 1,
+        stagger: 0.02,
+        ease: "none",
+        force3D: true,
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 85%",
+          end: "bottom 55%",
+          scrub: true,
+          fastScrollEnd: true,
+        },
+      }
+    );
+  });
 }
 
 // ==========================================================================
@@ -1737,6 +1865,77 @@ function initContactForm() {
   });
 }
 
+// ==========================================================================
+// Service Pages: 4-Stage Methodology / Process Cards 3D Folding Animation
+// (Reusable across any service page via #process or .services-process-section)
+// ==========================================================================
+function initProcessMethodologyAnimation() {
+  const sections = document.querySelectorAll(
+    "#process, .services-process-section, .methodology-section, .process-folding-section",
+  );
+  if (!sections.length) return;
 
+  let mm = gsap.matchMedia();
 
+  sections.forEach((section) => {
+    const cards = section.querySelectorAll(
+      ".principle-card, .methodology-card, .process-card, .service-process-card",
+    );
+    if (!cards.length) return;
 
+    // Desktop (min-width: 992px): 3D hinge swing-down / fold reveal animation
+    mm.add("(min-width: 992px)", () => {
+      gsap.set(cards, {
+        opacity: 0,
+        x: 0,
+        y: 0,
+        z: 0,
+        rotateX: -92,
+        rotateY: 0,
+        skewY: 0,
+        transformOrigin: "center top",
+        force3D: true,
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section.querySelector(".row") || section,
+          start: "top 95%",
+          end: "top 30%",
+          scrub: 1.5,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      cards.forEach((card, i) => {
+        tl.to(
+          card,
+          {
+            opacity: 1,
+            rotateX: 0,
+            ease: "power2.out",
+          },
+          i * 0.1,
+        );
+      });
+    });
+
+    // Mobile / Tablet (max-width: 991.5px)
+    mm.add("(max-width: 991.5px)", () => {
+      cards.forEach((card) => {
+        gsap.set(card, { opacity: 0, y: 50 });
+        gsap.to(card, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    });
+  });
+}
