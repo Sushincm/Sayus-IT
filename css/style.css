@@ -4172,8 +4172,12 @@ body {
    Light / Grey Shutter Reveal FAQ Section (Service Page Shutter FAQ)
    ========================================================================== */
 .shutter-reveal-section.shutter-light {
-  background-color: #f6f6f8;
+  background-color: #eaeaea;
   color: #111111;
+}
+
+.shutter-reveal-section.shutter-light .shutter-bg-container {
+  background-color: #eaeaea !important;
 }
 
 .shutter-reveal-section.shutter-light .faq-main-heading {
