@@ -798,9 +798,11 @@ function initServiceBoxVideoHover() {
 
   // Set up desktop hover listeners
   boxes.forEach((box) => {
+    if (box.dataset.videoHoverBound) return;
     const video = box.querySelector(".box-video");
     if (!video) return;
 
+    box.dataset.videoHoverBound = "true";
     video.pause();
 
     box.addEventListener("mouseenter", () => {
