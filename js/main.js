@@ -1479,41 +1479,78 @@ function initBackToTop() {
 }
 
 // ==========================================================================
-// Services Section Carousel for Mobile/Responsive (Swiper)
+// Services Section Carousel (Swiper - Lightweight, High-Performance)
 // ==========================================================================
 let servicesSwiper;
 function initServicesCarousel() {
   const container = document.querySelector(".services-carousel");
   if (!container) return;
 
-  const handleResponsiveInit = () => {
-    const isMobile = window.innerWidth <= 991.5;
+  if (typeof Swiper === "undefined") {
+    console.warn("Swiper library is not loaded.");
+    return;
+  }
 
-    if (isMobile) {
-      if (!servicesSwiper) {
-        servicesSwiper = new Swiper(".services-carousel", {
-          loop: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          slidesPerView: 1,
-          spaceBetween: 24,
-          centeredSlides: false,
-          grabCursor: true,
-          speed: 800,
-        });
-      }
-    } else {
-      if (servicesSwiper) {
-        servicesSwiper.destroy(true, true);
-        servicesSwiper = undefined;
-      }
-    }
-  };
+  // Destroy existing instance if any
+  if (servicesSwiper) {
+    servicesSwiper.destroy(true, true);
+    servicesSwiper = undefined;
+  }
 
-  handleResponsiveInit();
-  window.addEventListener("resize", handleResponsiveInit);
+  const isMobile = window.innerWidth < 992;
+
+  servicesSwiper = new Swiper(".services-carousel", {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    loop: true,
+    autoplay: isMobile
+      ? {
+          delay: 3200,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }
+      : false,
+    grabCursor: true,
+    speed: 600,
+    resistanceRatio: 0.85,
+    watchSlidesProgress: true,
+    watchOverflow: true,
+    navigation: {
+      nextEl: ".services-next-btn",
+      prevEl: ".services-prev-btn",
+    },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+    breakpoints: {
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 0,
+        autoplay: false,
+      },
+    },
+    on: {
+      init: function () {
+        if (window.innerWidth < 992 && this.autoplay) {
+          this.autoplay.start();
+        } else if (this.autoplay) {
+          this.autoplay.stop();
+        }
+      },
+      resize: function () {
+        if (window.innerWidth < 992 && this.autoplay) {
+          if (!this.autoplay.running) {
+            this.autoplay.start();
+          }
+        } else if (this.autoplay) {
+          if (this.autoplay.running) {
+            this.autoplay.stop();
+          }
+        }
+      },
+    },
+  });
 }
 
 // ==========================================================================

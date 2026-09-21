@@ -647,15 +647,13 @@ html.lenis body {
 
 .services-grid {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
   width: 100%;
-  background-color: #050505;
+  /* background-color: #050505; */
 }
 
 .service-box {
-  flex: 1;
-  min-width: 220px;
   height: 420px;
   display: flex;
   flex-direction: column;
@@ -669,7 +667,7 @@ html.lenis body {
     background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   cursor: pointer;
-  margin-bottom: 15px;
+  box-sizing: border-box;
 }
 
 .service-box.is-revealed {
@@ -846,6 +844,25 @@ html.lenis body {
   color: rgba(255, 255, 255, 0.85);
 }
 
+.box-05 .box-main {
+  background-color: #2b1202;
+}
+.box-05 .box-footer {
+  background-color: #481d03;
+}
+.box-05 {
+  color: #ffffff;
+}
+.box-05 .box-num {
+  color: rgba(255, 255, 255, 0.7);
+}
+.box-05 .box-title {
+  color: #ffffff;
+}
+.box-05 .box-description {
+  color: rgba(255, 255, 255, 0.85);
+}
+
 /* ==========================================================================
    Responsive Layout (Services - Desktop Hover & Expansion)
    ========================================================================== */
@@ -887,23 +904,35 @@ html.lenis body {
    Responsive Layout (Services - Mobile Stack)
    ========================================================================== */
 @media (max-width: 991.5px) {
+  .services-section {
+    padding: 2.5rem 0 3.5rem 0 !important;
+  }
+
+  .services-container {
+    padding: 0 20px !important;
+  }
+
+  .services-container .section-header {
+    padding: 0 0 3vh 0;
+  }
+
   .services-grid {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
   }
 
   .service-box {
-    flex: none;
-    width: 100%;
-    min-height: 380px;
-    height: auto;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex: 0 0 100%;
+    width: 100% !important;
+    min-height: 420px;
+    height: 420px !important;
+    border-bottom: none;
   }
 
   /* Disable hover expansions and transforms on mobile */
   .service-box:hover {
-    height: auto !important;
-    min-height: 380px !important;
+    height: 420px !important;
+    min-height: 420px !important;
     transform: none !important;
     box-shadow: none !important;
   }
@@ -951,6 +980,11 @@ html.lenis body {
   .service-box.box-04 .box-footer,
   .service-box.box-04:hover .box-footer {
     background-color: #6d3207 !important;
+  }
+
+  .service-box.box-05 .box-footer,
+  .service-box.box-05:hover .box-footer {
+    background-color: #481d03 !important;
   }
 }
 
@@ -2690,58 +2724,105 @@ body.menu-open .back-to-top {
 }
 
 /* ==========================================================================
-   Swiper Services Carousel Responsive Overrides
+   Swiper Services Carousel & Navigation Styles
    ========================================================================== */
+.services-nav-controls {
+  position: relative;
+  z-index: 10;
+}
+
+.services-nav-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  border: 1.5px solid #050505;
+  background: #050505;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.services-nav-btn:hover {
+  background: var(--color-volt, #f4791f);
+  border-color: var(--color-volt, #f4791f);
+  color: #ffffff;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(244, 121, 31, 0.35);
+}
+
+.services-nav-btn:active {
+  transform: scale(0.92);
+}
+
+.services-nav-btn.swiper-button-disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+  background: #999999;
+  border-color: #999999;
+  box-shadow: none;
+}
+
+@media (max-width: 991.5px) {
+  .services-nav-controls {
+    display: none !important;
+  }
+}
+
+.services-carousel {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 90px;
+  margin-bottom: -90px;
+  cursor: grab;
+}
+
+.services-carousel:active {
+  cursor: grabbing;
+}
+
+.services-carousel .swiper-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  box-sizing: border-box !important;
+}
+
+.services-carousel .swiper-slide,
+.services-carousel .service-box {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 420px;
+  box-sizing: border-box !important;
+  margin-bottom: 0 !important;
+}
+
 @media (min-width: 992px) {
-  /* On desktop, reset Swiper wrappers and slides to ensure grid looks identical */
-  .services-carousel {
-    overflow: visible !important;
-  }
-  .services-grid,
-  .services-grid.swiper-wrapper {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    transform: none !important;
-    width: 100% !important;
-    height: auto !important;
-    background-color: #fff !important;
-  }
-  .service-box,
-  .services-grid.swiper-wrapper > .service-box.swiper-slide {
-    width: calc(25% + 1px) !important;
-    flex: 0 0 calc(25% + 1px) !important;
-    margin-right: -1px !important;
-    margin-bottom: 0 !important;
-    height: 420px !important;
-  }
-  .service-box:last-child,
-  .services-grid.swiper-wrapper > .service-box.swiper-slide:last-child {
-    width: 25% !important;
-    flex: 0 0 25% !important;
-    margin-right: 0 !important;
+  .services-container {
+    padding: 0 20px !important;
   }
 }
 
 @media (max-width: 991.5px) {
-  /* When Swiper is active on mobile/tablet, force horizontal flow */
-  .services-carousel.swiper-initialized {
+  .services-carousel {
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
     width: 100% !important;
-    overflow: hidden !important;
-    padding: 0 !important;
   }
 
-  .services-carousel.swiper-initialized .services-grid.swiper-wrapper {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    height: auto !important;
-  }
-
-  .services-carousel.swiper-initialized .service-box.swiper-slide {
-    flex: none !important;
+  .services-carousel .swiper-slide,
+  .services-carousel .service-box {
+    width: 100% !important;
     height: 420px !important;
-    width: 100% !important;
-    max-width: none !important;
     border-bottom: none !important;
     border-right: none !important;
   }
