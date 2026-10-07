@@ -679,6 +679,36 @@ html.lenis body {
     opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.box-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  opacity: 0.95;
+  filter: brightness(0.9) contrast(1.1);
+  transform: scale(1);
+  pointer-events: none;
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.box-image-tint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .box-video {
   position: absolute;
   top: 0;
@@ -686,10 +716,10 @@ html.lenis body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1;
+  z-index: 3;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .box-video-overlay {
@@ -698,11 +728,16 @@ html.lenis body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(5, 5, 5, 0.55);
-  z-index: 2;
+  background: rgba(5, 5, 5, 0.6);
+  z-index: 4;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-box:hover .box-image {
+  transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.15);
 }
 
 .service-box:hover .box-video {
@@ -713,9 +748,8 @@ html.lenis body {
   opacity: 1;
 }
 
-.service-box:hover .box-main,
-.service-box:hover .box-footer {
-  background-color: transparent;
+.service-box:hover .box-image-tint {
+  opacity: 0.2;
 }
 
 .box-main {
@@ -724,15 +758,16 @@ html.lenis body {
   flex-direction: column;
   padding: 1.5rem 1.5rem 1rem 1.5rem;
   position: relative;
-  z-index: 3;
+  z-index: 5;
+  background: transparent;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .box-footer {
-  padding: 1.25rem 1.5rem;
+  padding: 0.75rem 1.25rem;
   position: relative;
-  z-index: 3;
-  min-height: 110px;
+  z-index: 5;
+  min-height: 58px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -742,10 +777,15 @@ html.lenis body {
 
 .box-num {
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  opacity: 0.9;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  width: fit-content;
   transition: var(--transition-smooth);
 }
 
@@ -761,111 +801,131 @@ html.lenis body {
   line-height: 1.6;
   margin: 0;
   font-weight: 400;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 .box-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 500;
-  line-height: 1.2;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
   margin: 0;
   letter-spacing: -0.01em;
   transition: var(--transition-smooth);
 }
 
-.box-01 .box-main {
-  background-color: #ce600e;
+/* Box 01: Cyan / High-Tech Diagnostics & Blueprint */
+.box-01 .box-image-tint {
+  background: linear-gradient(180deg, rgba(8, 28, 44, 0.2) 0%, rgba(5, 18, 30, 0.5) 100%);
 }
 .box-01 .box-footer {
-  background-color: var(--color-volt);
+  background: #094569;
+  border-top: 1px solid rgba(56, 189, 248, 0.3);
 }
 .box-01 {
   color: #ffffff;
+  border-right: 1px solid rgba(56, 189, 248, 0.2);
 }
 .box-01 .box-num {
-  color: rgba(255, 255, 255, 0.7);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
 }
 .box-01 .box-title {
   color: #ffffff;
 }
 .box-01 .box-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: #e0f2fe;
 }
 
-.box-02 .box-main {
-  background-color: #b34f0d;
+/* Box 02: Emerald / AI Neural Search & Knowledge Graph */
+.box-02 .box-image-tint {
+  background: linear-gradient(180deg, rgba(6, 38, 30, 0.2) 0%, rgba(4, 25, 20, 0.5) 100%);
 }
 .box-02 .box-footer {
-  background-color: #d86518;
+  background: #0f5240;
+  border-top: 1px solid rgba(52, 211, 153, 0.3);
 }
 .box-02 {
   color: #ffffff;
+  border-right: 1px solid rgba(52, 211, 153, 0.2);
 }
 .box-02 .box-num {
-  color: rgba(255, 255, 255, 0.7);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.35);
 }
 .box-02 .box-title {
   color: #ffffff;
 }
 .box-02 .box-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: #d1fae5;
 }
 
-.box-03 .box-main {
-  background-color: #803807;
+/* Box 03: Purple / Digital Culture & Community Resonance */
+.box-03 .box-image-tint {
+  background: linear-gradient(180deg, rgba(34, 14, 52, 0.2) 0%, rgba(20, 8, 32, 0.5) 100%);
 }
 .box-03 .box-footer {
-  background-color: #a34c0e;
+  background: #4c2275;
+  border-top: 1px solid rgba(192, 132, 252, 0.3);
 }
 .box-03 {
   color: #ffffff;
+  border-right: 1px solid rgba(192, 132, 252, 0.2);
 }
 .box-03 .box-num {
-  color: rgba(255, 255, 255, 0.7);
+  color: #c084fc;
+  border: 1px solid rgba(192, 132, 252, 0.35);
 }
 .box-03 .box-title {
   color: #ffffff;
 }
 .box-03 .box-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: #f3e8ff;
 }
 
-.box-04 .box-main {
-  background-color: #4d2102;
+/* Box 04: Volt Amber / Traction & Performance Marketing */
+.box-04 .box-image-tint {
+  background: linear-gradient(180deg, rgba(54, 23, 5, 0.2) 0%, rgba(32, 13, 2, 0.5) 100%);
 }
 .box-04 .box-footer {
-  background-color: #6d3207;
+  background: #78350f;
+  border-top: 1px solid rgba(251, 146, 60, 0.3);
 }
 .box-04 {
   color: #ffffff;
+  border-right: 1px solid rgba(251, 146, 60, 0.2);
 }
 .box-04 .box-num {
-  color: rgba(255, 255, 255, 0.7);
+  color: #fb923c;
+  border: 1px solid rgba(251, 146, 60, 0.35);
 }
 .box-04 .box-title {
   color: #ffffff;
 }
 .box-04 .box-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffedd5;
 }
 
-.box-05 .box-main {
-  background-color: #2b1202;
+/* Box 05: Crimson Rose / Strategic Foresight & Trends */
+.box-05 .box-image-tint {
+  background: linear-gradient(180deg, rgba(50, 10, 24, 0.2) 0%, rgba(28, 5, 13, 0.5) 100%);
 }
 .box-05 .box-footer {
-  background-color: #481d03;
+  background: #6c1833;
+  border-top: 1px solid rgba(251, 113, 133, 0.3);
 }
 .box-05 {
   color: #ffffff;
 }
 .box-05 .box-num {
-  color: rgba(255, 255, 255, 0.7);
+  color: #fb7185;
+  border: 1px solid rgba(251, 113, 133, 0.35);
 }
 .box-05 .box-title {
   color: #ffffff;
 }
 .box-05 .box-description {
-  color: rgba(255, 255, 255, 0.85);
+  color: #ffe4e6;
 }
 
 /* ==========================================================================
@@ -873,19 +933,20 @@ html.lenis body {
    ========================================================================== */
 .service-box {
   cursor: pointer;
+  background-color: #050505;
 }
 
 @media (min-width: 768px) {
   .services-grid:hover .service-box {
-    opacity: 0.8;
-    filter: brightness(0.9);
+    opacity: 0.85;
+    filter: brightness(0.92);
   }
 
   .services-grid .service-box:hover {
     height: 500px;
     opacity: 1;
     filter: brightness(1);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
     z-index: 5;
   }
 }
@@ -946,50 +1007,56 @@ html.lenis body {
     border-bottom: none;
   }
 
-  /* Show the video permanently on mobile */
-  .service-box .box-video {
-    opacity: 1 !important;
-  }
-
-  /* Hide default dark overlay */
-  .service-box .box-video-overlay {
-    opacity: 0 !important;
-  }
-
-  /* Hide box content description on mobile */
-  .service-box .box-content {
+  /* Hide the image and tint on mobile */
+  .service-box .box-image {
     display: none !important;
   }
 
-  /* Make the orange overlays semi-transparent to see the video underneath */
-  .service-box .box-main,
-  .service-box:hover .box-main {
-    background-color: rgba(244, 121, 31, 0.35) !important;
+  .service-box .box-image-tint {
+    display: none !important;
+  }
+
+  /* Show and play the video permanently on mobile */
+  .service-box .box-video {
+    opacity: 1 !important;
+    display: block !important;
+  }
+
+  .service-box .box-video-overlay {
+    opacity: 1 !important;
+  }
+
+  /* Make box content description visible on mobile */
+  .service-box .box-content {
+    display: block !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    margin-top: 1rem !important;
   }
 
   .service-box.box-01 .box-footer,
   .service-box.box-01:hover .box-footer {
-    background-color: var(--color-volt) !important;
+    background: #094569 !important;
   }
 
   .service-box.box-02 .box-footer,
   .service-box.box-02:hover .box-footer {
-    background-color: #d86518 !important;
+    background: #0f5240 !important;
   }
 
   .service-box.box-03 .box-footer,
   .service-box.box-03:hover .box-footer {
-    background-color: #a34c0e !important;
+    background: #4c2275 !important;
   }
 
   .service-box.box-04 .box-footer,
   .service-box.box-04:hover .box-footer {
-    background-color: #6d3207 !important;
+    background: #78350f !important;
   }
 
   .service-box.box-05 .box-footer,
   .service-box.box-05:hover .box-footer {
-    background-color: #481d03 !important;
+    background: #6c1833 !important;
   }
 }
 
